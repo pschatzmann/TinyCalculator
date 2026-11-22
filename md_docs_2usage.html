@@ -102,8 +102,17 @@ $(function() {
 </div><!-- fragment --><ul>
 <li><code>evaluate()</code> compiles and runs an expression or an assignment (<code>name = expr</code>). It also stores the result in <code>ans</code>.</li>
 <li><code>compile()</code> / <code>run()</code> separate parsing from evaluation, so one program can be run with many variable values.</li>
-<li><code>setVariable()</code>, <code>getVariable()</code> and <code>clearVariables()</code> manage user variables. </li>
+<li><code>setVariable()</code>, <code>getVariable()</code> and <code>clearVariables()</code> manage user variables.</li>
 </ul>
+<h1><a class="anchor" id="autotoc_md18"></a>
+Converting the result</h1>
+<p><code>evaluate()</code> and <code>run()</code> return a <code>Result</code>. Its value can be cast to any numeric type with a regular cast, or with <code>as&lt;U&gt;()</code>:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> r = calc.evaluate(<span class="stringliteral">&quot;1/4&quot;</span>);</div>
+<div class="line"><span class="keywordtype">double</span> d = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(r);   <span class="comment">// 0.25</span></div>
+<div class="line"><span class="keywordtype">float</span>  f = float(r);                 <span class="comment">// 0.25f</span></div>
+<div class="line"><span class="keywordtype">int</span>    i = r.as&lt;<span class="keywordtype">int</span>&gt;();              <span class="comment">// 0 (truncated)</span></div>
+<div class="line"><span class="keywordflow">if</span> (r) { <span class="comment">/* ok */</span> }                  <span class="comment">// the error code is still checked with the bool conversion</span></div>
+</div><!-- fragment --><p>The conversion does not check the error code: test <code>r</code> (or <code>r.ok()</code>) first. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

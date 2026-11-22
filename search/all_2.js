@@ -6,7 +6,7 @@ var searchData=
   ['calculator_20gui_20optional_3',['Calculator GUI (optional)',['../md_docs_2gui.html',1,'']]],
   ['calculator_2eh_4',['Calculator.h',['../Calculator_8h.html',1,'']]],
   ['calculator_3c_20float_20_3e_5',['Calculator&lt; float &gt;',['../classTinyCalc_1_1Calculator.html',1,'TinyCalc']]],
-  ['calculatorgui_6',['calculatorgui',['../classTinyCalc_1_1CalculatorGui.html#ac4e2faa4ba773a673177040520c94df8',1,'TinyCalc::CalculatorGui::CalculatorGui(tinymd::Bounds bounds)'],['../classTinyCalc_1_1CalculatorGui.html#aa54c7d7c5d08b88aa7cf0c8306ea142e',1,'TinyCalc::CalculatorGui::CalculatorGui(const CalculatorGui &amp;)=delete'],['../classTinyCalc_1_1CalculatorGui.html',1,'TinyCalc::CalculatorGui&lt; RGB_T, Number &gt;']]],
+  ['calculatorgui_6',['calculatorgui',['../classTinyCalc_1_1CalculatorGui.html',1,'TinyCalc::CalculatorGui&lt; RGB_T, Number &gt;'],['../classTinyCalc_1_1CalculatorGui.html#ac4e2faa4ba773a673177040520c94df8',1,'TinyCalc::CalculatorGui::CalculatorGui(tinymd::Bounds bounds)'],['../classTinyCalc_1_1CalculatorGui.html#aa54c7d7c5d08b88aa7cf0c8306ea142e',1,'TinyCalc::CalculatorGui::CalculatorGui(const CalculatorGui &amp;)=delete']]],
   ['call_7',['Call',['../namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386ac3755e61202abd74da5885d2e9c9160e',1,'TinyCalc']]],
   ['callfunction_8',['callFunction',['../namespaceTinyCalc_1_1detail.html#a1e01a6ae8382100ae50600b087c9a985',1,'TinyCalc::detail']]],
   ['capacity_9',['capacity',['../classTinyCalc_1_1Expression.html#a9e99784f715af8cb7add3c1291dfa6a7',1,'TinyCalc::Expression']]],
@@ -22,13 +22,14 @@ var searchData=
   ['comb_19',['Comb',['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70a727a6902aa157bdec751ce0739490899',1,'TinyCalc']]],
   ['comma_20',['Comma',['../namespaceTinyCalc_1_1detail.html#ac15ac6e12f8156599562a6a472b022c7a58be47db9455679e6a44df2eff9c9fa6',1,'TinyCalc::detail']]],
   ['compile_21',['compile',['../classTinyCalc_1_1Calculator.html#a510324b862a28a01dcfdaddd59b74cbc',1,'TinyCalc::Calculator']]],
-  ['compiler_22',['compiler',['../classTinyCalc_1_1detail_1_1Compiler.html',1,'TinyCalc::detail::Compiler&lt; T, N, Resolver &gt;'],['../classTinyCalc_1_1detail_1_1Compiler.html#a43dffe76eded97125b3eb11b2b56f393',1,'TinyCalc::detail::Compiler::Compiler()']]],
+  ['compiler_22',['compiler',['../classTinyCalc_1_1detail_1_1Compiler.html#a43dffe76eded97125b3eb11b2b56f393',1,'TinyCalc::detail::Compiler::Compiler()'],['../classTinyCalc_1_1detail_1_1Compiler.html',1,'TinyCalc::detail::Compiler&lt; T, N, Resolver &gt;']]],
   ['compiler_2eh_23',['Compiler.h',['../Compiler_8h.html',1,'']]],
   ['config_2eh_24',['Config.h',['../Config_8h.html',1,'']]],
   ['configuration_25',['Configuration',['../md_docs_2configuration.html',1,'']]],
   ['configuration_2emd_26',['configuration.md',['../configuration_8md.html',1,'']]],
-  ['cos_27',['cos',['../structTinyCalc_1_1detail_1_1Prim.html#a71edb12f3f8693a8f4cb88bde9e506da',1,'TinyCalc::detail::Prim::cos()'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a0e40ae8a35ec0a0baaf69b5d814ae874',1,'TinyCalc::detail::Prim&lt; float &gt;::cos()'],['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70affca562be079b9e4e41ea9d6a86c582b',1,'TinyCalc::Cos']]],
-  ['cosh_28',['cosh',['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70a4371c3565b771b40c187487cc0190392',1,'TinyCalc::Cosh'],['../classTinyCalc_1_1Math.html#a5db698f7bbf4b30156d743d9194342c6',1,'TinyCalc::Math::cosh()']]],
-  ['cot_29',['Cot',['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70acb15a9c3d21d89d6840c8dd1d2499322',1,'TinyCalc']]],
-  ['csc_30',['Csc',['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70a6731b938e3e89f3ef5e19a8483baa090',1,'TinyCalc']]]
+  ['converting_20the_20result_27',['Converting the result',['../md_docs_2usage.html#autotoc_md18',1,'']]],
+  ['cos_28',['cos',['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a0e40ae8a35ec0a0baaf69b5d814ae874',1,'TinyCalc::detail::Prim&lt; float &gt;::cos()'],['../structTinyCalc_1_1detail_1_1Prim.html#a71edb12f3f8693a8f4cb88bde9e506da',1,'TinyCalc::detail::Prim::cos()'],['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70affca562be079b9e4e41ea9d6a86c582b',1,'TinyCalc::Cos']]],
+  ['cosh_29',['cosh',['../classTinyCalc_1_1Math.html#a5db698f7bbf4b30156d743d9194342c6',1,'TinyCalc::Math::cosh()'],['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70a4371c3565b771b40c187487cc0190392',1,'TinyCalc::Cosh']]],
+  ['cot_30',['Cot',['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70acb15a9c3d21d89d6840c8dd1d2499322',1,'TinyCalc']]],
+  ['csc_31',['Csc',['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70a6731b938e3e89f3ef5e19a8483baa090',1,'TinyCalc']]]
 ];
