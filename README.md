@@ -31,14 +31,16 @@ if (!r) Serial.println(errorText(r.error));
 - [Notes](docs/notes.md): limitations and tips
 - [Class documentation (Doxygen)](https://pschatzmann.github.io/TinyCalculator/annotated.html): API reference for all classes
 
-## Installation (Arduino)
+## Installation in Arduino
 
-1. Download this repository as a ZIP file, or clone it into your Arduino
-   libraries folder: `git clone https://github.com/pschatzmann/TinyCalculator.git`
-2. In the Arduino IDE, choose **Sketch → Include Library → Add .ZIP Library**
-   (for the ZIP file) or restart the IDE after cloning.
-3. Examples are under **File → Examples → TinyCalculator**.
+You can download the library as zip and call include Library -> zip library. Or you can git clone this project into the Arduino libraries folder e.g. with
 
-The optional calculator GUI also needs
-[TinyMaterialDesign](https://github.com/pschatzmann/TinyMaterialDesign) and
-[TinyGPU](https://github.com/pschatzmann/TinyGPU), installed the same way.
+```
+cd  ~/Documents/Arduino/libraries
+git clone https://github.com/pschatzmann/TinyCalculator.git
+```
+
+I recommend to use git because you can easily update to the latest version just by executing the ```git pull``` command in the project folder.
+
+The optional calculator GUI also needs [TinyMaterialDesign](https://github.com/pschatzmann/TinyMaterialDesign) and [TinyGPU](https://github.com/pschatzmann/TinyGPU), which are installed the same way.
+
