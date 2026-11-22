@@ -12,7 +12,7 @@ var searchData=
   ['another_20cmake_20project_9',['Using TinyCalculator from another CMake project',['../md_docs_2desktop-build.html#autotoc_md7',1,'']]],
   ['append_10',['append',['../classTinyCalc_1_1Expression.html#a12c71084d882868e3d262bbe575b06a3',1,'TinyCalc::Expression']]],
   ['applybinary_11',['applyBinary',['../namespaceTinyCalc_1_1detail.html#a33146381ae7de0b81e1888cf77d7fc4c',1,'TinyCalc::detail']]],
-  ['arduino_12',['Installation (Arduino)',['../index.html#autotoc_md2',1,'']]],
+  ['arduino_12',['Installation in Arduino',['../index.html#autotoc_md2',1,'']]],
   ['argc_13',['argc',['../structTinyCalc_1_1Op.html#acd4b964753f02475ae04e47a3852a6ef',1,'TinyCalc::Op']]],
   ['as_14',['as',['../structTinyCalc_1_1Calculator_1_1Result.html#a2321d42fb0ee824723fa94b3cda94d06',1,'TinyCalc::Calculator::Result']]],
   ['asec_15',['Asec',['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70a91dd532e1e973c19bd00688ad519a95c',1,'TinyCalc']]],
