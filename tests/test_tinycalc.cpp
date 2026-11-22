@@ -404,6 +404,26 @@ void testClearAndAns() {
 }
 
 template <typename T>
+void testResultCasts() {
+  Calculator<T> calc;
+  auto r = calc.evaluate("1/4");
+  CHECK(r.ok());
+  CHECK(static_cast<double>(r) == 0.25);
+  CHECK(static_cast<float>(r) == 0.25f);
+  CHECK(static_cast<T>(r) == T(0.25));
+  CHECK((double)r == 0.25);
+  CHECK(float(r) == 0.25f);
+  CHECK(r.template as<double>() == 0.25);
+  CHECK(r.template as<int>() == 0);
+  CHECK(static_cast<bool>(r));  // bool conversion still works
+  CHECK(r.template as<int>() == 0 && !(calc.evaluate("1/0")));
+
+  auto big = calc.evaluate("7*6");
+  CHECK(static_cast<int>(big) == 42);
+  CHECK(big.template as<long>() == 42);
+}
+
+template <typename T>
 void runAll(const char* label) {
   std::cout << "running suite for " << label << "\n";
   testBasicArithmetic<T>();
@@ -422,6 +442,7 @@ void runAll(const char* label) {
   testErrors<T>();
   testErrorPosition<T>();
   testBoolConversion<T>();
+  testResultCasts<T>();
   testLimits<T>();
   testClearAndAns<T>();
 }

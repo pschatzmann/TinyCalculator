@@ -48,6 +48,17 @@ class Calculator {
     size_t errorPos;  // position in the input text if error != None
     bool ok() const { return error == Error::None; }
     explicit operator bool() const { return ok(); }
+    /// Converts the value to another number type, e.g. float(r), (double)r
+    /// or static_cast<double>(r). The result is not checked for errors.
+    template <typename U>
+    explicit operator U() const {
+      return static_cast<U>(value);
+    }
+    /// Same as the cast operator: r.as<double>().
+    template <typename U>
+    U as() const {
+      return static_cast<U>(value);
+    }
   };
 
   Calculator() : count_(0), angle_(AngleUnit::Radians) {

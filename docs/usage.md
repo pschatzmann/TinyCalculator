@@ -36,3 +36,19 @@ calc.setAngleUnit(AngleUnit::Degrees);  // trig functions use degrees
 - `compile()` / `run()` separate parsing from evaluation, so one program can be
   run with many variable values.
 - `setVariable()`, `getVariable()` and `clearVariables()` manage user variables.
+
+## Converting the result
+
+`evaluate()` and `run()` return a `Result`. Its value can be cast to any
+numeric type with a regular cast, or with `as<U>()`:
+
+```cpp
+auto r = calc.evaluate("1/4");
+double d = static_cast<double>(r);   // 0.25
+float  f = float(r);                 // 0.25f
+int    i = r.as<int>();              // 0 (truncated)
+if (r) { /* ok */ }                  // the error code is still checked with the bool conversion
+```
+
+The conversion does not check the error code: test `r` (or `r.ok()`) first.
+
