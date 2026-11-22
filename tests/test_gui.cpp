@@ -4,6 +4,7 @@
 
 #include <TinyCalculatorGui.h>
 
+#include <cmath>
 #include <cstring>
 #include <initializer_list>
 #include <iostream>
@@ -144,6 +145,7 @@ static void testEveryKeyCanBePressed() {
       gui.press(action);
     }
   }
+  gui.press("back");
   gui.press("clear");
   CHECK(gui.expression().empty());
 }
@@ -189,6 +191,100 @@ static void testFunctionKeysEvaluate() {
   CHECK(gui.resultText() == "6");
 }
 
+// the Plot key samples x^2 over the default range -10 .. 10
+static void testPlotSamplesFormula() {
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  type(gui, {"x", "^", "2"});
+  gui.press("plot");
+  CHECK(gui.plotting());
+  const std::vector<float>& s = gui.plotSamples();
+  CHECK(s.size() == FloatGui::kPlotSamples);
+  CHECK(std::fabs(s.front() - 100.0f) < 1e-3f);  // x = -10
+  CHECK(std::fabs(s.back() - 100.0f) < 1e-3f);   // x = 10
+  CHECK(std::fabs(s[s.size() / 2]) < 0.1f);      // x near 0
+  CHECK(gui.expression() == "x^2");              // expression is kept
+  CHECK(gui.calculator().variableCount() >= 1);
+  gui.press("back");
+  CHECK(!gui.plotting());
+}
+
+// undefined points (sqrt of a negative x) are NaN, which the chart draws as a gap
+static void testPlotUndefinedPoints() {
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.setPlotRange(-4.0f, 4.0f);
+  type(gui, {"sqrt(", "x", ")"});
+  gui.press("plot");
+  const std::vector<float>& s = gui.plotSamples();
+  CHECK(std::isnan(s.front()));                 // x = -4
+  CHECK(std::fabs(s.back() - 2.0f) < 1e-4f);    // x = 4
+  gui.press("back");
+}
+
+static void testPlotErrors() {
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.press("plot");                            // nothing typed
+  CHECK(!gui.plotting());
+  CHECK(gui.resultText() == "nothing to plot");
+  gui.press("clear");
+  type(gui, {"2", "+"});
+  gui.press("plot");                            // incomplete formula
+  CHECK(!gui.plotting());
+  CHECK(gui.resultText() == "unexpected end of expression");
+}
+
+static void testPlotRangeIgnoresInvalid() {
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.setPlotRange(5.0f, 5.0f);                 // empty range: ignored
+  type(gui, {"x"});
+  gui.press("plot");
+  CHECK(std::fabs(gui.plotSamples().front() + 10.0f) < 1e-4f);  // still -10 .. 10
+  gui.press("back");
+}
+
+// From and To entry: the numeric pad types into the selected field and the
+// chart is redrawn when both fields hold a valid range
+static void testPlotRangeEntry() {
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  type(gui, {"x", "^", "2"});
+  gui.press("plot");
+  CHECK(gui.plotFrom() == "-10" && gui.plotTo() == "10");
+  CHECK(std::fabs(gui.plotSamples().back() - 100.0f) < 1e-3f);
+
+  gui.press("to");                              // select To
+  gui.press("del");                             // "10" -> "1"
+  gui.press("5");                               // "15"
+  CHECK(gui.plotTo() == "15");
+  CHECK(std::fabs(gui.plotSamples().back() - 225.0f) < 1e-2f);  // x = 15
+
+  gui.press("from");                            // select From
+  gui.press("del");
+  gui.press("del");
+  gui.press("del");                             // "" is not a valid range
+  CHECK(gui.plotFrom().empty());
+  CHECK(std::fabs(gui.plotSamples().back() - 225.0f) < 1e-2f);  // chart unchanged
+  gui.press("0");                               // range 0 .. 15
+  CHECK(std::fabs(gui.plotSamples().front()) < 1e-3f);          // x = 0
+  gui.press("back");
+  CHECK(!gui.plotting());
+}
+
+// a range with To not above From is not applied
+static void testPlotRangeRejectsReversed() {
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  type(gui, {"x"});
+  gui.press("plot");
+  gui.press("from");
+  gui.press("del");
+  gui.press("del");
+  gui.press("del");                             // "-10" -> ""
+  gui.press("9");                               // From = 9: valid, chart shows 9 .. 10
+  CHECK(std::fabs(gui.plotSamples().front() - 9.0f) < 1e-4f);
+  gui.press("9");                               // From = 99 > To = 10: rejected
+  CHECK(gui.plotFrom() == "99");
+  CHECK(std::fabs(gui.plotSamples().front() - 9.0f) < 1e-4f);  // last valid range kept
+  gui.press("back");
+}
+
 static void testDoublePrecision() {
   DoubleGui gui(tinymd::Bounds(0, 0, 240, 320));
   type(gui, {"1", "/", "3"});
@@ -219,6 +315,12 @@ int main() {
   testPagesCycle();
   testAllFunctionsHaveKeys();
   testFunctionKeysEvaluate();
+  testPlotSamplesFormula();
+  testPlotUndefinedPoints();
+  testPlotErrors();
+  testPlotRangeIgnoresInvalid();
+  testPlotRangeEntry();
+  testPlotRangeRejectsReversed();
   testDoublePrecision();
   testAttachAndDraw();
 

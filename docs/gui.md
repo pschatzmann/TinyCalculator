@@ -42,9 +42,30 @@ The keypad has four pages. The top-left key shows the current page name
 | Basic | digits, `+ - * / ^ %`, `!`, `( ) ,`, `ans`, `pi`, `=`, `C`, `DEL`, `RAD`/`DEG` |
 | Trig | `sin cos tan asin acos atan atan2 sec csc cot asec acsc acot sinh cosh tanh asinh acosh atanh deg rad e tau phi` |
 | Math | `sqrt cbrt root pow exp exp2 expm1 ln log log2 log10 abs floor ceil round trunc frac sign mod hypot clamp min max sum avg gcd lcm` |
-| Special | `gamma fact erf erfc comb perm`, `! % ( ) , ans pi e tau phi ^` |
+| Special | `gamma fact erf erfc comb perm`, `! % ( ) , ans pi e tau phi ^`, `Plot`, `x` |
 
 Every function and constant of the library has a key.
+
+## Plotting
+
+`x` enters the variable x. `Plot` samples the current expression as a
+function of x and shows it in a chart with the formula as title. The range
+of x is given by the **From** and **To** fields (default -10 and 10). Points
+where the expression is undefined (for example `sqrt(x)` for negative x) are
+left as gaps.
+
+On the plot screen:
+
+- Tap **From** or **To**, or use the matching keys, to select a field.
+- The numeric pad types into the selected field: digits, `-` (at the start)
+  and `.`. **DEL** deletes the last character.
+- The chart is redrawn whenever both fields hold a valid range with To above
+  From. An invalid range keeps the last valid plot.
+- **Back** returns to the keypad. The expression is kept.
+
+<img src="images/gui-plot.png" width="240" alt="Plot of sin(x)*x/3 with the From and To fields">
+
+The default range can also be set in code with `gui.setPlotRange(xMin, xMax)`.
 
 ## Behaviour
 

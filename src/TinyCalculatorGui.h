@@ -14,8 +14,10 @@
 //   void loop()  { app.update(); }
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <string>
+#include <vector>
 
 #include "TinyCalculator.h"
 #include "TinyMaterialDesign.h"
@@ -23,7 +25,8 @@
 namespace TinyCalc {
 
 /**
- * @brief Calculator keypad with an expression line and a result line.
+ * @brief Calculator keypad with an expression line and a result line, and a
+ * plot of the expression as a function of x.
  *
  * The GUI owns a Calculator<Number>, so every key press goes through the
  * same parser and evaluator as the rest of the library. The class is
@@ -46,6 +49,13 @@ namespace TinyCalc {
  *  - "C" clears everything, "DEL" removes the last character
  *  - "RAD"/"DEG" toggles the angle unit used by the trigonometric functions
  *  - the expression is evaluated only when "=" is pressed
+ *  - "Plot" plots the expression as a function of x (see plotExpression());
+ *    "x" enters the variable x.
+ *
+ * Plot screen: the From and To fields hold the x range (default -10 .. 10).
+ * Tap a field, or use the From/To keys, to select it; the numeric pad types
+ * into the selected field. The plot is redrawn whenever both fields hold a
+ * valid range with To above From. "Back" returns to the keypad.
  */
 template <typename RGB_T = tinymd::TINYMD_DEFAULT_RGB_T, typename Number = float>
 class CalculatorGui {
@@ -53,6 +63,7 @@ class CalculatorGui {
   typedef Calculator<Number> Calc;
   static const size_t kKeyCount = 28;   // 7 rows x 4 columns per page
   static const size_t kPageCount = 4;
+  static const size_t kPlotSamples = 160;  // points of a plot
 
   /// @brief Key definition: the label shown on the key and the action it performs.
   ///
@@ -68,9 +79,16 @@ class CalculatorGui {
   explicit CalculatorGui(tinymd::Bounds bounds)
       : screen_(nullptr),
         exprLabel_(tinymd::Bounds(), "", tinymd::TypographyRole::kLabel),
-        resultLabel_(tinymd::Bounds(), "", tinymd::TypographyRole::kHeadline) {
+        resultLabel_(tinymd::Bounds(), "", tinymd::TypographyRole::kHeadline),
+        fromField_(tinymd::Bounds(), "From"),
+        toField_(tinymd::Bounds(), "To") {
     layout(bounds);
-    refreshKeys();
+    plot_.addSeries(colorFromHex<RGB_T>(0x6750A4));
+    fromField_.onFocus = [this]() { activeField_ = 0; };
+    toField_.onFocus = [this]() { activeField_ = 1; };
+    syncRangeFields();
+    calc_.setVariable("x", Number(0));
+    applyMode();
   }
 
   CalculatorGui(const CalculatorGui&) = delete;
@@ -82,19 +100,30 @@ class CalculatorGui {
     screen.addWidget(exprLabel_);
     screen.addWidget(resultLabel_);
     for (size_t i = 0; i < kKeyCount; ++i) screen.addWidget(keys_[i]);
+    screen.addWidget(plot_);
+    screen.addWidget(fromField_);
+    screen.addWidget(toField_);
     refresh();
   }
 
-  /// Handles one key by its action string (see keys()). Also used as the
-  /// click handler of every key button.
+  /// Handles one key by its action string (see keys() and plotKeys()). Also
+  /// used as the click handler of every key button.
   void press(const char* action) {
     if (action == nullptr || *action == '\0') return;
     std::string a = action;
     error_.clear();
 
+    if (plotting_) {
+      handlePlotKey(a);
+      refresh();
+      return;
+    }
+
     if (a == "page") {
       page_ = (page_ + 1) % kPageCount;
       refreshKeys();
+    } else if (a == "plot") {
+      plotExpression();
     } else if (a == "angle") {
       toggleAngle();
     } else if (a == "clear") {
@@ -135,12 +164,31 @@ class CalculatorGui {
   /// The calculator used by the keypad (variables, angle unit, ...).
   Calc& calculator() { return calc_; }
 
-  /// The button of key `index` (0 .. kKeyCount-1) on the current page, e.g.
+  /// The button of key `index` (0 .. kKeyCount-1) of the shown table, e.g.
   /// to fire its onClick in tests.
   tinymd::Button<RGB_T>& key(size_t index) { return keys_[index]; }
 
   /// Index of the current keypad page (0 .. kPageCount-1).
   size_t page() const { return page_; }
+
+  /// Range of x used by the Plot key (default -10 .. 10). Ignored unless xMax > xMin.
+  void setPlotRange(float xMin, float xMax) {
+    if (xMax > xMin) {
+      plotMin_ = xMin;
+      plotMax_ = xMax;
+      syncRangeFields();
+    }
+  }
+
+  /// True while the plot is shown instead of the keypad.
+  bool plotting() const { return plotting_; }
+
+  /// Text of the From and To fields of the plot.
+  std::string plotFrom() const { return fromText_; }
+  std::string plotTo() const { return toText_; }
+
+  /// The y values of the last plot (kPlotSamples values, NaN where undefined).
+  const std::vector<float>& plotSamples() const { return samples_; }
 
   /// Key table of one page (kPageCount pages, kKeyCount entries each).
   static const KeyDef* keys(size_t page = 0) {
@@ -177,7 +225,7 @@ class CalculatorGui {
         {"erfc", "erfc("}, {"comb", "comb("}, {"perm", "perm("}, {"%", "%"},
         {"!", "!"},       {"(", "("},       {")", ")"},      {",", ","},
         {"ans", "ans"},   {"pi", "pi"},     {"e", "e"},      {"tau", "tau"},
-        {"phi", "phi"},   {"^", "^"},
+        {"phi", "phi"},   {"^", "^"},      {"Plot", "plot"}, {"x", "x"},
     };
     switch (page % kPageCount) {
       case 1: return trig;
@@ -187,6 +235,18 @@ class CalculatorGui {
     }
   }
 
+  /// Numeric pad of the plot screen: From/To select a field, the digits and
+  /// "-" and "." type into it, DEL deletes, Back returns to the keypad.
+  static const KeyDef* plotKeys() {
+    static const KeyDef pad[kKeyCount] = {
+        {"From", "from"}, {"To", "to"},     {"DEL", "del"},  {"Back", "back"},
+        {"7", "7"},       {"8", "8"},       {"9", "9"},      {"-", "-"},
+        {"4", "4"},       {"5", "5"},       {"6", "6"},      {".", "."},
+        {"1", "1"},       {"2", "2"},       {"3", "3"},      {"0", "0"},
+    };
+    return pad;
+  }
+
   /// Name shown on the page key.
   static const char* pageName(size_t page) {
     static const char* names[kPageCount] = {"Basic", "Trig", "Math", "Special"};
@@ -194,31 +254,54 @@ class CalculatorGui {
   }
 
  private:
-  // Position the widgets inside `b`: expression line, result line, keypad.
+  static const int32_t kMargin = 8;     // outer margin
+  static const int32_t kGap = 4;        // gap between keys and fields
+  static const int32_t kExprH = 20;     // expression line
+  static const int32_t kResultH = 44;   // result line
+  static const int32_t kChartH = 136;   // plot area
+  static const int32_t kFieldH = 34;    // From / To fields
+
+  // Position the widgets inside `b`.
   void layout(tinymd::Bounds b) {
-    const int32_t m = 8;  // outer margin
-    const int32_t g = 4;  // gap between keys
-    const int32_t exprH = 20, resultH = 44;
-    const int32_t top = b.y + m + exprH + resultH + g;  // keypad top
-    const int32_t cols = 4, rows = 7;
-    const int32_t keyW = (b.w - 2 * m - (cols - 1) * g) / cols;
-    const int32_t keyH = (b.y + b.h - m - top - (rows - 1) * g) / rows;
+    bounds_ = b;
+    const int32_t w = b.w - 2 * kMargin;
+    exprLabel_.bounds = tinymd::Bounds(b.x + kMargin, b.y + kMargin, w, kExprH);
+    resultLabel_.bounds = tinymd::Bounds(b.x + kMargin, b.y + kMargin + kExprH, w, kResultH);
+    plot_.bounds = tinymd::Bounds(b.x + kMargin, b.y + kMargin, w, kChartH);
+    const int32_t fieldW = (w - kGap) / 2;
+    fromField_.bounds = tinymd::Bounds(b.x + kMargin, fieldsY(), fieldW, kFieldH);
+    toField_.bounds = tinymd::Bounds(b.x + kMargin + fieldW + kGap, fieldsY(), fieldW, kFieldH);
+    placeKeys(b.y + kMargin + kExprH + kResultH + kGap, 7);  // keypad top
+  }
 
-    exprLabel_.bounds = tinymd::Bounds(b.x + m, b.y + m, b.w - 2 * m, exprH);
-    resultLabel_.bounds = tinymd::Bounds(b.x + m, b.y + m + exprH, b.w - 2 * m, resultH);
+  int32_t fieldsY() const { return bounds_.y + kMargin + kChartH + 6; }
 
+  // Places the key buttons in a grid of `rows` rows (4 columns) from `top`.
+  void placeKeys(int32_t top, int32_t rows) {
+    const int32_t cols = 4;
+    const int32_t keyW = (bounds_.w - 2 * kMargin - (cols - 1) * kGap) / cols;
+    const int32_t keyH = (bounds_.y + bounds_.h - kMargin - top - (rows - 1) * kGap) / rows;
     for (size_t i = 0; i < kKeyCount; ++i) {
+      keys_[i].onClick = [this, i]() { press(activeKeys()[i].action); };
       int32_t row = static_cast<int32_t>(i) / cols;
       int32_t col = static_cast<int32_t>(i) % cols;
-      keys_[i].bounds = tinymd::Bounds(b.x + m + col * (keyW + g),
-                                       top + row * (keyH + g), keyW, keyH);
-      keys_[i].onClick = [this, i]() { press(keys(page_)[i].action); };
+      if (row >= rows) {
+        // not on the grid: zero size, so hidden keys do not extend the scroll area
+        keys_[i].bounds = tinymd::Bounds(bounds_.x, bounds_.y, 0, 0);
+        continue;
+      }
+      keys_[i].bounds = tinymd::Bounds(bounds_.x + kMargin + col * (keyW + kGap),
+                                       top + row * (keyH + kGap), keyW, keyH);
     }
   }
 
-  // Shows the key table of the current page.
-  void refreshKeys() {
-    const KeyDef* defs = keys(page_);
+  // The key table shown now: the plot pad or the keypad page.
+  const KeyDef* activeKeys() const { return plotting_ ? plotKeys() : keys(page_); }
+
+  // Shows the keypad page.
+  void refreshKeys() { showKeys(keys(page_)); }
+
+  void showKeys(const KeyDef* defs) {
     for (size_t i = 0; i < kKeyCount; ++i) {
       const bool used = defs[i].action != nullptr && *defs[i].action != '\0';
       keys_[i].visible = used;
@@ -239,11 +322,11 @@ class CalculatorGui {
   static tinymd::ButtonVariant variantFor(const char* action) {
     std::string a = action;
     if (a == "=") return tinymd::ButtonVariant::kFilled;
-    if (a == "angle" || a == "page" || a == "clear" || a == "del") {
+    if (a == "angle" || a == "page" || a == "clear" || a == "del" || a == "back") {
       return tinymd::ButtonVariant::kText;
     }
     if (a.size() == 1 && (a[0] >= '0' && a[0] <= '9')) return tinymd::ButtonVariant::kOutlined;
-    if (a == ".") return tinymd::ButtonVariant::kOutlined;
+    if (a == "." || a == "-") return tinymd::ButtonVariant::kOutlined;
     return tinymd::ButtonVariant::kTonal;
   }
 
@@ -276,6 +359,144 @@ class CalculatorGui {
     return buf;
   }
 
+  static std::string formatRange(float v) {
+    char buf[24];
+    snprintf(buf, sizeof(buf), "%g", static_cast<double>(v));
+    return buf;
+  }
+
+  // Copies the current range into the From/To texts and fields.
+  void syncRangeFields() {
+    fromText_ = formatRange(plotMin_);
+    toText_ = formatRange(plotMax_);
+    fromField_.setText(fromText_.c_str());
+    toField_.setText(toText_.c_str());
+  }
+
+  // Parses a whole number text; false if empty or not a number.
+  static bool parseNumber(const std::string& text, float& out) {
+    if (text.empty() || text == "-" || text == ".") return false;
+    char* end = nullptr;
+    out = strtof(text.c_str(), &end);
+    return end != nullptr && *end == '\0';
+  }
+
+  // Keys of the plot pad. The From/To fields report focus through onFocus.
+  void handlePlotKey(const std::string& a) {
+    if (a == "back") {
+      closePlot();
+      return;
+    }
+    if (a == "from") {
+      fromField_.focus();
+      return;
+    }
+    if (a == "to") {
+      toField_.focus();
+      return;
+    }
+    std::string& text = activeField_ == 0 ? fromText_ : toText_;
+    if (a == "del") {
+      if (!text.empty()) text.erase(text.size() - 1);
+    } else if (a == "-") {
+      if (text.empty()) text = "-";  // a minus sign only at the start
+    } else if (a == ".") {
+      if (text.find('.') == std::string::npos) text += ".";
+    } else if (a.size() == 1 && a[0] >= '0' && a[0] <= '9') {
+      if (text.size() < 9) text += a;
+    } else {
+      return;
+    }
+    fromField_.setText(fromText_.c_str());
+    toField_.setText(toText_.c_str());
+    applyRangeText();
+  }
+
+  // Redraws the plot if both fields hold a valid range (To above From).
+  void applyRangeText() {
+    float lo = 0.0f, hi = 0.0f;
+    if (!parseNumber(fromText_, lo) || !parseNumber(toText_, hi) || hi <= lo) return;
+    plotMin_ = lo;
+    plotMax_ = hi;
+    samplePlot();  // the expression compiled when the plot opened
+  }
+
+  // Samples the expression as a function of x over [plotMin_, plotMax_] and
+  // shows it in the chart. Points where the expression is undefined become
+  // NaN, which the chart draws as a gap.
+  Error samplePlot() {
+    typename Calc::Program prog;  // compiled once, run for every sample
+    Error e = calc_.compile(expr_.c_str(), prog);
+    if (e != Error::None) return e;
+    samples_.assign(kPlotSamples, nanValue());
+    for (size_t i = 0; i < kPlotSamples; ++i) {
+      double x = plotMin_ + (plotMax_ - plotMin_) * static_cast<double>(i) /
+                                static_cast<double>(kPlotSamples - 1);
+      calc_.setVariable("x", static_cast<Number>(x));
+      typename Calc::Result r = calc_.run(prog);
+      if (r.ok()) samples_[i] = static_cast<float>(r.value);
+    }
+    calc_.setVariable("x", Number(0));  // leave x at 0 for the keypad
+
+    char footer[48];
+    snprintf(footer, sizeof(footer), "x from %g to %g", static_cast<double>(plotMin_),
+             static_cast<double>(plotMax_));
+    std::string title = "f(x) = " + expr_;
+    plot_.setTitle(title.c_str());
+    plot_.setFooter(footer);
+    plot_.setXAxis(plotMin_, plotMax_, 5);
+    plot_.setValues(0, samples_);
+    return Error::None;
+  }
+
+  // Opens the plot screen for the current expression.
+  void plotExpression() {
+    if (expr_.empty()) {
+      error_ = "nothing to plot";
+      return;
+    }
+    Error e = samplePlot();
+    if (e != Error::None) {
+      error_ = errorText(e);
+      return;
+    }
+    plotting_ = true;
+    syncRangeFields();
+    fromField_.focus();  // selects the From field (activeField_ = 0)
+    error_.clear();
+    applyMode();
+    refresh();
+  }
+
+  void closePlot() {
+    plotting_ = false;
+    fromField_.blur();
+    toField_.blur();
+    applyMode();
+    refresh();
+  }
+
+  // Shows the keypad or the plot, depending on plotting_.
+  void applyMode() {
+    if (plotting_) {
+      showKeys(plotKeys());
+      placeKeys(fieldsY() + kFieldH + 8, 4);  // the pad below the fields
+    } else {
+      refreshKeys();
+      placeKeys(bounds_.y + kMargin + kExprH + kResultH + kGap, 7);
+    }
+    exprLabel_.visible = !plotting_;
+    resultLabel_.visible = !plotting_;
+    plot_.visible = plotting_;
+    fromField_.visible = plotting_;
+    toField_.visible = plotting_;
+  }
+
+  static float nanValue() {
+    volatile float zero = 0.0f;
+    return zero / zero;
+  }
+
   void refresh() {
     std::string e = showResult_ ? expr_ + " =" : expr_;
     exprLabel_.setText(e.c_str());
@@ -283,6 +504,7 @@ class CalculatorGui {
     if (screen_ != nullptr) screen_->invalidate();
   }
 
+  tinymd::Bounds bounds_;
   tinymd::Screen<RGB_T>* screen_;
   Calc calc_;
   std::string expr_;
@@ -293,6 +515,16 @@ class CalculatorGui {
   tinymd::Label<RGB_T> exprLabel_;
   tinymd::Label<RGB_T> resultLabel_;
   tinymd::Button<RGB_T> keys_[kKeyCount];
+  tinymd::LineChart<RGB_T> plot_;
+  tinymd::TextField<RGB_T> fromField_;
+  tinymd::TextField<RGB_T> toField_;
+  std::string fromText_;
+  std::string toText_;
+  int activeField_ = 0;  // 0: From, 1: To
+  std::vector<float> samples_;
+  float plotMin_ = -10.0f;
+  float plotMax_ = 10.0f;
+  bool plotting_ = false;
 };
 
 }  // namespace TinyCalc
