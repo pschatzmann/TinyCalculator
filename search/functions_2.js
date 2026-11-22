@@ -1,14 +1,16 @@
 var searchData=
 [
-  ['e_0',['e',['../classTinyCalc_1_1Math.html#a4ba89116d04587c0ee8d9a61f446b1b6',1,'TinyCalc::Math']]],
-  ['empty_1',['empty',['../classTinyCalc_1_1Expression.html#a7d0203f718a336b87d2ad8a6cfc7eb45',1,'TinyCalc::Expression']]],
-  ['erf_2',['erf',['../classTinyCalc_1_1Math.html#adbbb81785d402786a3038affe073a392',1,'TinyCalc::Math']]],
-  ['erfc_3',['erfc',['../classTinyCalc_1_1Math.html#a913aec778ac8f5e8e4ed505ff7eb0955',1,'TinyCalc::Math']]],
-  ['errortext_4',['errorText',['../namespaceTinyCalc.html#a3556315f1b5df863559d5cbdffe8a99d',1,'TinyCalc']]],
-  ['evaluate_5',['evaluate',['../classTinyCalc_1_1Calculator.html#a008eb85469e5b279e402b5793d995802',1,'TinyCalc::Calculator']]],
-  ['evaluateprogram_6',['evaluateProgram',['../namespaceTinyCalc_1_1detail.html#afd34bd65f537753c2580362c99dddc21',1,'TinyCalc::detail']]],
-  ['exp_7',['exp',['../structTinyCalc_1_1detail_1_1Prim.html#a81aedc2a5e6786d926ccdf478d01ff9d',1,'TinyCalc::detail::Prim::exp()'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a3fff2788a21a3c655172a9867eb8b761',1,'TinyCalc::detail::Prim&lt; float &gt;::exp()']]],
-  ['exp2_8',['exp2',['../classTinyCalc_1_1Math.html#ae94655e845c4698cfa16f8aaab54c497',1,'TinyCalc::Math']]],
-  ['expm1_9',['expm1',['../classTinyCalc_1_1Math.html#a34205141538bfd0ee1bd1b452fa5c74f',1,'TinyCalc::Math']]],
-  ['expression_10',['expression',['../classTinyCalc_1_1Expression.html#a55e67ea6753d3b014ce03284a1270606',1,'TinyCalc::Expression::Expression()'],['../classTinyCalc_1_1CalculatorGui.html#a67bdcd845578ab9af43115fa814b04aa',1,'TinyCalc::CalculatorGui::expression()']]]
+  ['c_0',['c',['../classTinyCalc_1_1Math.html#a8a032c3eeb142a42b1ba19013f017994',1,'TinyCalc::Math']]],
+  ['calculator_1',['calculator',['../classTinyCalc_1_1Calculator.html#a2e86aa54bf014d12c6f1cd4e104efca1',1,'TinyCalc::Calculator::Calculator()'],['../classTinyCalc_1_1CalculatorGui.html#a985d7615224cae3f431bf81f00313dde',1,'TinyCalc::CalculatorGui::calculator()']]],
+  ['calculatorgui_2',['calculatorgui',['../classTinyCalc_1_1CalculatorGui.html#ac4e2faa4ba773a673177040520c94df8',1,'TinyCalc::CalculatorGui::CalculatorGui(tinymd::Bounds bounds)'],['../classTinyCalc_1_1CalculatorGui.html#aa54c7d7c5d08b88aa7cf0c8306ea142e',1,'TinyCalc::CalculatorGui::CalculatorGui(const CalculatorGui &amp;)=delete']]],
+  ['callfunction_3',['callFunction',['../namespaceTinyCalc_1_1detail.html#a1e01a6ae8382100ae50600b087c9a985',1,'TinyCalc::detail']]],
+  ['capacity_4',['capacity',['../classTinyCalc_1_1Expression.html#a9e99784f715af8cb7add3c1291dfa6a7',1,'TinyCalc::Expression']]],
+  ['cbrt_5',['cbrt',['../classTinyCalc_1_1Math.html#a57d32e8e4f589afea91badc6493fae9e',1,'TinyCalc::Math']]],
+  ['ceil_6',['ceil',['../structTinyCalc_1_1detail_1_1Prim.html#aaee58d7c460e31fec3b7b443750c2207',1,'TinyCalc::detail::Prim::ceil()'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a49bc4df1b19562daa30a8b475c6655ca',1,'TinyCalc::detail::Prim&lt; float &gt;::ceil()']]],
+  ['clear_7',['clear',['../classTinyCalc_1_1Expression.html#ad585e379422954456a3da0c4824594c7',1,'TinyCalc::Expression']]],
+  ['clearvariables_8',['clearVariables',['../classTinyCalc_1_1Calculator.html#a6750ee6eba45172ead0d9290fbf72f1d',1,'TinyCalc::Calculator']]],
+  ['compile_9',['compile',['../classTinyCalc_1_1Calculator.html#a510324b862a28a01dcfdaddd59b74cbc',1,'TinyCalc::Calculator']]],
+  ['compiler_10',['Compiler',['../classTinyCalc_1_1detail_1_1Compiler.html#a43dffe76eded97125b3eb11b2b56f393',1,'TinyCalc::detail::Compiler']]],
+  ['cos_11',['cos',['../structTinyCalc_1_1detail_1_1Prim.html#a71edb12f3f8693a8f4cb88bde9e506da',1,'TinyCalc::detail::Prim::cos()'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a0e40ae8a35ec0a0baaf69b5d814ae874',1,'TinyCalc::detail::Prim&lt; float &gt;::cos()']]],
+  ['cosh_12',['cosh',['../classTinyCalc_1_1Math.html#a5db698f7bbf4b30156d743d9194342c6',1,'TinyCalc::Math']]]
 ];

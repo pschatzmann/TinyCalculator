@@ -11,6 +11,5 @@ var searchData=
   ['asinh_8',['asinh',['../classTinyCalc_1_1Math.html#a125924c5507ebec622f6cabdf0b54503',1,'TinyCalc::Math']]],
   ['atan_9',['atan',['../structTinyCalc_1_1detail_1_1Prim.html#a606d743a1c1e55790f0f37dfb61a8131',1,'TinyCalc::detail::Prim::atan()'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a05a37d02e01e5e743bac9454d188b11c',1,'TinyCalc::detail::Prim&lt; float &gt;::atan()']]],
   ['atan2_10',['atan2',['../structTinyCalc_1_1detail_1_1Prim.html#a2aa442bbe12d882fe3f605016e2b51e7',1,'TinyCalc::detail::Prim::atan2()'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a5514867d7b439026069d76ad1669dae0',1,'TinyCalc::detail::Prim&lt; float &gt;::atan2()']]],
-  ['atanh_11',['atanh',['../classTinyCalc_1_1Math.html#a6d4b07d19d26593b4064538114c969b9',1,'TinyCalc::Math']]],
-  ['attach_12',['attach',['../classTinyCalc_1_1CalculatorGui.html#a3b9aa34fee98b22df1ddec8ed0dc4156',1,'TinyCalc::CalculatorGui']]]
+  ['atanh_11',['atanh',['../classTinyCalc_1_1Math.html#a6d4b07d19d26593b4064538114c969b9',1,'TinyCalc::Math']]]
 ];

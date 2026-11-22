@@ -79,7 +79,7 @@ $(function() {
 <div class="line">App&lt;RGB565&gt; app(DefaultBoard);</div>
 <div class="line">CalculatorGui&lt;RGB565, float&gt; gui(Bounds(0, 0, 240, 320));  <span class="comment">// or &lt;RGB565, double&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> setup() { app.begin(); gui.attach(app.screen()); }</div>
+<div class="line"><span class="keywordtype">void</span> setup() { app.begin(); gui.begin(app.screen()); }</div>
 <div class="line"><span class="keywordtype">void</span> loop()  { app.update(); }</div>
 <div class="ttc" id="aTinyCalculatorGui_8h_html"><div class="ttname"><a href="TinyCalculatorGui_8h.html">TinyCalculatorGui.h</a></div></div>
 </div><!-- fragment --><p>It needs TinyMaterialDesign (and therefore TinyGPU) on the include path.</p>
