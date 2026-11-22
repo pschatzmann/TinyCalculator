@@ -1,0 +1,21 @@
+TinyCalculator	KEYWORD1
+Calculator	KEYWORD1
+Expression	KEYWORD1
+Error	KEYWORD1
+AngleUnit	KEYWORD1
+errorText	KEYWORD1
+Math	KEYWORD1
+
+evaluate	KEYWORD2
+compile	KEYWORD2
+run	KEYWORD2
+setVariable	KEYWORD2
+getVariable	KEYWORD2
+clearVariables	KEYWORD2
+setAngleUnit	KEYWORD2
+angleUnit	KEYWORD2
+variableCount	KEYWORD2
+ok	KEYWORD2
+
+Radians	LITERAL1
+Degrees	LITERAL1
