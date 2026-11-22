@@ -2,7 +2,7 @@
 
 [![Arduino Library](https://img.shields.io/badge/Arduino-Library-blue.svg)](https://www.arduino.cc/reference/en/libraries/)
 [![CMake](https://img.shields.io/badge/CMake-Supported-blue.svg)](https://github.com/pschatzmann/TinyCalculator/blob/main/CMakeLists.txt)
-[![Documentation](https://img.shields.io/badge/Documentation-Doxygen-blue.svg)](https://pschatzmann.github.io/TinyCalculator/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit)
 
 Header-only formula parser and evaluator for Arduino and desktop C++, with
 all common math functions. The number type is a template parameter: `float`
@@ -29,6 +29,7 @@ if (!r) Serial.println(errorText(r.error));
 - [Calculator GUI](docs/gui.md): the optional keypad
 - [Desktop build](docs/desktop-build.md): CMake, tests and examples
 - [Notes](docs/notes.md): limitations and tips
+- [Class documentation (Doxygen)](https://pschatzmann.github.io/TinyCalculator/annotated.html): API reference for all classes
 
 ## Installation (Arduino)
 
