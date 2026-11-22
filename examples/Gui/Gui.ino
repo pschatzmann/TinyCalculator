@@ -15,7 +15,7 @@ CalculatorGui<RGB565, float> calculatorGui(Bounds(0, 0, 240, 320));
 void setup() {
   Serial.begin(115200);
   app.begin();
-  calculatorGui.attach(app.screen());
+  calculatorGui.begin(app.screen());
 }
 
 void loop() {

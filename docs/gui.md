@@ -11,7 +11,7 @@ dependency. Include it explicitly:
 App<RGB565> app(DefaultBoard);
 CalculatorGui<RGB565, float> gui(Bounds(0, 0, 240, 320));  // or <RGB565, double>
 
-void setup() { app.begin(); gui.attach(app.screen()); }
+void setup() { app.begin(); gui.begin(app.screen()); }
 void loop()  { app.update(); }
 ```
 

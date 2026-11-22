@@ -295,13 +295,61 @@ static void testDoublePrecision() {
 static void testAttachAndDraw() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
   tinymd::Screen<TINYMD_DEFAULT_RGB_T> screen(tinymd::defaultTheme<TINYMD_DEFAULT_RGB_T>());
-  gui.attach(screen);
+  gui.begin(screen);
 
   tinygpu::Surface<TINYMD_DEFAULT_RGB_T> surface(240, 320, tinygpu::FontRGB565);
   CHECK(surface.begin());
   type(gui, {"4", "*", "5"});
   screen.draw(surface);
   CHECK(!screen.isDirty());
+}
+
+// begin() adds the widgets once; end() removes them; begin() can follow end()
+static void testLifecycle() {
+  tinymd::Screen<TINYMD_DEFAULT_RGB_T> screen(tinymd::defaultTheme<TINYMD_DEFAULT_RGB_T>());
+  CHECK(screen.childCount() == 0);
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.begin(screen);
+  const int widgets = screen.childCount();
+  CHECK(widgets > 0);
+  gui.begin(screen);                            // second call: no duplicates
+  CHECK(screen.childCount() == widgets);
+  gui.end();
+  CHECK(screen.childCount() == 0);
+  gui.end();                                    // second call: no-op
+  CHECK(screen.childCount() == 0);
+  gui.begin(screen);
+  CHECK(screen.childCount() == widgets);
+  gui.end();
+}
+
+// destroying an attached GUI removes its widgets from the screen
+static void testDestructorDetaches() {
+  tinymd::Screen<TINYMD_DEFAULT_RGB_T> screen(tinymd::defaultTheme<TINYMD_DEFAULT_RGB_T>());
+  {
+    FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+    gui.begin(screen);
+    CHECK(screen.childCount() > 0);
+  }
+  CHECK(screen.childCount() == 0);
+}
+
+// beginPlot/endPlot open and close the plot screen from code
+static void testBeginEndPlot() {
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  CHECK(gui.beginPlot("x^2"));
+  CHECK(gui.plotting());
+  CHECK(std::fabs(gui.plotSamples().back() - 100.0f) < 1e-3f);
+  gui.endPlot();
+  CHECK(!gui.plotting());
+  CHECK(gui.expression() == "x^2");             // the expression is kept
+
+  CHECK(!gui.beginPlot("2+"));                  // invalid: stays on the keypad
+  CHECK(!gui.plotting());
+  CHECK(gui.resultText() == "unexpected end of expression");
+  CHECK(!gui.beginPlot(""));
+  CHECK(gui.resultText() == "nothing to plot");
+  gui.endPlot();                                // no-op when not plotting
 }
 
 int main() {
@@ -321,6 +369,9 @@ int main() {
   testPlotRangeIgnoresInvalid();
   testPlotRangeEntry();
   testPlotRangeRejectsReversed();
+  testLifecycle();
+  testDestructorDetaches();
+  testBeginEndPlot();
   testDoublePrecision();
   testAttachAndDraw();
 

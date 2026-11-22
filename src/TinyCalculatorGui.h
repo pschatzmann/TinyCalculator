@@ -10,7 +10,7 @@
 //
 //   App<RGB565> app(DefaultBoard);
 //   CalculatorGui<RGB565, float> gui(Bounds(0, 0, 240, 320));
-//   void setup() { app.begin(); gui.attach(app.screen()); }
+//   void setup() { app.begin(); gui.begin(app.screen()); }
 //   void loop()  { app.update(); }
 
 #include <stdio.h>
@@ -91,11 +91,19 @@ class CalculatorGui {
     applyMode();
   }
 
+  // Removes the widgets from the screen if the GUI is still attached. The
+  // screen must still exist, so destroy the GUI before its screen (or call
+  // end() first).
+  ~CalculatorGui() { end(); }
+
   CalculatorGui(const CalculatorGui&) = delete;
   CalculatorGui& operator=(const CalculatorGui&) = delete;
 
-  /// Registers all widgets with the screen. Call once, e.g. from setup().
-  void attach(tinymd::Screen<RGB_T>& screen) {
+  /// Adds all widgets to `screen`. Call once, e.g. from setup(). Calling it
+  /// again while attached does nothing. The screen must outlive the GUI or
+  /// end() must be called before the screen is destroyed.
+  void begin(tinymd::Screen<RGB_T>& screen) {
+    if (attached_) return;
     screen_ = &screen;
     screen.addWidget(exprLabel_);
     screen.addWidget(resultLabel_);
@@ -103,7 +111,38 @@ class CalculatorGui {
     screen.addWidget(plot_);
     screen.addWidget(fromField_);
     screen.addWidget(toField_);
+    attached_ = true;
     refresh();
+  }
+
+  /// Removes the widgets from the screen given to begin(). The GUI keeps its
+  /// state, so begin() can attach it again later. Does nothing if not attached.
+  void end() {
+    if (!attached_) return;
+    screen_->removeChild(exprLabel_);
+    screen_->removeChild(resultLabel_);
+    for (size_t i = 0; i < kKeyCount; ++i) screen_->removeChild(keys_[i]);
+    screen_->removeChild(plot_);
+    screen_->removeChild(fromField_);
+    screen_->removeChild(toField_);
+    screen_ = nullptr;
+    attached_ = false;
+  }
+
+  /// Plots `expr` as a function of x and shows the plot screen. Returns false
+  /// (and sets resultText()) if the expression is empty or invalid.
+  bool beginPlot(const char* expr) {
+    expr_ = expr != nullptr ? expr : "";
+    showResult_ = false;
+    error_.clear();
+    plotExpression();
+    refresh();
+    return plotting_;
+  }
+
+  /// Leaves the plot screen and returns to the keypad. The expression is kept.
+  void endPlot() {
+    if (plotting_) closePlot();
   }
 
   /// Handles one key by its action string (see keys() and plotKeys()). Also
@@ -525,6 +564,7 @@ class CalculatorGui {
   float plotMin_ = -10.0f;
   float plotMax_ = 10.0f;
   bool plotting_ = false;
+  bool attached_ = false;
 };
 
 }  // namespace TinyCalc
