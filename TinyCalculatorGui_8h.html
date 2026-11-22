@@ -81,8 +81,10 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="TinyCalculator_8h_source.html">TinyCalculator.h</a>&quot;</code><br />
 <code>#include &quot;TinyMaterialDesign.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -90,67 +92,70 @@ Include dependency graph for TinyCalculatorGui.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="TinyCalculatorGui_8h__incl.png" border="0" usemap="#asrc_2TinyCalculatorGui_8h" alt=""/></div>
 <map name="asrc_2TinyCalculatorGui_8h" id="asrc_2TinyCalculatorGui_8h">
-<area shape="rect" title=" " alt="" coords="486,5,659,33"/>
+<area shape="rect" title=" " alt="" coords="237,5,410,33"/>
 <area shape="rect" title=" " alt="" coords="5,81,71,109"/>
-<area shape="poly" title=" " alt="" coords="484,30,304,52,90,84,88,84,84,80,90,78,303,46,488,27"/>
-<area shape="rect" title=" " alt="" coords="150,384,220,411"/>
-<area shape="poly" title=" " alt="" coords="484,32,371,51,248,80,194,98,150,119,121,143,114,156,111,169,111,247,117,283,130,316,147,346,166,372,160,372,143,349,125,318,111,284,106,248,106,169,109,154,117,140,147,115,192,93,246,74,370,46,488,29"/>
-<area shape="rect" title=" " alt="" coords="660,81,718,109"/>
-<area shape="poly" title=" " alt="" coords="594,31,658,72,653,73,593,36"/>
-<area shape="rect" href="TinyCalculator_8h.html" title=" " alt="" coords="510,81,636,109"/>
-<area shape="poly" title=" " alt="" coords="574,31,575,66,570,64,571,36"/>
-<area shape="rect" title=" " alt="" coords="742,81,902,109"/>
-<area shape="poly" title=" " alt="" coords="617,31,765,75,760,77,617,36"/>
-<area shape="rect" href="Config_8h.html" title=" " alt="" coords="536,459,665,487"/>
-<area shape="poly" title=" " alt="" coords="519,111,385,155,305,186,230,222,167,264,144,286,126,309,116,333,114,358,122,383,140,409,157,419,191,428,292,444,523,466,518,468,291,449,190,433,155,424,136,413,117,385,109,358,111,332,122,306,140,282,164,259,227,217,303,181,383,150,523,108"/>
-<area shape="rect" href="Types_8h.html" title=" " alt="" coords="666,384,791,411"/>
-<area shape="poly" title=" " alt="" coords="636,104,683,122,704,136,721,155,736,181,745,210,752,269,748,325,738,370,734,367,742,324,746,269,740,211,731,183,717,158,701,140,681,127,637,109"/>
-<area shape="rect" href="Math_8h.html" title=" " alt="" coords="1104,384,1225,411"/>
-<area shape="poly" title=" " alt="" coords="636,104,791,132,897,154,976,185,1046,230,1087,265,1120,306,1140,338,1156,371,1151,369,1135,341,1116,310,1083,268,1043,234,973,189,896,159,790,137,637,110"/>
-<area shape="rect" href="Functions_8h.html" title=" " alt="" coords="442,308,592,336"/>
-<area shape="poly" title=" " alt="" coords="566,107,545,158,528,230,521,294,516,291,523,229,539,156,563,111"/>
-<area shape="rect" href="Expression_8h.html" title=" " alt="" coords="768,308,927,336"/>
-<area shape="poly" title=" " alt="" coords="633,107,736,131,778,144,801,155,825,187,839,224,847,261,849,294,845,291,841,262,834,225,820,189,798,159,776,149,735,136,634,112"/>
-<area shape="rect" href="Compiler_8h.html" title=" " alt="" coords="332,232,478,260"/>
-<area shape="poly" title=" " alt="" coords="558,108,498,159,430,223,426,219,495,155,553,111"/>
-<area shape="rect" href="Evaluator_8h.html" title=" " alt="" coords="883,232,1033,260"/>
-<area shape="poly" title=" " alt="" coords="636,105,770,131,859,154,904,185,940,221,934,220,900,189,857,159,768,137,637,111"/>
-<area shape="rect" href="Calculator_8h.html" title=" " alt="" coords="553,157,707,184"/>
-<area shape="poly" title=" " alt="" coords="584,107,613,145,608,144,582,112"/>
-<area shape="poly" title=" " alt="" coords="708,411,637,454,635,449,703,413"/>
-<area shape="rect" title=" " alt="" coords="924,459,997,487"/>
-<area shape="poly" title=" " alt="" coords="771,409,911,456,906,455,770,415"/>
-<area shape="rect" title=" " alt="" coords="830,459,900,487"/>
-<area shape="poly" title=" " alt="" coords="754,409,830,452,824,451,752,414"/>
-<area shape="rect" title=" " alt="" coords="1131,459,1198,487"/>
-<area shape="poly" title=" " alt="" coords="1167,410,1167,445,1163,442,1163,414"/>
-<area shape="poly" title=" " alt="" coords="455,338,236,388,235,382,459,334"/>
-<area shape="poly" title=" " alt="" coords="525,334,588,446,583,445,522,338"/>
-<area shape="poly" title=" " alt="" coords="555,334,679,378,674,378,554,339"/>
-<area shape="poly" title=" " alt="" coords="592,329,1091,386,1086,389,592,334"/>
-<area shape="poly" title=" " alt="" coords="847,334,833,374,821,395,805,413,777,433,745,448,681,466,681,461,744,443,774,428,802,409,817,392,828,372,842,338"/>
-<area shape="poly" title=" " alt="" coords="858,333,944,448,939,446,856,338"/>
-<area shape="poly" title=" " alt="" coords="851,334,864,445,859,442,847,338"/>
-<area shape="poly" title=" " alt="" coords="333,262,285,281,260,294,237,310,213,339,196,371,192,368,208,336,234,306,257,290,282,276,337,259"/>
-<area shape="poly" title=" " alt="" coords="403,258,401,296,403,316,410,334,438,373,475,406,515,431,554,453,549,452,513,436,472,410,434,377,405,337,398,317,396,296,400,263"/>
-<area shape="poly" title=" " alt="" coords="406,258,412,297,419,317,432,334,447,344,468,353,524,368,653,389,648,390,522,373,466,358,444,348,428,338,415,320,407,299,403,263"/>
-<area shape="poly" title=" " alt="" coords="425,258,487,299,482,300,424,263"/>
-<area shape="poly" title=" " alt="" coords="478,257,755,304,750,306,478,262"/>
-<area shape="rect" title=" " alt="" coords="247,308,317,336"/>
-<area shape="poly" title=" " alt="" coords="380,262,318,302,315,298,385,259"/>
-<area shape="poly" title=" " alt="" coords="961,258,959,298,953,319,941,337,912,361,878,378,842,389,807,396,806,390,841,384,876,373,909,357,937,334,948,317,954,297,957,262"/>
-<area shape="poly" title=" " alt="" coords="985,258,1014,278,1036,307,1048,335,1051,360,1048,384,1036,413,1021,435,1000,453,998,448,1017,431,1032,410,1042,383,1046,360,1043,336,1032,309,1010,282,984,263"/>
-<area shape="poly" title=" " alt="" coords="964,258,972,295,972,316,969,336,954,370,934,401,891,451,889,446,929,398,949,368,963,335,967,315,967,295,961,263"/>
-<area shape="poly" title=" " alt="" coords="995,258,1040,278,1086,306,1121,337,1149,372,1144,370,1117,341,1083,310,1038,283,994,263"/>
-<area shape="poly" title=" " alt="" coords="881,261,608,308,607,303,886,259"/>
-<area shape="poly" title=" " alt="" coords="941,260,880,302,878,297,936,262"/>
-<area shape="poly" title=" " alt="" coords="550,179,441,199,380,214,320,235,257,263,233,281,210,309,196,338,189,369,184,367,191,337,205,307,230,277,254,258,318,230,378,209,440,194,555,177"/>
-<area shape="poly" title=" " alt="" coords="631,183,606,445,601,443,626,186"/>
-<area shape="poly" title=" " alt="" coords="637,182,719,370,714,369,634,187"/>
-<area shape="poly" title=" " alt="" coords="623,183,537,298,534,294,618,186"/>
-<area shape="poly" title=" " alt="" coords="650,182,819,299,813,299,648,187"/>
-<area shape="poly" title=" " alt="" coords="587,186,460,230,458,225,592,184"/>
-<area shape="poly" title=" " alt="" coords="689,182,887,228,881,229,689,188"/>
+<area shape="poly" title=" " alt="" coords="271,36,87,84,84,79,274,31"/>
+<area shape="rect" title=" " alt="" coords="150,308,219,336"/>
+<area shape="poly" title=" " alt="" coords="293,35,266,55,240,83,214,137,198,195,190,249,187,294,182,292,185,249,192,194,209,135,236,79,263,51,297,32"/>
+<area shape="rect" title=" " alt="" coords="384,384,454,411"/>
+<area shape="poly" title=" " alt="" coords="314,31,284,82,265,124,261,144,259,169,259,247,262,269,270,290,298,325,335,353,374,377,369,377,332,358,294,329,266,292,257,271,254,248,254,169,256,143,260,123,280,80,311,35"/>
+<area shape="rect" title=" " alt="" coords="294,81,352,109"/>
+<area shape="poly" title=" " alt="" coords="324,31,326,66,321,65,322,36"/>
+<area shape="rect" title=" " alt="" coords="376,81,438,109"/>
+<area shape="poly" title=" " alt="" coords="338,31,384,70,378,71,338,36"/>
+<area shape="rect" href="TinyCalculator_8h.html" title=" " alt="" coords="530,81,656,109"/>
+<area shape="poly" title=" " alt="" coords="371,31,532,75,528,78,372,36"/>
+<area shape="rect" title=" " alt="" coords="680,81,841,109"/>
+<area shape="poly" title=" " alt="" coords="402,31,669,76,665,79,402,36"/>
+<area shape="rect" href="Config_8h.html" title=" " alt="" coords="579,459,708,487"/>
+<area shape="poly" title=" " alt="" coords="527,105,392,130,314,149,240,174,178,205,154,222,136,241,125,262,121,284,126,308,140,334,167,358,208,380,261,399,321,416,449,443,566,462,560,463,448,448,320,421,259,404,206,385,163,362,136,337,121,310,116,284,120,260,132,238,151,218,175,200,238,169,312,144,390,125,532,102"/>
+<area shape="rect" href="Types_8h.html" title=" " alt="" coords="721,384,846,411"/>
+<area shape="poly" title=" " alt="" coords="656,103,707,121,731,136,751,155,767,180,779,209,792,268,794,324,790,371,786,367,788,324,786,268,774,210,762,183,747,158,728,140,705,126,657,108"/>
+<area shape="rect" href="Math_8h.html" title=" " alt="" coords="1159,384,1280,411"/>
+<area shape="poly" title=" " alt="" coords="656,104,952,154,1031,184,1101,230,1142,265,1175,306,1195,338,1210,371,1206,369,1190,341,1170,310,1138,268,1098,234,1028,189,951,159,657,109"/>
+<area shape="rect" href="Functions_8h.html" title=" " alt="" coords="496,308,646,336"/>
+<area shape="poly" title=" " alt="" coords="588,107,574,157,569,230,571,294,566,291,563,230,569,156,585,111"/>
+<area shape="rect" href="Expression_8h.html" title=" " alt="" coords="822,308,982,336"/>
+<area shape="poly" title=" " alt="" coords="656,105,778,129,828,143,856,155,880,186,894,223,902,260,904,294,900,291,896,261,889,225,875,189,852,159,826,148,776,135,657,110"/>
+<area shape="rect" href="Compiler_8h.html" title=" " alt="" coords="336,232,482,260"/>
+<area shape="poly" title=" " alt="" coords="573,108,502,159,433,223,429,219,499,155,568,111"/>
+<area shape="rect" href="Evaluator_8h.html" title=" " alt="" coords="938,232,1087,260"/>
+<area shape="poly" title=" " alt="" coords="656,105,814,133,914,154,959,185,995,221,990,220,956,189,912,159,813,138,657,110"/>
+<area shape="rect" href="Calculator_8h.html" title=" " alt="" coords="583,157,736,184"/>
+<area shape="poly" title=" " alt="" coords="605,107,640,145,635,145,604,112"/>
+<area shape="poly" title=" " alt="" coords="761,411,682,454,681,449,756,413"/>
+<area shape="rect" title=" " alt="" coords="883,459,956,487"/>
+<area shape="poly" title=" " alt="" coords="808,409,884,452,879,451,807,414"/>
+<area shape="rect" title=" " alt="" coords="980,459,1050,487"/>
+<area shape="poly" title=" " alt="" coords="825,409,968,456,962,456,824,415"/>
+<area shape="rect" title=" " alt="" coords="1186,459,1253,487"/>
+<area shape="poly" title=" " alt="" coords="1221,410,1221,445,1217,442,1217,414"/>
+<area shape="poly" title=" " alt="" coords="547,335,461,379,459,374,542,337"/>
+<area shape="poly" title=" " alt="" coords="579,334,633,446,628,444,576,338"/>
+<area shape="poly" title=" " alt="" coords="610,334,734,378,728,378,609,339"/>
+<area shape="poly" title=" " alt="" coords="647,329,1146,386,1141,389,647,334"/>
+<area shape="poly" title=" " alt="" coords="901,334,888,375,876,395,860,413,829,434,794,450,724,468,723,462,792,445,826,430,856,409,872,392,883,372,897,338"/>
+<area shape="poly" title=" " alt="" coords="905,334,918,445,914,442,902,338"/>
+<area shape="poly" title=" " alt="" coords="913,333,999,448,994,446,910,338"/>
+<area shape="poly" title=" " alt="" coords="366,262,235,307,233,302,371,259"/>
+<area shape="poly" title=" " alt="" coords="404,258,394,295,391,315,393,335,406,371,401,369,387,336,386,315,389,294,401,262"/>
+<area shape="poly" title=" " alt="" coords="401,259,384,292,367,331,362,352,361,373,365,392,375,410,386,420,403,429,451,444,507,455,566,465,560,465,506,460,449,449,401,433,383,424,371,413,360,394,356,373,357,351,362,329,379,289,397,262"/>
+<area shape="poly" title=" " alt="" coords="417,258,445,296,464,317,486,333,540,358,597,375,654,386,708,394,702,394,653,391,596,381,538,363,483,338,460,321,440,300,415,263"/>
+<area shape="poly" title=" " alt="" coords="438,258,531,301,526,302,437,263"/>
+<area shape="poly" title=" " alt="" coords="482,256,809,305,805,308,482,261"/>
+<area shape="poly" title=" " alt="" coords="1016,258,1014,298,1008,319,996,337,967,361,933,378,897,389,862,396,861,390,896,384,931,373,964,357,992,334,1003,317,1009,297,1012,262"/>
+<area shape="poly" title=" " alt="" coords="1019,258,1027,295,1027,316,1023,336,1008,370,988,401,946,451,943,446,984,398,1004,368,1018,335,1022,315,1021,295,1015,263"/>
+<area shape="poly" title=" " alt="" coords="1040,258,1069,278,1091,307,1102,335,1106,360,1102,384,1091,413,1075,435,1054,453,1052,448,1071,431,1086,410,1097,383,1101,360,1097,336,1086,309,1065,282,1039,263"/>
+<area shape="poly" title=" " alt="" coords="1049,258,1095,278,1141,306,1176,337,1204,372,1199,370,1172,341,1138,310,1093,283,1049,263"/>
+<area shape="poly" title=" " alt="" coords="935,261,662,308,661,303,940,259"/>
+<area shape="poly" title=" " alt="" coords="995,260,935,302,933,297,990,262"/>
+<area shape="poly" title=" " alt="" coords="641,184,570,238,527,272,487,310,460,341,437,373,434,369,456,338,483,306,523,268,566,234,637,186"/>
+<area shape="poly" title=" " alt="" coords="662,183,661,336,649,445,645,442,655,336,658,186"/>
+<area shape="poly" title=" " alt="" coords="670,182,704,231,744,305,774,370,769,368,739,307,700,234,669,187"/>
+<area shape="poly" title=" " alt="" coords="654,183,589,296,585,292,650,186"/>
+<area shape="poly" title=" " alt="" coords="681,182,871,300,866,300,680,187"/>
+<area shape="poly" title=" " alt="" coords="612,186,469,230,467,225,617,184"/>
+<area shape="poly" title=" " alt="" coords="723,182,937,228,932,229,723,188"/>
 </map>
 </div>
 </div>
@@ -159,7 +164,7 @@ Include dependency graph for TinyCalculatorGui.h:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyCalc_1_1CalculatorGui.html">TinyCalc::CalculatorGui&lt; RGB_T, Number &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classTinyCalc_1_1Calculator.html" title="High-level calculator: variables, angle unit, compile and evaluate.">Calculator</a> keypad with an expression line and a result line.  <a href="classTinyCalc_1_1CalculatorGui.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classTinyCalc_1_1Calculator.html" title="High-level calculator: variables, angle unit, compile and evaluate.">Calculator</a> keypad with an expression line and a result line, and a plot of the expression as a function of x.  <a href="classTinyCalc_1_1CalculatorGui.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTinyCalc_1_1CalculatorGui_1_1KeyDef.html">TinyCalc::CalculatorGui&lt; RGB_T, Number &gt;::KeyDef</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Key definition: the label shown on the key and the action it performs.  <a href="structTinyCalc_1_1CalculatorGui_1_1KeyDef.html#details">More...</a><br /></td></tr>

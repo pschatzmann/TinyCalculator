@@ -109,10 +109,22 @@ Keypad</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Math   </td><td class="markdownTableBodyNone"><code>sqrt cbrt root pow exp exp2 expm1 ln log log2 log10 abs floor ceil round trunc frac sign mod hypot clamp min max sum avg gcd lcm</code>    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Special   </td><td class="markdownTableBodyNone"><code>gamma fact erf erfc comb perm</code>, <code>! % ( ) , ans pi e tau phi ^</code>   </td></tr>
+<td class="markdownTableBodyNone">Special   </td><td class="markdownTableBodyNone"><code>gamma fact erf erfc comb perm</code>, <code>! % ( ) , ans pi e tau phi ^</code>, <code>Plot</code>, <code>x</code>   </td></tr>
 </table>
 <p>Every function and constant of the library has a key.</p>
 <h1><a class="anchor" id="autotoc_md13"></a>
+Plotting</h1>
+<p><code>x</code> enters the variable x. <code>Plot</code> samples the current expression as a function of x and shows it in a chart with the formula as title. The range of x is given by the <b>From</b> and <b>To</b> fields (default -10 and 10). Points where the expression is undefined (for example <code>sqrt(x)</code> for negative x) are left as gaps.</p>
+<p>On the plot screen:</p>
+<ul>
+<li>Tap <b>From</b> or <b>To</b>, or use the matching keys, to select a field.</li>
+<li>The numeric pad types into the selected field: digits, <code>-</code> (at the start) and <code>.</code>. <b>DEL</b> deletes the last character.</li>
+<li>The chart is redrawn whenever both fields hold a valid range with To above From. An invalid range keeps the last valid plot.</li>
+<li><b>Back</b> returns to the keypad. The expression is kept.</li>
+</ul>
+<p><img src="images/gui-plot.png" alt="Plot of sin(x)*x/3 with the From and To fields" width="240" class="inline"/></p>
+<p>The default range can also be set in code with <code>gui.setPlotRange(xMin, xMax)</code>.</p>
+<h1><a class="anchor" id="autotoc_md14"></a>
 Behaviour</h1>
 <ul>
 <li>Digits, operators and function keys append to the expression.</li>

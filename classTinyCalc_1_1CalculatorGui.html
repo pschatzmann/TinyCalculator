@@ -85,7 +85,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classTinyCalc_1_1Calculator.html" title="High-level calculator: variables, angle unit, compile and evaluate.">Calculator</a> keypad with an expression line and a result line.  
+<p><a class="el" href="classTinyCalc_1_1Calculator.html" title="High-level calculator: variables, angle unit, compile and evaluate.">Calculator</a> keypad with an expression line and a result line, and a plot of the expression as a function of x.  
  <a href="classTinyCalc_1_1CalculatorGui.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="TinyCalculatorGui_8h_source.html">TinyCalculatorGui.h</a>&gt;</code></p>
@@ -127,12 +127,28 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa8e958cc37a6f3d3051d06ac03b95a78" id="r_aa8e958cc37a6f3d3051d06ac03b95a78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyCalc_1_1CalculatorGui.html#aa8e958cc37a6f3d3051d06ac03b95a78">page</a> () <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a></td></tr>
 <tr class="memdesc:aa8e958cc37a6f3d3051d06ac03b95a78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of the current keypad page (0 .. kPageCount-1).  <br /></td></tr>
 <tr class="separator:aa8e958cc37a6f3d3051d06ac03b95a78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6377c4f76697e4c2806231f71d270ad" id="r_ad6377c4f76697e4c2806231f71d270ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyCalc_1_1CalculatorGui.html#ad6377c4f76697e4c2806231f71d270ad">setPlotRange</a> (<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">float</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">xMin</a>, <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">float</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">xMax</a>)</td></tr>
+<tr class="memdesc:ad6377c4f76697e4c2806231f71d270ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Range of x used by the Plot key (default -10 .. 10). Ignored unless xMax &gt; xMin.  <br /></td></tr>
+<tr class="separator:ad6377c4f76697e4c2806231f71d270ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac502e98468b88be795999f8fd0e9367c" id="r_ac502e98468b88be795999f8fd0e9367c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyCalc_1_1CalculatorGui.html#ac502e98468b88be795999f8fd0e9367c">plotting</a> () <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a></td></tr>
+<tr class="memdesc:ac502e98468b88be795999f8fd0e9367c"><td class="mdescLeft">&#160;</td><td class="mdescRight">True while the plot is shown instead of the keypad.  <br /></td></tr>
+<tr class="separator:ac502e98468b88be795999f8fd0e9367c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e8992b2fe0bff598e7a3eedb3eeb3b0" id="r_a6e8992b2fe0bff598e7a3eedb3eeb3b0"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyCalc_1_1CalculatorGui.html#a6e8992b2fe0bff598e7a3eedb3eeb3b0">plotFrom</a> () <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a></td></tr>
+<tr class="memdesc:a6e8992b2fe0bff598e7a3eedb3eeb3b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Text of the From and To fields of the plot.  <br /></td></tr>
+<tr class="separator:a6e8992b2fe0bff598e7a3eedb3eeb3b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b26945365ffd125c24ad2d9f9bbc3d3" id="r_a9b26945365ffd125c24ad2d9f9bbc3d3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyCalc_1_1CalculatorGui.html#a9b26945365ffd125c24ad2d9f9bbc3d3">plotTo</a> () <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a></td></tr>
+<tr class="separator:a9b26945365ffd125c24ad2d9f9bbc3d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc6d21f9456149b02bbae248b49711bf" id="r_abc6d21f9456149b02bbae248b49711bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> std::vector&lt; <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">float</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyCalc_1_1CalculatorGui.html#abc6d21f9456149b02bbae248b49711bf">plotSamples</a> () <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a></td></tr>
+<tr class="memdesc:abc6d21f9456149b02bbae248b49711bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">The y values of the last plot (kPlotSamples values, NaN where undefined).  <br /></td></tr>
+<tr class="separator:abc6d21f9456149b02bbae248b49711bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a8f4ad10415c08400a723271087292e0c" id="r_a8f4ad10415c08400a723271087292e0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">static</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="structTinyCalc_1_1CalculatorGui_1_1KeyDef.html">KeyDef</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyCalc_1_1CalculatorGui.html#a8f4ad10415c08400a723271087292e0c">keys</a> (<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">size_t</a> <a class="el" href="classTinyCalc_1_1CalculatorGui.html#aa8e958cc37a6f3d3051d06ac03b95a78">page</a>=0)</td></tr>
 <tr class="memdesc:a8f4ad10415c08400a723271087292e0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Key table of one page (kPageCount pages, kKeyCount entries each).  <br /></td></tr>
 <tr class="separator:a8f4ad10415c08400a723271087292e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec98a6ececd602519403c8cc8a358b7b" id="r_aec98a6ececd602519403c8cc8a358b7b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">static</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="structTinyCalc_1_1CalculatorGui_1_1KeyDef.html">KeyDef</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyCalc_1_1CalculatorGui.html#aec98a6ececd602519403c8cc8a358b7b">plotKeys</a> ()</td></tr>
+<tr class="separator:aec98a6ececd602519403c8cc8a358b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af04455a01a66103bbe930125570b5aa8" id="r_af04455a01a66103bbe930125570b5aa8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">static</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyCalc_1_1CalculatorGui.html#af04455a01a66103bbe930125570b5aa8">pageName</a> (<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">size_t</a> <a class="el" href="classTinyCalc_1_1CalculatorGui.html#aa8e958cc37a6f3d3051d06ac03b95a78">page</a>)</td></tr>
 <tr class="memdesc:af04455a01a66103bbe930125570b5aa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name shown on the page key.  <br /></td></tr>
 <tr class="separator:af04455a01a66103bbe930125570b5aa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,10 +159,12 @@ Static Public Attributes</h2></td></tr>
 <tr class="separator:a27f2c4e5b6fd63aaf061e80709da9444"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6ed1c488764147149d7b3ecee6286f3" id="r_aa6ed1c488764147149d7b3ecee6286f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">static</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyCalc_1_1CalculatorGui.html#aa6ed1c488764147149d7b3ecee6286f3">kPageCount</a> = 4</td></tr>
 <tr class="separator:aa6ed1c488764147149d7b3ecee6286f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84ae089ae8168544fd6d7b4949578787" id="r_a84ae089ae8168544fd6d7b4949578787"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">static</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyCalc_1_1CalculatorGui.html#a84ae089ae8168544fd6d7b4949578787">kPlotSamples</a> = 160</td></tr>
+<tr class="separator:a84ae089ae8168544fd6d7b4949578787"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a> = tinymd::TINYMD_DEFAULT_RGB_T, <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> Number = float&gt;<br />
-class TinyCalc::CalculatorGui&lt; RGB_T, Number &gt;</div><p><a class="el" href="classTinyCalc_1_1Calculator.html" title="High-level calculator: variables, angle unit, compile and evaluate.">Calculator</a> keypad with an expression line and a result line. </p>
+class TinyCalc::CalculatorGui&lt; RGB_T, Number &gt;</div><p><a class="el" href="classTinyCalc_1_1Calculator.html" title="High-level calculator: variables, angle unit, compile and evaluate.">Calculator</a> keypad with an expression line and a result line, and a plot of the expression as a function of x. </p>
 <p>The GUI owns a Calculator&lt;Number&gt;, so every key press goes through the same parser and evaluator as the rest of the library. The class is independent of the display: <a class="el" href="classTinyCalc_1_1CalculatorGui.html#a2b4453c2113d627077ff2acf7b8d4636">press()</a> drives it directly, which allows testing the key logic without a window.</p>
 <p>The keypad has several pages. The top-left key shows the current page name and cycles through the pages:</p><ul>
 <li>Basic: digits, operators, parentheses, "ans", "pi"</li>
@@ -159,8 +177,10 @@ class TinyCalc::CalculatorGui&lt; RGB_T, Number &gt;</div><p><a class="el" href=
 <li>"=" evaluates the expression; the result stays in the result line and "ans" holds it for the next calculation (an operator after "=" starts from "ans")</li>
 <li>"C" clears everything, "DEL" removes the last character</li>
 <li>"RAD"/"DEG" toggles the angle unit used by the trigonometric functions</li>
-<li>the expression is evaluated only when "=" is pressed </li>
+<li>the expression is evaluated only when "=" is pressed</li>
+<li>"Plot" plots the expression as a function of x (see plotExpression()); "x" enters the variable x.</li>
 </ul>
+<p>Plot screen: the From and To fields hold the x range (default -10 .. 10). Tap a field, or use the From/To keys, to select it; the numeric pad types into the selected field. The plot is redrawn whenever both fields hold a valid range with To above From. "Back" returns to the keypad. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="abf8b0dc481750375751599c05e78db3b" name="abf8b0dc481750375751599c05e78db3b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abf8b0dc481750375751599c05e78db3b">&#9670;&#160;</a></span>Calc</h2>
@@ -350,7 +370,7 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The button of key <code>index</code> (0 .. kKeyCount-1) on the current page, e.g. to fire its onClick in tests. </p>
+<p>The button of key <code>index</code> (0 .. kKeyCount-1) of the shown table, e.g. to fire its onClick in tests. </p>
 
 </div>
 </div>
@@ -471,6 +491,148 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
 
 </div>
 </div>
+<a id="a6e8992b2fe0bff598e7a3eedb3eeb3b0" name="a6e8992b2fe0bff598e7a3eedb3eeb3b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e8992b2fe0bff598e7a3eedb3eeb3b0">&#9670;&#160;</a></span>plotFrom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>  = tinymd::TINYMD_DEFAULT_RGB_T, <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> Number  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string <a class="el" href="classTinyCalc_1_1CalculatorGui.html">TinyCalc::CalculatorGui</a>&lt; <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>, Number &gt;::plotFrom </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Text of the From and To fields of the plot. </p>
+
+</div>
+</div>
+<a id="aec98a6ececd602519403c8cc8a358b7b" name="aec98a6ececd602519403c8cc8a358b7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec98a6ececd602519403c8cc8a358b7b">&#9670;&#160;</a></span>plotKeys()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>  = tinymd::TINYMD_DEFAULT_RGB_T, <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> Number  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">static</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="structTinyCalc_1_1CalculatorGui_1_1KeyDef.html">KeyDef</a> * <a class="el" href="classTinyCalc_1_1CalculatorGui.html">TinyCalc::CalculatorGui</a>&lt; <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>, Number &gt;::plotKeys </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Numeric pad of the plot screen: From/To select a field, the digits and "-" and "." type into it, DEL deletes, Back returns to the keypad. </p>
+
+</div>
+</div>
+<a id="abc6d21f9456149b02bbae248b49711bf" name="abc6d21f9456149b02bbae248b49711bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc6d21f9456149b02bbae248b49711bf">&#9670;&#160;</a></span>plotSamples()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>  = tinymd::TINYMD_DEFAULT_RGB_T, <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> Number  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> std::vector&lt; <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">float</a> &gt; &amp; <a class="el" href="classTinyCalc_1_1CalculatorGui.html">TinyCalc::CalculatorGui</a>&lt; <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>, Number &gt;::plotSamples </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The y values of the last plot (kPlotSamples values, NaN where undefined). </p>
+
+</div>
+</div>
+<a id="ac502e98468b88be795999f8fd0e9367c" name="ac502e98468b88be795999f8fd0e9367c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac502e98468b88be795999f8fd0e9367c">&#9670;&#160;</a></span>plotting()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>  = tinymd::TINYMD_DEFAULT_RGB_T, <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> Number  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">bool</a> <a class="el" href="classTinyCalc_1_1CalculatorGui.html">TinyCalc::CalculatorGui</a>&lt; <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>, Number &gt;::plotting </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>True while the plot is shown instead of the keypad. </p>
+
+</div>
+</div>
+<a id="a9b26945365ffd125c24ad2d9f9bbc3d3" name="a9b26945365ffd125c24ad2d9f9bbc3d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b26945365ffd125c24ad2d9f9bbc3d3">&#9670;&#160;</a></span>plotTo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>  = tinymd::TINYMD_DEFAULT_RGB_T, <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> Number  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string <a class="el" href="classTinyCalc_1_1CalculatorGui.html">TinyCalc::CalculatorGui</a>&lt; <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>, Number &gt;::plotTo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2b4453c2113d627077ff2acf7b8d4636" name="a2b4453c2113d627077ff2acf7b8d4636"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2b4453c2113d627077ff2acf7b8d4636">&#9670;&#160;</a></span>press()</h2>
 
@@ -496,7 +658,7 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Handles one key by its action string (see <a class="el" href="classTinyCalc_1_1CalculatorGui.html#a8f4ad10415c08400a723271087292e0c" title="Key table of one page (kPageCount pages, kKeyCount entries each).">keys()</a>). Also used as the click handler of every key button. </p>
+<p>Handles one key by its action string (see <a class="el" href="classTinyCalc_1_1CalculatorGui.html#a8f4ad10415c08400a723271087292e0c" title="Key table of one page (kPageCount pages, kKeyCount entries each).">keys()</a> and <a class="el" href="classTinyCalc_1_1CalculatorGui.html#aec98a6ececd602519403c8cc8a358b7b">plotKeys()</a>). Also used as the click handler of every key button. </p>
 
 </div>
 </div>
@@ -525,6 +687,46 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
 </table>
 </div><div class="memdoc">
 <p>Text currently shown in the result line: the result after "=", or the error of the last "=" (empty otherwise). </p>
+
+</div>
+</div>
+<a id="ad6377c4f76697e4c2806231f71d270ad" name="ad6377c4f76697e4c2806231f71d270ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6377c4f76697e4c2806231f71d270ad">&#9670;&#160;</a></span>setPlotRange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>  = tinymd::TINYMD_DEFAULT_RGB_T, <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> Number  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">void</a> <a class="el" href="classTinyCalc_1_1CalculatorGui.html">TinyCalc::CalculatorGui</a>&lt; <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>, Number &gt;::setPlotRange </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">float</a>&#160;</td>
+          <td class="paramname"><em>xMin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">float</a>&#160;</td>
+          <td class="paramname"><em>xMax</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Range of x used by the Plot key (default -10 .. 10). Ignored unless xMax &gt; xMin. </p>
 
 </div>
 </div>
@@ -566,6 +768,30 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">size_t</a> <a class="el" href="classTinyCalc_1_1CalculatorGui.html">TinyCalc::CalculatorGui</a>&lt; <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>, Number &gt;::kPageCount = 4</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a84ae089ae8168544fd6d7b4949578787" name="a84ae089ae8168544fd6d7b4949578787"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84ae089ae8168544fd6d7b4949578787">&#9670;&#160;</a></span>kPlotSamples</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>  = tinymd::TINYMD_DEFAULT_RGB_T, <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> Number  = float&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">size_t</a> <a class="el" href="classTinyCalc_1_1CalculatorGui.html">TinyCalc::CalculatorGui</a>&lt; <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>, Number &gt;::kPlotSamples = 160</td>
         </tr>
       </table>
   </td>

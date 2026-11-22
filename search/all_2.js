@@ -2,7 +2,7 @@ var searchData=
 [
   ['c_0',['c',['../classTinyCalc_1_1Math.html#a8a032c3eeb142a42b1ba19013f017994',1,'TinyCalc::Math']]],
   ['calc_1',['Calc',['../classTinyCalc_1_1CalculatorGui.html#abf8b0dc481750375751599c05e78db3b',1,'TinyCalc::CalculatorGui']]],
-  ['calculator_2',['calculator',['../classTinyCalc_1_1Calculator.html',1,'TinyCalc::Calculator&lt; T, MaxOps, MaxVars &gt;'],['../classTinyCalc_1_1CalculatorGui.html#a985d7615224cae3f431bf81f00313dde',1,'TinyCalc::CalculatorGui::calculator()'],['../classTinyCalc_1_1Calculator.html#a2e86aa54bf014d12c6f1cd4e104efca1',1,'TinyCalc::Calculator::Calculator()']]],
+  ['calculator_2',['calculator',['../classTinyCalc_1_1Calculator.html',1,'TinyCalc::Calculator&lt; T, MaxOps, MaxVars &gt;'],['../classTinyCalc_1_1Calculator.html#a2e86aa54bf014d12c6f1cd4e104efca1',1,'TinyCalc::Calculator::Calculator()'],['../classTinyCalc_1_1CalculatorGui.html#a985d7615224cae3f431bf81f00313dde',1,'TinyCalc::CalculatorGui::calculator()']]],
   ['calculator_20gui_20optional_3',['Calculator GUI (optional)',['../md_docs_2gui.html',1,'']]],
   ['calculator_2eh_4',['Calculator.h',['../Calculator_8h.html',1,'']]],
   ['calculator_3c_20float_20_3e_5',['Calculator&lt; float &gt;',['../classTinyCalc_1_1Calculator.html',1,'TinyCalc']]],
@@ -27,7 +27,7 @@ var searchData=
   ['config_2eh_24',['Config.h',['../Config_8h.html',1,'']]],
   ['configuration_25',['Configuration',['../md_docs_2configuration.html',1,'']]],
   ['configuration_2emd_26',['configuration.md',['../configuration_8md.html',1,'']]],
-  ['converting_20the_20result_27',['Converting the result',['../md_docs_2usage.html#autotoc_md18',1,'']]],
+  ['converting_20the_20result_27',['Converting the result',['../md_docs_2usage.html#autotoc_md19',1,'']]],
   ['cos_28',['cos',['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a0e40ae8a35ec0a0baaf69b5d814ae874',1,'TinyCalc::detail::Prim&lt; float &gt;::cos()'],['../structTinyCalc_1_1detail_1_1Prim.html#a71edb12f3f8693a8f4cb88bde9e506da',1,'TinyCalc::detail::Prim::cos()'],['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70affca562be079b9e4e41ea9d6a86c582b',1,'TinyCalc::Cos']]],
   ['cosh_29',['cosh',['../classTinyCalc_1_1Math.html#a5db698f7bbf4b30156d743d9194342c6',1,'TinyCalc::Math::cosh()'],['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70a4371c3565b771b40c187487cc0190392',1,'TinyCalc::Cosh']]],
   ['cot_30',['Cot',['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70acb15a9c3d21d89d6840c8dd1d2499322',1,'TinyCalc']]],
