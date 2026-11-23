@@ -10,7 +10,8 @@ var searchData=
   ['as_7',['as',['../structTinyCalc_1_1Calculator_1_1Result.html#a2321d42fb0ee824723fa94b3cda94d06',1,'TinyCalc::Calculator::Result']]],
   ['asin_8',['asin',['../structTinyCalc_1_1detail_1_1Prim.html#a587ac18e0076cde2f2f5d1d4350656cd',1,'TinyCalc::detail::Prim::asin()'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#ab025ea39b3e30eda07225c1becadda04',1,'TinyCalc::detail::Prim&lt; float &gt;::asin()']]],
   ['asinh_9',['asinh',['../classTinyCalc_1_1Math.html#a125924c5507ebec622f6cabdf0b54503',1,'TinyCalc::Math']]],
-  ['atan_10',['atan',['../structTinyCalc_1_1detail_1_1Prim.html#a606d743a1c1e55790f0f37dfb61a8131',1,'TinyCalc::detail::Prim::atan()'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a05a37d02e01e5e743bac9454d188b11c',1,'TinyCalc::detail::Prim&lt; float &gt;::atan()']]],
-  ['atan2_11',['atan2',['../structTinyCalc_1_1detail_1_1Prim.html#a2aa442bbe12d882fe3f605016e2b51e7',1,'TinyCalc::detail::Prim::atan2()'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a5514867d7b439026069d76ad1669dae0',1,'TinyCalc::detail::Prim&lt; float &gt;::atan2()']]],
-  ['atanh_12',['atanh',['../classTinyCalc_1_1Math.html#a6d4b07d19d26593b4064538114c969b9',1,'TinyCalc::Math']]]
+  ['assignfonts_10',['assignFonts',['../classTinyCalc_1_1CalculatorGui.html#ad13c39a0ff9aabf5d13c3b8665ddb91a',1,'TinyCalc::CalculatorGui']]],
+  ['atan_11',['atan',['../structTinyCalc_1_1detail_1_1Prim.html#a606d743a1c1e55790f0f37dfb61a8131',1,'TinyCalc::detail::Prim::atan()'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a05a37d02e01e5e743bac9454d188b11c',1,'TinyCalc::detail::Prim&lt; float &gt;::atan()']]],
+  ['atan2_12',['atan2',['../structTinyCalc_1_1detail_1_1Prim.html#a2aa442bbe12d882fe3f605016e2b51e7',1,'TinyCalc::detail::Prim::atan2()'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a5514867d7b439026069d76ad1669dae0',1,'TinyCalc::detail::Prim&lt; float &gt;::atan2()']]],
+  ['atanh_13',['atanh',['../classTinyCalc_1_1Math.html#a6d4b07d19d26593b4064538114c969b9',1,'TinyCalc::Math']]]
 ];

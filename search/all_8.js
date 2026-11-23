@@ -5,7 +5,7 @@ var searchData=
   ['in_20arduino_2',['Installation in Arduino',['../index.html#autotoc_md2',1,'']]],
   ['index_3',['index',['../structTinyCalc_1_1Op.html#a4d43d923dc1e89b3402a127fc3f7e7c2',1,'TinyCalc::Op']]],
   ['index_2emd_4',['index.md',['../index_8md.html',1,'']]],
-  ['input_20rules_5',['Input rules',['../md_docs_2gui.html#autotoc_md13',1,'']]],
+  ['input_20rules_5',['Input rules',['../md_docs_2gui.html#autotoc_md15',1,'']]],
   ['installation_20in_20arduino_6',['Installation in Arduino',['../index.html#autotoc_md2',1,'']]],
   ['invalidname_7',['InvalidName',['../namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bcaa798c6c805d93fedf99d9bdf443e7ffc',1,'TinyCalc']]],
   ['isbinaryop_8',['isBinaryOp',['../classTinyCalc_1_1CalculatorGui.html#a99ef6806b6bc10aef1df10003b570805',1,'TinyCalc::CalculatorGui']]],
