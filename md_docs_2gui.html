@@ -106,13 +106,25 @@ Screens</h1>
 <b>Special</b>  </td></tr>
 </table>
 <h1><a class="anchor" id="autotoc_md13"></a>
+Input rules</h1>
+<p>The keypad only accepts keys that continue the expression validly. A key that does not fit is ignored:</p>
+<ul>
+<li>an operator (<code>+ * / ^ %</code>) needs a number, name, <code>)</code> or <code>!</code> before it</li>
+<li><code>-</code> may start an expression or follow an operator, as a sign (<code>2*-3</code>)</li>
+<li><code>)</code> and <code>,</code> need an open <code>(</code> (a function call)</li>
+<li><code>!</code> needs a number, name or <code>)</code> before it</li>
+<li>a number has at most one <code>.</code></li>
+<li>after <code>=</code>, an operator continues with <code>ans</code>; any other key starts over</li>
+</ul>
+<p>A name followed by a digit, a name or <code>(</code> gets an explicit <code>*</code>, so <code>pi</code> then <code>2</code> is <code>pi*2</code>.</p>
+<h1><a class="anchor" id="autotoc_md14"></a>
 Swipes</h1>
 <ul>
 <li><b>Swipe right</b>: next keypad page (Basic → Trig → Math → Special → Basic).</li>
 <li><b>Swipe left</b>: previous keypad page. On the plot screen it returns to the keypad.</li>
 </ul>
 <p>A swipe works wherever it starts, including on a key. Pages wrap around, the same as the <b>page</b> key.</p>
-<h1><a class="anchor" id="autotoc_md14"></a>
+<h1><a class="anchor" id="autotoc_md15"></a>
 Keypad</h1>
 <p>The keypad has four pages. The top-left key shows the current page name (<code>Basic</code>, <code>Trig</code>, <code>Math</code>, <code>Special</code>) and switches to the next page.</p>
 <table class="markdownTable">
@@ -128,7 +140,7 @@ Keypad</h1>
 <td class="markdownTableBodyNone">Special   </td><td class="markdownTableBodyNone"><code>gamma fact erf erfc comb perm</code>, <code>! % ( ) , ans pi e tau phi ^</code>, <code>Plot</code>, <code>x</code>   </td></tr>
 </table>
 <p>Every function and constant of the library has a key.</p>
-<h1><a class="anchor" id="autotoc_md15"></a>
+<h1><a class="anchor" id="autotoc_md16"></a>
 Plotting</h1>
 <p><code>x</code> enters the variable x. <code>Plot</code> samples the current expression as a function of x and shows it in a chart with the formula as title. The range of x is given by the <b>From</b> and <b>To</b> fields (default -10 and 10). Points where the expression is undefined (for example <code>sqrt(x)</code> for negative x) are left as gaps.</p>
 <p>On the plot screen:</p>
@@ -140,7 +152,7 @@ Plotting</h1>
 </ul>
 <p><img src="images/gui-plot.png" alt="Plot of sin(x)*x/3 with the From and To fields" width="240" class="inline"/></p>
 <p>The default range can also be set in code with <code>gui.setPlotRange(xMin, xMax)</code>.</p>
-<h1><a class="anchor" id="autotoc_md16"></a>
+<h1><a class="anchor" id="autotoc_md17"></a>
 Behaviour</h1>
 <ul>
 <li>Digits, operators and function keys append to the expression.</li>

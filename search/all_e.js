@@ -10,7 +10,7 @@ var searchData=
   ['plotfrom_7',['plotFrom',['../classTinyCalc_1_1CalculatorGui.html#a6e8992b2fe0bff598e7a3eedb3eeb3b0',1,'TinyCalc::CalculatorGui']]],
   ['plotkeys_8',['plotKeys',['../classTinyCalc_1_1CalculatorGui.html#aec98a6ececd602519403c8cc8a358b7b',1,'TinyCalc::CalculatorGui']]],
   ['plotsamples_9',['plotSamples',['../classTinyCalc_1_1CalculatorGui.html#abc6d21f9456149b02bbae248b49711bf',1,'TinyCalc::CalculatorGui']]],
-  ['plotting_10',['plotting',['../md_docs_2gui.html#autotoc_md15',1,'Plotting'],['../classTinyCalc_1_1CalculatorGui.html#ac502e98468b88be795999f8fd0e9367c',1,'TinyCalc::CalculatorGui::plotting() const']]],
+  ['plotting_10',['plotting',['../md_docs_2gui.html#autotoc_md16',1,'Plotting'],['../classTinyCalc_1_1CalculatorGui.html#ac502e98468b88be795999f8fd0e9367c',1,'TinyCalc::CalculatorGui::plotting() const']]],
   ['plotto_11',['plotTo',['../classTinyCalc_1_1CalculatorGui.html#a9b26945365ffd125c24ad2d9f9bbc3d3',1,'TinyCalc::CalculatorGui']]],
   ['plus_12',['Plus',['../namespaceTinyCalc_1_1detail.html#ac15ac6e12f8156599562a6a472b022c7a32ba78fe43257d3e7f88e3935a8ea0d4',1,'TinyCalc::detail']]],
   ['pos_13',['pos',['../structTinyCalc_1_1detail_1_1Token.html#a3c3563463492002899b10f02251bba4f',1,'TinyCalc::detail::Token']]],

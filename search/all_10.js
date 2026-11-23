@@ -17,7 +17,7 @@ var searchData=
   ['star_14',['Star',['../namespaceTinyCalc_1_1detail.html#ac15ac6e12f8156599562a6a472b022c7a26f93e6e68e28a698377e941cb59f29a',1,'TinyCalc::detail']]],
   ['sub_15',['Sub',['../namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386ae80155eceb940c89e2de63ad05868db2',1,'TinyCalc']]],
   ['sum_16',['Sum',['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70aa0ec87054b5e5b7847d0d8780a01a3d5',1,'TinyCalc']]],
-  ['swipes_17',['Swipes',['../md_docs_2gui.html#autotoc_md13',1,'']]],
+  ['swipes_17',['Swipes',['../md_docs_2gui.html#autotoc_md14',1,'']]],
   ['syntax_18',['syntax',['../namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bca92e9d6227d5534e7afc27a11179c808e',1,'TinyCalc::Syntax'],['../md_docs_2syntax.html',1,'Syntax']]],
   ['syntax_2emd_19',['syntax.md',['../syntax_8md.html',1,'']]]
 ];
