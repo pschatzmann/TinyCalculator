@@ -21,14 +21,14 @@ if (!r) Serial.println(errorText(r.error));
 
 ## Documentation
 
-- [Usage](docs/usage.md): the API, assignments, compile and run
-- [Syntax](docs/syntax.md): operators, precedence, implicit multiplication
-- [Functions](docs/functions.md): all functions and constants
-- [Errors](docs/errors.md): error codes and error positions
-- [Configuration](docs/configuration.md): size limits and macros
-- [Calculator GUI](docs/gui.md): the optional keypad
-- [Desktop build](docs/desktop-build.md): CMake, tests and examples
-- [Notes](docs/notes.md): limitations and tips
+- [Usage](https://github.com/pschatzmann/TinyCalculator/wiki/Usage): the API, assignments, compile and run
+- [Syntax](https://github.com/pschatzmann/TinyCalculator/wiki/Syntax): operators, precedence, implicit multiplication
+- [Functions](https://github.com/pschatzmann/TinyCalculator/wiki/Functions): all functions and constants
+- [Errors](https://github.com/pschatzmann/TinyCalculator/wiki/Errors): error codes and error positions
+- [Configuration](https://github.com/pschatzmann/TinyCalculator/wiki/Configuration): size limits and macros
+- [Calculator GUI](https://github.com/pschatzmann/TinyCalculator/wiki/Calculator-GUI): the optional keypad
+- [Desktop build](https://github.com/pschatzmann/TinyCalculator/wiki/Desktop-Build): CMake, tests and examples
+- [Notes](https://github.com/pschatzmann/TinyCalculator/wiki/Notes): limitations and tips
 - [Class documentation (Doxygen)](https://pschatzmann.github.io/TinyCalculator/annotated.html): API reference for all classes
 
 ## Installation in Arduino

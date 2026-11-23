@@ -329,17 +329,16 @@ class CalculatorGui {
   /// The area the calculator occupies.
   tinymd::Bounds bounds() const { return bounds_; }
 
-  /// Fonts for the expression line and the result line, e.g. TinyFonts
-  /// (tinyfonts::TinyGPUFont). nullptr keeps the theme's font for the line.
-  /// Signature of a font function: it receives the theme and assigns fonts to
-  /// its typography, e.g.
-  ///
-  ///   void myFonts(CalculatorTheme<RGB565>& t) {
-  ///     t.typography.label = &smallFont;         // keys, chart axes, field labels
-  ///     t.typography.body = &smallFont;          // expression line, chart text
-  ///     t.typography.headline = &resultFont;     // result line
-  ///   }
-  ///   calculatorGui.assignFonts(myFonts);
+  /// Signature of a font function: it receives the theme and assigns the fonts
+  /// of its typography (e.g. TinyFonts, tinyfonts::TinyGPUFont). Example:
+  /// @code
+  /// void myFonts(CalculatorTheme<RGB565>& t) {
+  ///   t.typography.label = &smallFont;      // keys, chart axes, field labels
+  ///   t.typography.body = &smallFont;       // expression line, chart text
+  ///   t.typography.headline = &resultFont;  // result line
+  /// }
+  /// calculatorGui.assignFonts(myFonts);
+  /// @endcode
   typedef void (*FontFunction)(CalculatorTheme<RGB_T>& theme);
 
   /// Lets a function defined in the sketch assign the fonts of the theme.
