@@ -12,5 +12,5 @@ var searchData=
   ['exp_9',['exp',['../structTinyCalc_1_1detail_1_1Prim.html#a81aedc2a5e6786d926ccdf478d01ff9d',1,'TinyCalc::detail::Prim::exp()'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a3fff2788a21a3c655172a9867eb8b761',1,'TinyCalc::detail::Prim&lt; float &gt;::exp()']]],
   ['exp2_10',['exp2',['../classTinyCalc_1_1Math.html#ae94655e845c4698cfa16f8aaab54c497',1,'TinyCalc::Math']]],
   ['expm1_11',['expm1',['../classTinyCalc_1_1Math.html#a34205141538bfd0ee1bd1b452fa5c74f',1,'TinyCalc::Math']]],
-  ['expression_12',['expression',['../classTinyCalc_1_1CalculatorGui.html#a67bdcd845578ab9af43115fa814b04aa',1,'TinyCalc::CalculatorGui::expression()'],['../classTinyCalc_1_1Expression.html#a55e67ea6753d3b014ce03284a1270606',1,'TinyCalc::Expression::Expression()']]]
+  ['expression_12',['expression',['../classTinyCalc_1_1Expression.html#a55e67ea6753d3b014ce03284a1270606',1,'TinyCalc::Expression::Expression()'],['../classTinyCalc_1_1CalculatorGui.html#a67bdcd845578ab9af43115fa814b04aa',1,'TinyCalc::CalculatorGui::expression()']]]
 ];

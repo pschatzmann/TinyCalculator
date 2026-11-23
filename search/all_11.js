@@ -8,7 +8,7 @@ var searchData=
   ['tc_5fprim_5ff2_5',['TC_PRIM_F2',['../Math_8h.html#a9db670167713252516f94cc1110cf0ab',1,'Math.h']]],
   ['tc_5fprim_5fgen1_6',['TC_PRIM_GEN1',['../Math_8h.html#a888e2e60d2934f7a0b2e9d5b3ad5cbe4',1,'Math.h']]],
   ['tc_5fprim_5fgen2_7',['TC_PRIM_GEN2',['../Math_8h.html#af469d5b126fd9f56a16d7b8dfbad3aeb',1,'Math.h']]],
-  ['the_20result_8',['Converting the result',['../md_docs_2usage.html#autotoc_md19',1,'']]],
+  ['the_20result_8',['Converting the result',['../md_docs_2usage.html#autotoc_md20',1,'']]],
   ['tinycalc_9',['TinyCalc',['../namespaceTinyCalc.html',1,'']]],
   ['tinycalc_3a_3adetail_10',['detail',['../namespaceTinyCalc_1_1detail.html',1,'TinyCalc']]],
   ['tinycalc_5fmax_5fname_11',['TINYCALC_MAX_NAME',['../Config_8h.html#a055bfe52d452566d8c372f59684c9c30',1,'Config.h']]],

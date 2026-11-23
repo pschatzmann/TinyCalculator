@@ -1,7 +1,7 @@
 var searchData=
 [
   ['c_0',['c',['../classTinyCalc_1_1Math.html#a8a032c3eeb142a42b1ba19013f017994',1,'TinyCalc::Math']]],
-  ['calculator_1',['calculator',['../classTinyCalc_1_1Calculator.html#a2e86aa54bf014d12c6f1cd4e104efca1',1,'TinyCalc::Calculator::Calculator()'],['../classTinyCalc_1_1CalculatorGui.html#a985d7615224cae3f431bf81f00313dde',1,'TinyCalc::CalculatorGui::calculator()']]],
+  ['calculator_1',['calculator',['../classTinyCalc_1_1CalculatorGui.html#a985d7615224cae3f431bf81f00313dde',1,'TinyCalc::CalculatorGui::calculator()'],['../classTinyCalc_1_1Calculator.html#a2e86aa54bf014d12c6f1cd4e104efca1',1,'TinyCalc::Calculator::Calculator()']]],
   ['calculatorgui_2',['calculatorgui',['../classTinyCalc_1_1CalculatorGui.html#ac4e2faa4ba773a673177040520c94df8',1,'TinyCalc::CalculatorGui::CalculatorGui(tinymd::Bounds bounds)'],['../classTinyCalc_1_1CalculatorGui.html#aa54c7d7c5d08b88aa7cf0c8306ea142e',1,'TinyCalc::CalculatorGui::CalculatorGui(const CalculatorGui &amp;)=delete']]],
   ['callfunction_3',['callFunction',['../namespaceTinyCalc_1_1detail.html#a1e01a6ae8382100ae50600b087c9a985',1,'TinyCalc::detail']]],
   ['capacity_4',['capacity',['../classTinyCalc_1_1Expression.html#a9e99784f715af8cb7add3c1291dfa6a7',1,'TinyCalc::Expression']]],
