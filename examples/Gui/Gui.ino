@@ -10,7 +10,7 @@
 
 // Same panel size as the TinyMaterialDesign examples.
 App<RGB565> app(DefaultBoard);
-CalculatorGui<RGB565, float> calculatorGui(Bounds(0, 0, 240, 320));
+CalculatorGui<RGB565, float> calculatorGui(Bounds(0, 0, DefaultBoard.width(), DefaultBoard.height()));
 
 void setup() {
   Serial.begin(115200);

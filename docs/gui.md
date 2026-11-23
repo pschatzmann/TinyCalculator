@@ -17,6 +17,20 @@ void loop()  { app.update(); }
 
 It needs TinyMaterialDesign (and therefore TinyGPU) on the include path.
 
+## Sizes
+
+The layout adapts to the area it is given (`CalculatorGui(Bounds(...))`,
+`setBounds()`):
+
+- **Tall areas** (portrait) stack the display above the keys.
+- **Wide areas** (landscape) put the display on the left and the keys on the right.
+
+The keys and the plot fields take the space the display does not need. Call
+`setBounds()` to change the size at runtime, for example after a rotation.
+
+Sizes from about 160×240 (portrait) and 320×200 (landscape) are readable.
+Smaller areas still lay out, but the key labels no longer fit on the keys.
+
 ## Screens
 
 All keypad pages, shown at the same size:

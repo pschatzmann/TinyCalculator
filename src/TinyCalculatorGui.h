@@ -82,7 +82,8 @@ class CalculatorGui {
         resultLabel_(tinymd::Bounds(), "", tinymd::TypographyRole::kHeadline),
         fromField_(tinymd::Bounds(), "From"),
         toField_(tinymd::Bounds(), "To") {
-    layout(bounds);
+    bounds_ = bounds;
+    relayout();
     plot_.addSeries(colorFromHex<RGB_T>(0x6750A4));
     fromField_.onFocus = [this]() { activeField_ = 0; };
     toField_.onFocus = [this]() { activeField_ = 1; };
@@ -210,6 +211,18 @@ class CalculatorGui {
   /// Index of the current keypad page (0 .. kPageCount-1).
   size_t page() const { return page_; }
 
+  /// The area the calculator occupies.
+  tinymd::Bounds bounds() const { return bounds_; }
+
+  /// Changes the area the calculator occupies (e.g. after a rotation). Works
+  /// for any size: a wide area gets the display left and the keys right, a
+  /// tall area stacks them.
+  void setBounds(tinymd::Bounds bounds) {
+    bounds_ = bounds;
+    relayout();
+    if (screen_ != nullptr) screen_->invalidate();
+  }
+
   /// Range of x used by the Plot key (default -10 .. 10). Ignored unless xMax > xMin.
   void setPlotRange(float xMin, float xMax) {
     if (xMax > xMin) {
@@ -295,31 +308,58 @@ class CalculatorGui {
  private:
   static const int32_t kMargin = 8;     // outer margin
   static const int32_t kGap = 4;        // gap between keys and fields
-  static const int32_t kExprH = 20;     // expression line
-  static const int32_t kResultH = 44;   // result line
-  static const int32_t kChartH = 136;   // plot area
-  static const int32_t kFieldH = 34;    // From / To fields
+  static const int32_t kExprH = 20;     // expression line (at most)
+  static const int32_t kFieldH = 34;    // From / To fields (at most)
 
-  // Position the widgets inside `b`.
-  void layout(tinymd::Bounds b) {
-    bounds_ = b;
-    const int32_t w = b.w - 2 * kMargin;
-    exprLabel_.bounds = tinymd::Bounds(b.x + kMargin, b.y + kMargin, w, kExprH);
-    resultLabel_.bounds = tinymd::Bounds(b.x + kMargin, b.y + kMargin + kExprH, w, kResultH);
-    plot_.bounds = tinymd::Bounds(b.x + kMargin, b.y + kMargin, w, kChartH);
-    const int32_t fieldW = (w - kGap) / 2;
-    fromField_.bounds = tinymd::Bounds(b.x + kMargin, fieldsY(), fieldW, kFieldH);
-    toField_.bounds = tinymd::Bounds(b.x + kMargin + fieldW + kGap, fieldsY(), fieldW, kFieldH);
-    placeKeys(b.y + kMargin + kExprH + kResultH + kGap, 7);  // keypad top
+  // Positions all widgets for the current size (bounds_) and mode.
+  //
+  // Wide areas (landscape) put the display on the left and the keys on the
+  // right; tall areas (portrait) stack the display above the keys. The keys
+  // use the space the display does not need, so the keypad fills the area.
+  void relayout() {
+    const int32_t x = bounds_.x, y = bounds_.y, w = bounds_.w, h = bounds_.h;
+    const bool landscape = w > h;
+    tinymd::Bounds display, pad;
+    if (landscape) {
+      const int32_t dw = (w - 2 * kMargin) / 2;
+      display = tinymd::Bounds(x + kMargin, y + kMargin, dw, h - 2 * kMargin);
+      pad = tinymd::Bounds(x + kMargin + dw + kGap, y + kMargin,
+                           w - 2 * kMargin - dw - kGap, h - 2 * kMargin);
+    } else {
+      // the plot needs more height than the expression and result lines
+      const int32_t dh = plotting_ ? h / 2 : (h * 3) / 10;
+      display = tinymd::Bounds(x + kMargin, y + kMargin, w - 2 * kMargin, dh);
+      pad = tinymd::Bounds(x + kMargin, y + kMargin + dh + kGap,
+                           w - 2 * kMargin, h - 2 * kMargin - dh - kGap);
+    }
+
+    if (plotting_) {
+      const int32_t fh = min32(kFieldH, display.h / 4);
+      plot_.bounds = tinymd::Bounds(display.x, display.y, display.w,
+                                    display.h - fh - kGap);
+      const int32_t fw = (display.w - kGap) / 2;
+      const int32_t fy = display.y + display.h - fh;
+      fromField_.bounds = tinymd::Bounds(display.x, fy, fw, fh);
+      toField_.bounds = tinymd::Bounds(display.x + fw + kGap, fy, display.w - fw - kGap, fh);
+      placeKeys(pad, 4);  // numeric pad
+    } else {
+      const int32_t eh = min32(kExprH, display.h / 3);
+      exprLabel_.bounds = tinymd::Bounds(display.x, display.y, display.w, eh);
+      resultLabel_.bounds = tinymd::Bounds(display.x, display.y + eh, display.w,
+                                           display.h - eh);
+      placeKeys(pad, 7);  // keypad
+    }
   }
 
-  int32_t fieldsY() const { return bounds_.y + kMargin + kChartH + 6; }
+  static int32_t min32(int32_t a, int32_t b) { return a < b ? a : b; }
 
-  // Places the key buttons in a grid of `rows` rows (4 columns) from `top`.
-  void placeKeys(int32_t top, int32_t rows) {
+  // Places the key buttons in a grid of `rows` rows (4 columns) inside `area`.
+  void placeKeys(tinymd::Bounds area, int32_t rows) {
     const int32_t cols = 4;
-    const int32_t keyW = (bounds_.w - 2 * kMargin - (cols - 1) * kGap) / cols;
-    const int32_t keyH = (bounds_.y + bounds_.h - kMargin - top - (rows - 1) * kGap) / rows;
+    int32_t keyW = (area.w - (cols - 1) * kGap) / cols;
+    int32_t keyH = (area.h - (rows - 1) * kGap) / rows;
+    if (keyW < 1) keyW = 1;
+    if (keyH < 1) keyH = 1;
     for (size_t i = 0; i < kKeyCount; ++i) {
       keys_[i].onClick = [this, i]() { press(activeKeys()[i].action); };
       int32_t row = static_cast<int32_t>(i) / cols;
@@ -329,8 +369,8 @@ class CalculatorGui {
         keys_[i].bounds = tinymd::Bounds(bounds_.x, bounds_.y, 0, 0);
         continue;
       }
-      keys_[i].bounds = tinymd::Bounds(bounds_.x + kMargin + col * (keyW + kGap),
-                                       top + row * (keyH + kGap), keyW, keyH);
+      keys_[i].bounds = tinymd::Bounds(area.x + col * (keyW + kGap),
+                                       area.y + row * (keyH + kGap), keyW, keyH);
     }
   }
 
@@ -519,11 +559,10 @@ class CalculatorGui {
   void applyMode() {
     if (plotting_) {
       showKeys(plotKeys());
-      placeKeys(fieldsY() + kFieldH + 8, 4);  // the pad below the fields
     } else {
       refreshKeys();
-      placeKeys(bounds_.y + kMargin + kExprH + kResultH + kGap, 7);
     }
+    relayout();
     exprLabel_.visible = !plotting_;
     resultLabel_.visible = !plotting_;
     plot_.visible = plotting_;

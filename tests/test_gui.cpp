@@ -285,6 +285,50 @@ static void testPlotRangeRejectsReversed() {
   gui.press("back");
 }
 
+static bool overlaps(const tinymd::Bounds& a, const tinymd::Bounds& b) {
+  return a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+}
+
+// the layout works for portrait, landscape and square areas, in keypad and plot mode
+static void testLayoutAnySize() {
+  const int sizes[][2] = {{240, 320}, {320, 240}, {480, 320}, {320, 480},
+                          {160, 128}, {128, 160}, {400, 240}, {240, 240}};
+  for (const auto& sz : sizes) {
+    FloatGui gui(tinymd::Bounds(0, 0, sz[0], sz[1]));
+    const tinymd::Bounds area = gui.bounds();
+    for (int mode = 0; mode < 2; ++mode) {
+      if (mode == 1) gui.beginPlot("x");
+      size_t visible = 0;
+      for (size_t i = 0; i < FloatGui::kKeyCount; ++i) {
+        const tinymd::Bounds& k = gui.key(i).bounds;
+        if (!gui.key(i).visible) continue;
+        ++visible;
+        CHECK(k.w > 0 && k.h > 0);
+        CHECK(k.x >= area.x && k.y >= area.y);
+        CHECK(k.x + k.w <= area.x + area.w && k.y + k.h <= area.y + area.h);
+        for (size_t j = 0; j < i; ++j) {
+          if (gui.key(j).visible) CHECK(!overlaps(k, gui.key(j).bounds));
+        }
+      }
+      CHECK(visible == (mode == 1 ? 16u : 28u));
+      gui.endPlot();
+    }
+  }
+}
+
+// setBounds() re-lays out the keys: landscape puts them on the right half
+static void testSetBounds() {
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  const int portraitX = gui.key(7).bounds.x;
+  CHECK(gui.key(0).bounds.y >= 100);            // keypad below the display
+  gui.setBounds(tinymd::Bounds(0, 0, 320, 240));
+  CHECK(gui.bounds().w == 320 && gui.bounds().h == 240);
+  CHECK(gui.key(7).bounds.x > 160);             // right half
+  CHECK(gui.key(7).bounds.x != portraitX || gui.key(7).bounds.y < 120);
+  gui.setBounds(tinymd::Bounds(0, 0, 240, 320));
+  CHECK(gui.key(0).bounds.y >= 100);            // back to portrait
+}
+
 static void testDoublePrecision() {
   DoubleGui gui(tinymd::Bounds(0, 0, 240, 320));
   type(gui, {"1", "/", "3"});
@@ -372,6 +416,8 @@ int main() {
   testLifecycle();
   testDestructorDetaches();
   testBeginEndPlot();
+  testLayoutAnySize();
+  testSetBounds();
   testDoublePrecision();
   testAttachAndDraw();
 
