@@ -256,9 +256,15 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Fonts for the expression line and the result line, e.g. TinyFonts (tinyfonts::TinyGPUFont). nullptr keeps the theme's font for the line. Signature of a font function: it receives the theme and assigns fonts to its typography, e.g.</p>
-<p>void myFonts(CalculatorTheme&lt;RGB565&gt;&amp; t) { t.typography.label = &amp;smallFont; // keys, chart axes, field labels t.typography.body = &amp;smallFont; // expression line, chart text t.typography.headline = &amp;resultFont; // result line } calculatorGui.assignFonts(myFonts); </p>
-
+<p>Signature of a font function: it receives the theme and assigns the fonts of its typography (e.g. TinyFonts, tinyfonts::TinyGPUFont). Example: </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">myFonts</a>(<a class="code hl_typedef" href="namespaceTinyCalc.html#a3f24dffc500a71d57bdb81e863c82fd1">CalculatorTheme&lt;RGB565&gt;</a>&amp; <a class="code hl_function" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">t</a>) {</div>
+<div class="line">  <a class="code hl_function" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">t</a>.typography.label = &amp;<a class="code hl_function" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">smallFont</a>;      <span class="comment">// keys, chart axes, field labels</span></div>
+<div class="line">  <a class="code hl_function" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">t</a>.typography.body = &amp;<a class="code hl_function" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">smallFont</a>;       <span class="comment">// expression line, chart text</span></div>
+<div class="line">  <a class="code hl_function" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">t</a>.typography.headline = &amp;<a class="code hl_function" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">resultFont</a>;  <span class="comment">// result line</span></div>
+<div class="line">}</div>
+<div class="line"><a class="code hl_function" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">calculatorGui</a>.assignFonts(<a class="code hl_function" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">myFonts</a>);</div>
+<div class="ttc" id="anamespaceTinyCalc_html_a2b0b42f9cc6180e3b86e650924d18797"><div class="ttname"><a href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">TinyCalc::lookupConstant</a></div><div class="ttdeci">bool lookupConstant(const char *name, T &amp;value)</div><div class="ttdef"><b>Definition</b> Functions.h:77</div></div>
+<div class="ttc" id="anamespaceTinyCalc_html_a3f24dffc500a71d57bdb81e863c82fd1"><div class="ttname"><a href="namespaceTinyCalc.html#a3f24dffc500a71d57bdb81e863c82fd1">TinyCalc::CalculatorTheme</a></div><div class="ttdeci">tinymd::MaterialTheme&lt; RGB_T &gt; CalculatorTheme</div><div class="ttdoc">Look of the calculator: the TinyMaterialDesign theme of all its widgets. Its typography holds the fon...</div><div class="ttdef"><b>Definition</b> TinyCalculatorGui.h:35</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>

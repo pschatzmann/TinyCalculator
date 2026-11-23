@@ -4,7 +4,5 @@ var searchData=
   ['gammachecked_1',['gammaChecked',['../namespaceTinyCalc_1_1detail.html#a2a3d420439702c0146e05dcd83953116',1,'TinyCalc::detail']]],
   ['gcd_2',['Gcd',['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70a4a05d35af095fe4846e4e652a275417a',1,'TinyCalc']]],
   ['getvariable_3',['getVariable',['../classTinyCalc_1_1Calculator.html#ae582fe47871282512ea24ab9a8d8d465',1,'TinyCalc::Calculator']]],
-  ['gui_20optional_4',['Calculator GUI (optional)',['../md_docs_2gui.html',1,'']]],
-  ['gui_2eino_5',['Gui.ino',['../Gui_8ino.html',1,'']]],
-  ['gui_2emd_6',['gui.md',['../gui_8md.html',1,'']]]
+  ['gui_2eino_4',['Gui.ino',['../Gui_8ino.html',1,'']]]
 ];

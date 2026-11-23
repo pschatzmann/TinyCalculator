@@ -10,17 +10,16 @@ var searchData=
   ['plotfrom_7',['plotFrom',['../classTinyCalc_1_1CalculatorGui.html#a6e8992b2fe0bff598e7a3eedb3eeb3b0',1,'TinyCalc::CalculatorGui']]],
   ['plotkeys_8',['plotKeys',['../classTinyCalc_1_1CalculatorGui.html#aec98a6ececd602519403c8cc8a358b7b',1,'TinyCalc::CalculatorGui']]],
   ['plotsamples_9',['plotSamples',['../classTinyCalc_1_1CalculatorGui.html#abc6d21f9456149b02bbae248b49711bf',1,'TinyCalc::CalculatorGui']]],
-  ['plotting_10',['plotting',['../md_docs_2gui.html#autotoc_md18',1,'Plotting'],['../classTinyCalc_1_1CalculatorGui.html#ac502e98468b88be795999f8fd0e9367c',1,'TinyCalc::CalculatorGui::plotting() const']]],
+  ['plotting_10',['plotting',['../classTinyCalc_1_1CalculatorGui.html#ac502e98468b88be795999f8fd0e9367c',1,'TinyCalc::CalculatorGui']]],
   ['plotto_11',['plotTo',['../classTinyCalc_1_1CalculatorGui.html#a9b26945365ffd125c24ad2d9f9bbc3d3',1,'TinyCalc::CalculatorGui']]],
   ['plus_12',['Plus',['../namespaceTinyCalc_1_1detail.html#ac15ac6e12f8156599562a6a472b022c7a32ba78fe43257d3e7f88e3935a8ea0d4',1,'TinyCalc::detail']]],
   ['pos_13',['pos',['../structTinyCalc_1_1detail_1_1Token.html#a3c3563463492002899b10f02251bba4f',1,'TinyCalc::detail::Token']]],
-  ['pow_14',['pow',['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a7ff266022420fa7557474c1cef0af097',1,'TinyCalc::detail::Prim&lt; float &gt;::pow()'],['../structTinyCalc_1_1detail_1_1Prim.html#ab1c052c757e4eb2afbbc2d86387c4177',1,'TinyCalc::detail::Prim::pow()'],['../namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386a8be6d3e955290ee50c00a4bc92aa7749',1,'TinyCalc::Pow'],['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70a8be6d3e955290ee50c00a4bc92aa7749',1,'TinyCalc::Pow']]],
+  ['pow_14',['pow',['../namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386a8be6d3e955290ee50c00a4bc92aa7749',1,'TinyCalc::Pow'],['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70a8be6d3e955290ee50c00a4bc92aa7749',1,'TinyCalc::Pow'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a7ff266022420fa7557474c1cef0af097',1,'TinyCalc::detail::Prim&lt; float &gt;::pow()'],['../structTinyCalc_1_1detail_1_1Prim.html#ab1c052c757e4eb2afbbc2d86387c4177',1,'TinyCalc::detail::Prim::pow()']]],
   ['powchecked_15',['powChecked',['../namespaceTinyCalc_1_1detail.html#a1faf00d204234913e7e7720def8c382e',1,'TinyCalc::detail']]],
   ['press_16',['press',['../classTinyCalc_1_1CalculatorGui.html#a2b4453c2113d627077ff2acf7b8d4636',1,'TinyCalc::CalculatorGui']]],
   ['prim_17',['Prim',['../structTinyCalc_1_1detail_1_1Prim.html',1,'TinyCalc::detail']]],
   ['prim_3c_20float_20_3e_18',['Prim&lt; float &gt;',['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html',1,'TinyCalc::detail']]],
   ['progmem_2eh_19',['Progmem.h',['../Progmem_8h.html',1,'']]],
   ['program_20',['Program',['../classTinyCalc_1_1Calculator.html#a5c77add20537d222f62f46a15d322e32',1,'TinyCalc::Calculator']]],
-  ['project_21',['Using TinyCalculator from another CMake project',['../md_docs_2desktop-build.html#autotoc_md7',1,'']]],
-  ['push_22',['Push',['../namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386a9c6a9d9f033001a9b3104984d319563b',1,'TinyCalc']]]
+  ['push_21',['Push',['../namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386a9c6a9d9f033001a9b3104984d319563b',1,'TinyCalc']]]
 ];
