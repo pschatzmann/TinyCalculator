@@ -17,6 +17,41 @@ void loop()  { app.update(); }
 
 It needs TinyMaterialDesign (and therefore TinyGPU) on the include path.
 
+## Themes and fonts
+
+The calculator is drawn with a TinyMaterialDesign theme
+(`CalculatorTheme<RGB_T>`, the `MaterialTheme` of the widgets). It is the
+argument of the constructor, or of `setTheme()`:
+
+```cpp
+CalculatorGui<RGB565, float> gui(Bounds(0, 0, 240, 320), tinymd::greenTheme<RGB565>());
+gui.setTheme(tinymd::defaultDarkTheme<RGB565>());   // at any time
+```
+
+The fonts are part of the theme: its `typography` holds the font of each role.
+The expression line and the chart text use the `body` font, the result line
+the `headline` font, and the keys, chart axes and field labels the `label` font. Fonts are assigned with a function defined in the sketch:
+
+```cpp
+void calculatorFonts(CalculatorTheme<RGB565>& theme) {
+  theme.typography.label = &smallFont;      // keys, chart axes, field labels
+  theme.typography.body = &smallFont;       // expression line, chart title and footer
+  theme.typography.headline = &resultFont;  // result line
+}
+
+setup() { ...; calculatorGui.assignFonts(calculatorFonts); calculatorGui.begin(app.screen()); }
+```
+
+`begin()` applies the theme to the screen, so it also changes the keys and
+other widgets on that screen.
+
+## TinyFonts
+
+[TinyFonts](https://github.com/pschatzmann/TinyFonts) gives smooth,
+anti-aliased text. The GUI example always uses it: it assigns `tinyfonts::Lato16`
+and `Lato32` in `calculatorFonts()`. Building the GUI therefore needs TinyFonts;
+point `TINYCALC_TINYFONTS_DIR` at a checkout if it is not next to this project.
+
 ## Sizes
 
 The layout adapts to the area it is given (`CalculatorGui(Bounds(...))`,

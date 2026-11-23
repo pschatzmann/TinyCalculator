@@ -424,6 +424,60 @@ static void testInputRules() {
   gui.press("clear");
 }
 
+#ifdef TINYCALC_USE_TINYFONTS
+#include <TinyFontsGPU.h>
+
+// the sketch-style font function: assigns TinyFonts to the theme's typography
+static tinyfonts::TinyGPUFont<TINYMD_DEFAULT_RGB_T> g_small(tinyfonts::Lato16);
+static tinyfonts::TinyGPUFont<TINYMD_DEFAULT_RGB_T> g_big(tinyfonts::Lato32);
+static void sketchFonts(CalculatorTheme<TINYMD_DEFAULT_RGB_T>& t) {
+  t.typography.label = &g_small;
+  t.typography.headline = &g_big;
+}
+
+// TinyFonts assigned through a function: the calculator still works and draws
+static void testTinyFonts() {
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.assignFonts(sketchFonts);
+  CHECK(gui.theme().typography.label == &g_small);
+  CHECK(gui.theme().typography.headline == &g_big);
+  tinymd::Screen<TINYMD_DEFAULT_RGB_T> screen(tinymd::defaultTheme<TINYMD_DEFAULT_RGB_T>());
+  gui.begin(screen);
+  CHECK(screen.theme().typography.label == &g_small);  // the screen got the theme
+  type(gui, {"2", "+", "3", "="});
+  CHECK(gui.resultText() == "5");
+  tinygpu::Surface<TINYMD_DEFAULT_RGB_T> surface(240, 320, tinygpu::FontRGB565);
+  CHECK(surface.begin());
+  screen.draw(surface);
+  gui.end();
+}
+#endif
+
+// themes: a theme is applied to the screen and the plot, and the calculator draws with it
+static void testThemes() {
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  CalculatorTheme<TINYMD_DEFAULT_RGB_T> dark = tinymd::defaultDarkTheme<TINYMD_DEFAULT_RGB_T>();
+  CalculatorTheme<TINYMD_DEFAULT_RGB_T> green = tinymd::greenTheme<TINYMD_DEFAULT_RGB_T>();
+  gui.setTheme(dark);
+  CHECK(gui.theme().colors.primary.getRed() == dark.colors.primary.getRed());
+  gui.setTheme(green);
+  CHECK(gui.theme().colors.primary.getRed() == green.colors.primary.getRed());
+  CHECK(gui.theme().colors.primary.getGreen() == green.colors.primary.getGreen());
+
+  tinymd::Screen<TINYMD_DEFAULT_RGB_T> screen(tinymd::defaultTheme<TINYMD_DEFAULT_RGB_T>());
+  gui.begin(screen);
+  CHECK(screen.theme().colors.primary.getGreen() == green.colors.primary.getGreen());
+  gui.setTheme(dark);                           // changing the theme while attached
+  CHECK(screen.theme().colors.primary.getRed() == dark.colors.primary.getRed());
+  gui.end();
+
+  // a default-constructed GUI uses the default theme
+  FloatGui plain(tinymd::Bounds(0, 0, 240, 320));
+  CHECK(plain.theme().colors.primary.getRed() ==
+        tinymd::defaultTheme<TINYMD_DEFAULT_RGB_T>().colors.primary.getRed());
+}
+
+
 static void testDoublePrecision() {
   DoubleGui gui(tinymd::Bounds(0, 0, 240, 320));
   type(gui, {"1", "/", "3"});
@@ -516,6 +570,10 @@ int main() {
   testSwipePages();
   testSwipeInPlot();
   testInputRules();
+  testThemes();
+#ifdef TINYCALC_USE_TINYFONTS
+  testTinyFonts();
+#endif
   testDoublePrecision();
   testAttachAndDraw();
 

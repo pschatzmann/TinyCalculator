@@ -15,4 +15,5 @@ if(TINYCALC_BUILD_GUI)
   target_compile_definitions(tinycalc_gui PRIVATE ARDUINO=10819
                              TINYGPU_AUTO_NAMESPACE TINYMD_AUTO_NAMESPACE)
   set_target_properties(tinycalc_gui PROPERTIES CXX_STANDARD 17)
+  target_link_libraries(tinycalc_gui TinyFonts::TinyFonts)
 endif()

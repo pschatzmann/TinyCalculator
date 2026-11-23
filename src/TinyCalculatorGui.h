@@ -26,6 +26,15 @@
 namespace TinyCalc {
 
 /**
+ * @brief Look of the calculator: the TinyMaterialDesign theme of all its
+ * widgets. Its typography holds the fonts (label, body, title, headline), so
+ * a TinyFonts font assigned there is used by the expression line (label) and
+ * the result line (headline).
+ */
+template <typename RGB_T = tinymd::TINYMD_DEFAULT_RGB_T>
+using CalculatorTheme = tinymd::MaterialTheme<RGB_T>;
+
+/**
  * @brief Container for the calculator's widgets. Gestures go to the widget
  * under the touch first. A swipe that no widget handles reaches this
  * container, which reports left swipes through onSwipeLeft.
@@ -106,15 +115,17 @@ class CalculatorGui {
 
   /// `bounds` is the area the calculator occupies. The layout adapts to any
   /// size; 240x320 is the default panel size of the desktop/ESP32 examples.
-  explicit CalculatorGui(tinymd::Bounds bounds)
-      : screen_(nullptr),
-        exprLabel_(tinymd::Bounds(), "", tinymd::TypographyRole::kLabel),
+  explicit CalculatorGui(tinymd::Bounds bounds,
+                         const CalculatorTheme<RGB_T>& theme = tinymd::defaultTheme<RGB_T>())
+      : theme_(theme),
+        screen_(nullptr),
+        exprLabel_(tinymd::Bounds(), "", tinymd::TypographyRole::kBody),
         resultLabel_(tinymd::Bounds(), "", tinymd::TypographyRole::kHeadline),
         fromField_(tinymd::Bounds(), "From"),
         toField_(tinymd::Bounds(), "To") {
     bounds_ = bounds;
     relayout();
-    plot_.addSeries(colorFromHex<RGB_T>(0x6750A4));
+    plot_.addSeries(theme_.colors.primary);
     panel_.onSwipeLeft = [this]() { swipeLeft(); };
     panel_.onSwipeRight = [this]() { swipeRight(); };
     fromField_.onFocus = [this]() { activeField_ = 0; };
@@ -145,6 +156,7 @@ class CalculatorGui {
     panel_.addChild(plot_);
     panel_.addChild(fromField_);
     panel_.addChild(toField_);
+    screen.setTheme(theme_);  // the calculator's theme applies to every widget
     attached_ = true;
     refresh();
   }
@@ -317,6 +329,36 @@ class CalculatorGui {
   /// The area the calculator occupies.
   tinymd::Bounds bounds() const { return bounds_; }
 
+  /// Fonts for the expression line and the result line, e.g. TinyFonts
+  /// (tinyfonts::TinyGPUFont). nullptr keeps the theme's font for the line.
+  /// Signature of a font function: it receives the theme and assigns fonts to
+  /// its typography, e.g.
+  ///
+  ///   void myFonts(CalculatorTheme<RGB565>& t) {
+  ///     t.typography.label = &smallFont;         // keys, chart axes, field labels
+  ///     t.typography.body = &smallFont;          // expression line, chart text
+  ///     t.typography.headline = &resultFont;     // result line
+  ///   }
+  ///   calculatorGui.assignFonts(myFonts);
+  typedef void (*FontFunction)(CalculatorTheme<RGB_T>& theme);
+
+  /// Lets a function defined in the sketch assign the fonts of the theme.
+  /// The new fonts are applied at once and to the attached screen.
+  void assignFonts(FontFunction fn) {
+    if (fn == nullptr) return;
+    fn(theme_);
+    applyTheme();
+  }
+
+  /// Replaces the theme (colors, shapes, fonts) of the calculator.
+  void setTheme(const CalculatorTheme<RGB_T>& theme) {
+    theme_ = theme;
+    applyTheme();
+  }
+
+  /// The theme in use.
+  const CalculatorTheme<RGB_T>& theme() const { return theme_; }
+
   /// Changes the area the calculator occupies (e.g. after a rotation). Works
   /// for any size: a wide area gets the display left and the keys right, a
   /// tall area stacks them.
@@ -431,7 +473,7 @@ class CalculatorGui {
                            w - 2 * kMargin - dw - kGap, h - 2 * kMargin);
     } else {
       // the plot needs more height than the expression and result lines
-      const int32_t dh = plotting_ ? h / 2 : (h * 3) / 10;
+      const int32_t dh = plotting_ ? (h * 11) / 20 : (h * 3) / 10;
       display = tinymd::Bounds(x + kMargin, y + kMargin, w - 2 * kMargin, dh);
       pad = tinymd::Bounds(x + kMargin, y + kMargin + dh + kGap,
                            w - 2 * kMargin, h - 2 * kMargin - dh - kGap);
@@ -439,8 +481,10 @@ class CalculatorGui {
 
     if (plotting_) {
       const int32_t fh = min32(kFieldH, display.h / 4);
+      // room for the field labels ("From", "To"), which are drawn above the fields
+      const int32_t labelH = 18;
       plot_.bounds = tinymd::Bounds(display.x, display.y, display.w,
-                                    display.h - fh - kGap);
+                                    display.h - fh - labelH - kGap);
       const int32_t fw = (display.w - kGap) / 2;
       const int32_t fy = display.y + display.h - fh;
       fromField_.bounds = tinymd::Bounds(display.x, fy, fw, fh);
@@ -701,6 +745,13 @@ class CalculatorGui {
     return zero / zero;
   }
 
+  // Pushes the theme to the attached screen and the plot color.
+  void applyTheme() {
+    plot_.series(0).color = theme_.colors.primary;
+    if (screen_ != nullptr) screen_->setTheme(theme_);
+    refresh();
+  }
+
   void refresh() {
     std::string e = showResult_ ? expr_ + " =" : expr_;
     exprLabel_.setText(e.c_str());
@@ -709,6 +760,7 @@ class CalculatorGui {
   }
 
   tinymd::Bounds bounds_;
+  CalculatorTheme<RGB_T> theme_;
   tinymd::Screen<RGB_T>* screen_;
   Calc calc_;
   std::string expr_;

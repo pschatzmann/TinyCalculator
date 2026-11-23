@@ -42,5 +42,5 @@ git clone https://github.com/pschatzmann/TinyCalculator.git
 
 I recommend to use git because you can easily update to the latest version just by executing the ```git pull``` command in the project folder.
 
-The optional calculator GUI also needs [TinyMaterialDesign](https://github.com/pschatzmann/TinyMaterialDesign) and [TinyGPU](https://github.com/pschatzmann/TinyGPU), which are installed the same way.
+The optional calculator GUI also needs [TinyMaterialDesign](https://github.com/pschatzmann/TinyMaterialDesign), [TinyGPU](https://github.com/pschatzmann/TinyGPU) and [TinyFonts](https://github.com/pschatzmann/TinyFonts), which are installed the same way.
 

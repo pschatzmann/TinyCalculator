@@ -70,6 +70,26 @@ if(TINYCALC_BUILD_GUI)
   endif()
 endif()
 
+# ---- TinyFonts (optional): text in the GUI -------------------------------------
+# Enables TinyFonts for the GUI's expression and result lines. Needs the
+# TinyFonts sources: a sibling ../TinyFonts checkout or -DTINYCALC_TINYFONTS_DIR=...
+option(TINYCALC_USE_TINYFONTS "Use TinyFonts for the GUI text" OFF)
+if(TINYCALC_BUILD_GUI)
+  # the GUI example always uses TinyFonts
+  set(TINYCALC_USE_TINYFONTS ON CACHE BOOL "" FORCE)
+endif()
+set(TINYCALC_TINYFONTS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../TinyFonts" CACHE PATH
+    "Local TinyFonts checkout (used when TINYCALC_USE_TINYFONTS is ON)")
+if(TINYCALC_USE_TINYFONTS)
+  if(NOT EXISTS "${TINYCALC_TINYFONTS_DIR}/CMakeLists.txt")
+    message(FATAL_ERROR "TINYCALC_USE_TINYFONTS is ON but TinyFonts was not found at ${TINYCALC_TINYFONTS_DIR}")
+  endif()
+  # only the header-only target: no tests, no examples
+  set(TINYFONTS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+  set(TINYFONTS_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+  add_subdirectory("${TINYCALC_TINYFONTS_DIR}" "${CMAKE_BINARY_DIR}/TinyFonts")
+endif()
+
 # ---- tests / examples -----------------------------------------------------------
 if(TINYCALC_BUILD_TESTS)
   enable_testing()
