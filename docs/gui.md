@@ -46,6 +46,21 @@ All keypad pages, shown at the same size:
 </tr>
 </table>
 
+## Input rules
+
+The keypad only accepts keys that continue the expression validly. A key that
+does not fit is ignored:
+
+- an operator (`+ * / ^ %`) needs a number, name, `)` or `!` before it
+- `-` may start an expression or follow an operator, as a sign (`2*-3`)
+- `)` and `,` need an open `(` (a function call)
+- `!` needs a number, name or `)` before it
+- a number has at most one `.`
+- after `=`, an operator continues with `ans`; any other key starts over
+
+A name followed by a digit, a name or `(` gets an explicit `*`, so `pi` then
+`2` is `pi*2`.
+
 ## Swipes
 
 - **Swipe right**: next keypad page (Basic → Trig → Math → Special → Basic).

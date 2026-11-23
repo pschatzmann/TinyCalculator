@@ -378,6 +378,52 @@ static void testSwipeInPlot() {
   gui.end();
 }
 
+// invalid key combinations are ignored; valid ones are kept
+static void testInputRules() {
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  type(gui, {"2", "+", "+"});  CHECK(gui.expression() == "2+");   // operator after operator
+  type(gui, {"*", "/"});       CHECK(gui.expression() == "2+");   // "*" and "/" after "+" are ignored
+  gui.press("clear");
+  type(gui, {"2", "*", "/"});  CHECK(gui.expression() == "2*");
+  gui.press("clear");
+  type(gui, {"+", "*", ")"});  CHECK(gui.expression().empty());   // nothing valid at the start
+  type(gui, {"-"});            CHECK(gui.expression() == "-");     // a sign is allowed
+  gui.press("clear");
+  type(gui, {"2", ")", "!", ","});  CHECK(gui.expression() == "2!");  // ")" and "," ignored, "!" valid
+  gui.press("(");              CHECK(gui.expression() == "2!*(");  // "(" after an operand: product
+  gui.press("clear");
+  type(gui, {"(", "("});
+  CHECK(gui.expression() == "((");
+  type(gui, {"-", "3", ")", ")", "="});
+  CHECK(gui.resultText() == "-3");
+  gui.press("clear");
+  type(gui, {"2", ".", ".", "5", "."});
+  CHECK(gui.expression() == "2.5");              // a second "." in a number is ignored
+  gui.press("clear");
+  type(gui, {"2", "+", "-", "3", "="});
+  CHECK(gui.resultText() == "-1");              // "+" then a sign is valid
+  gui.press("clear");
+
+  // a name followed by a digit or a function gets an explicit "*"
+  type(gui, {"pi", "2"});  CHECK(gui.expression() == "pi*2");
+  gui.press("clear");
+  type(gui, {"pi", "sin(", "0", ")", "="});
+  CHECK(gui.expression() == "pi*sin(0)");
+  CHECK(gui.resultText() == "0");
+  gui.press("clear");
+  type(gui, {"2", "pi", "="});
+  CHECK(std::fabs(std::atof(gui.resultText().c_str()) - 2.0 * 3.14159265) < 1e-3);
+
+  // after "=", a key that cannot start an expression leaves the result on screen
+  type(gui, {"2", "+", "3", "="});
+  gui.press(")");
+  CHECK(gui.resultText() == "5");
+  CHECK(gui.expression() == "2+3");
+  gui.press("*");
+  CHECK(gui.expression() == "ans*");            // an operator continues with ans
+  gui.press("clear");
+}
+
 static void testDoublePrecision() {
   DoubleGui gui(tinymd::Bounds(0, 0, 240, 320));
   type(gui, {"1", "/", "3"});
@@ -469,6 +515,7 @@ int main() {
   testSetBounds();
   testSwipePages();
   testSwipeInPlot();
+  testInputRules();
   testDoublePrecision();
   testAttachAndDraw();
 

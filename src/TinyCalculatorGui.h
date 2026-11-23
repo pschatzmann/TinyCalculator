@@ -208,16 +208,91 @@ class CalculatorGui {
       evaluate();
     } else {
       // digits, operators, functions and constants
+      // after "=", an operator continues with the result, anything else starts over
+      std::string prefix = expr_;
       if (showResult_) {
-        // an operator after "=" continues with the result
         bool continues = a == "+" || a == "-" || a == "*" || a == "/" || a == "^" ||
                          a == "%" || a == "!" || a == ",";
-        expr_ = continues ? "ans" : "";
+        prefix = continues ? "ans" : "";
+      }
+      if (!acceptable(a, prefix)) {  // invalid combination: the key is ignored
+        refresh();
+        return;
+      }
+      if (showResult_) {
+        expr_ = prefix;
         showResult_ = false;
       }
+      if (needsProduct(expr_, a)) expr_ += "*";
       expr_ += a;
     }
     refresh();
+  }
+
+  // ---- key entry rules --------------------------------------------------
+  // The keypad only accepts keys that continue the expression validly, e.g.
+  // no operator after an operator, no ")" without "(", no second "." in a
+  // number. Rejected keys are ignored.
+
+  static char lastChar(const std::string& t) { return t.empty() ? '\0' : t[t.size() - 1]; }
+  static bool isDigitChar(char c) { return c >= '0' && c <= '9'; }
+  static bool isLetter(char c) { return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'); }
+  static bool isOperatorChar(char c) {
+    return c == '+' || c == '-' || c == '*' || c == '/' || c == '^' || c == '%' || c == ',';
+  }
+  static bool isBinaryOp(const std::string& a) {
+    return a == "+" || a == "*" || a == "/" || a == "^" || a == "%";
+  }
+  static bool isNameKey(const std::string& a) {
+    return a == "pi" || a == "e" || a == "tau" || a == "phi" || a == "ans" || a == "x";
+  }
+  static bool isFunctionKey(const std::string& a) { return !a.empty() && a[a.size() - 1] == '('; }
+
+  // number of '(' not yet closed
+  static int openDepth(const std::string& t) {
+    int depth = 0;
+    for (char c : t) {
+      if (c == '(') ++depth;
+      if (c == ')' && depth > 0) --depth;
+    }
+    return depth;
+  }
+
+  // true if the number being typed already contains a '.'
+  static bool numberHasDot(const std::string& t) {
+    for (size_t i = t.size(); i-- > 0;) {
+      if (t[i] == '.') return true;
+      if (!isDigitChar(t[i])) return false;
+    }
+    return false;
+  }
+
+  // true if key `a` may follow the expression `t`
+  static bool acceptable(const std::string& a, const std::string& t) {
+    const char c = lastChar(t);
+    const bool empty = t.empty();
+    const bool open = c == '(';
+    const bool op = isOperatorChar(c);
+    const bool operand = !empty && !open && !op;  // a number, name, ")" or "!"
+
+    if (a == "(" || isFunctionKey(a)) return true;  // a function is also a call start
+    if (a == ")") return openDepth(t) > 0 && operand;
+    if (a == "!") return operand && c != '.';
+    if (a == ",") return openDepth(t) > 0 && operand;
+    if (a == "-") return c != '-';  // subtraction or a sign, but never "--"
+    if (a == ".") return !numberHasDot(t) && !isLetter(c) && c != ')' && c != '!';
+    if (isBinaryOp(a)) return operand;
+    if (isNameKey(a)) return c != '.';
+    return true;  // digits
+  }
+
+  // an explicit "*" is needed when a name, ")" or "!" is followed by an operand
+  // (so that "pi" then "2" is "pi*2", not the name "pi2")
+  static bool needsProduct(const std::string& t, const std::string& a) {
+    const char c = lastChar(t);
+    const bool endsOperand = isLetter(c) || c == ')' || c == '!';
+    const bool startsOperand = isDigitChar(a[0]) || isLetter(a[0]) || a[0] == '(';
+    return endsOperand && startsOperand;
   }
 
   /// Expression as typed so far.
