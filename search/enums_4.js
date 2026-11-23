@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tok_0',['Tok',['../namespaceTinyCalc_1_1detail.html#ac15ac6e12f8156599562a6a472b022c7',1,'TinyCalc::detail']]]
+  ['opcode_0',['OpCode',['../namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386',1,'TinyCalc']]]
 ];

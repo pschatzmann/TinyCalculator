@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['id_0',['id',['../structTinyCalc_1_1FunctionInfo.html#a3c55e27fd33cd6c5d3a02026fa00c800',1,'TinyCalc::FunctionInfo']]],
-  ['index_1',['index',['../structTinyCalc_1_1Op.html#a4d43d923dc1e89b3402a127fc3f7e7c2',1,'TinyCalc::Op']]]
+  ['error_0',['error',['../structTinyCalc_1_1Calculator_1_1Result.html#ac073312bf0e3f07c2f61edd653789c20',1,'TinyCalc::Calculator::Result']]],
+  ['errorpos_1',['errorPos',['../structTinyCalc_1_1Calculator_1_1Result.html#aa87334c64f5e2d3f6c4ac6251ced1841',1,'TinyCalc::Calculator::Result']]]
 ];

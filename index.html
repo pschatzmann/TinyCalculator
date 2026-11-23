@@ -75,6 +75,13 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://www.arduino.cc/reference/en/libraries/"><img src="https://img.shields.io/badge/Arduino-Library-blue.svg" alt="Arduino Library" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/pschatzmann/TinyCalculator/blob/main/CMakeLists.txt"><img src="https://img.shields.io/badge/CMake-Supported-blue.svg" alt="CMake" style="pointer-events: none;" class="inline"/></a> <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache-yellow.svg" alt="License: Apache" style="pointer-events: none;" class="inline"/></a></p>
 <p>Header-only formula parser and evaluator for Arduino and desktop C++, with all common math functions. The number type is a template parameter: <code>float</code> (default) or <code>double</code>.</p>
+<ul>
+<li>All common math functions, constants and expressions with implicit multiplication</li>
+<li>Units and conversion: <code>1000mm to m</code> is 1, <code>100 degC to degF</code> is 212</li>
+<li>User-defined functions: <code>f(x) = x^2 + 1</code>, then <code>f(3)</code> is 10</li>
+<li>No heap allocation, no exceptions, C++11</li>
+<li>Optional calculator GUI (TinyMaterialDesign) with the basic keypad and optional screens for trigonometry, math, special functions, units and plotting</li>
+</ul>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="TinyCalculator_8h.html">TinyCalculator.h</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line">Calculator&lt;float&gt; calc;</div>

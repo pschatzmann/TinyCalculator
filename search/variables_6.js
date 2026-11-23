@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['label_0',['label',['../structTinyCalc_1_1CalculatorGui_1_1KeyDef.html#a3a94f8cc704f011c37d537fc6fdedf30',1,'TinyCalc::CalculatorGui::KeyDef']]]
+  ['id_0',['id',['../structTinyCalc_1_1FunctionInfo.html#a3c55e27fd33cd6c5d3a02026fa00c800',1,'TinyCalc::FunctionInfo']]],
+  ['index_1',['index',['../structTinyCalc_1_1Op.html#a4d43d923dc1e89b3402a127fc3f7e7c2',1,'TinyCalc::Op']]]
 ];

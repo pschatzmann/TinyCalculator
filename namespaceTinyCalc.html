@@ -75,7 +75,8 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">TinyCalc Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -108,11 +109,13 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTinyCalc_1_1Op.html">Op</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">One instruction of a compiled program.  <a href="structTinyCalc_1_1Op.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTinyCalc_1_1UnitInfo.html">UnitInfo</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a3f24dffc500a71d57bdb81e863c82fd1" id="r_a3f24dffc500a71d57bdb81e863c82fd1"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>  = tinymd::TINYMD_DEFAULT_RGB_T&gt; </td></tr>
-<tr class="memitem:a3f24dffc500a71d57bdb81e863c82fd1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">using</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a3f24dffc500a71d57bdb81e863c82fd1">CalculatorTheme</a> = tinymd::MaterialTheme&lt; <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a> &gt;</td></tr>
+<tr class="memitem:a3f24dffc500a71d57bdb81e863c82fd1" id="r_a3f24dffc500a71d57bdb81e863c82fd1"><td class="memTemplParams" colspan="2">template&lt;typename RGB_T  = tinymd::TINYMD_DEFAULT_RGB_T&gt; </td></tr>
+<tr class="memitem:a3f24dffc500a71d57bdb81e863c82fd1"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a3f24dffc500a71d57bdb81e863c82fd1">CalculatorTheme</a> = tinymd::MaterialTheme&lt; RGB_T &gt;</td></tr>
 <tr class="memdesc:a3f24dffc500a71d57bdb81e863c82fd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Look of the calculator: the TinyMaterialDesign theme of all its widgets. Its typography holds the fonts (label, body, title, headline), so a TinyFonts font assigned there is used by the expression line (label) and the result line (headline).  <br /></td></tr>
 <tr class="separator:a3f24dffc500a71d57bdb81e863c82fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -131,6 +134,7 @@ Enumerations</h2></td></tr>
 , <br />
 &#160;&#160;<a class="el" href="namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386afb278fa5defd7e699fcbc930c3e76ccd">Neg</a>
 , <a class="el" href="namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386ac3755e61202abd74da5885d2e9c9160e">Call</a>
+, <a class="el" href="namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386abbceed526fabacb364f6437e6c9ec34d">UserCall</a>
 <br />
  }</td></tr>
 <tr class="separator:a4585c23ced3a9447c6d119660a80b386"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -227,6 +231,7 @@ Enumerations</h2></td></tr>
 , <a class="el" href="namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bcaa798c6c805d93fedf99d9bdf443e7ffc">InvalidName</a>
 , <br />
 &#160;&#160;<a class="el" href="namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bcad94463866431e5ac2ebc6777fe799a0a">ReservedName</a>
+, <a class="el" href="namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bcad943de8a96214baf559b59d3c5ad90ae">TooManyFunctions</a>
 <br />
  }</td></tr>
 <tr class="separator:a73b8b20c23c22eb34a959888019462bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -234,18 +239,38 @@ Enumerations</h2></td></tr>
 , <a class="el" href="namespaceTinyCalc.html#abe2ed22a2b3a2f1bc8a08c88674592c4a9ef125630442bb42e2e367e0cf70d892">Degrees</a> = 1
  }</td></tr>
 <tr class="separator:abe2ed22a2b3a2f1bc8a08c88674592c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a256612747c07965adf7321628878dce8" id="r_a256612747c07965adf7321628878dce8"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8">GuiScreen</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8aac96e85e29431333294cdc2e48f3fdce">Trig</a>
+, <a class="el" href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8aa49950aa047c2292e989e368a97a3aae">Math</a>
+, <a class="el" href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8ab4c2b550635fe54fd29f2b64dfaca55d">Special</a>
+, <a class="el" href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8ae5771a362d88a71a657bfcd21ca54b3f">Units</a>
+, <br />
+&#160;&#160;<a class="el" href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8a36be98b843e778a6e7350354b6937cfe">Plot</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a256612747c07965adf7321628878dce8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The screens of the calculator that are not part of the basic keypad. Each one is off by default and is switched on with <a class="el" href="classTinyCalc_1_1CalculatorGui.html#a9295bd94de4aff6d8e9a528b009877a2" title="Switches on a screen. Only the Basic keypad is shown until a screen is enabled.">CalculatorGui::enable()</a>, e.g. <code>gui.enable(GuiScreen::Trig);</code>.  <a href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8">More...</a><br /></td></tr>
+<tr class="separator:a256612747c07965adf7321628878dce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a60b7303010068655231a060f90ed7076" id="r_a60b7303010068655231a060f90ed7076"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a60b7303010068655231a060f90ed7076">functionTable</a> (<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">size_t</a> &amp;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">count</a>)</td></tr>
+<tr class="memitem:a60b7303010068655231a060f90ed7076" id="r_a60b7303010068655231a060f90ed7076"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a60b7303010068655231a060f90ed7076">functionTable</a> (size_t &amp;count)</td></tr>
 <tr class="separator:a60b7303010068655231a060f90ed7076"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a800c90f3cad48adef27c6fddb4d0dc33" id="r_a800c90f3cad48adef27c6fddb4d0dc33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a800c90f3cad48adef27c6fddb4d0dc33">findFunction</a> (<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">char</a> *name)</td></tr>
+<tr class="memitem:a800c90f3cad48adef27c6fddb4d0dc33" id="r_a800c90f3cad48adef27c6fddb4d0dc33"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a800c90f3cad48adef27c6fddb4d0dc33">findFunction</a> (const char *name)</td></tr>
 <tr class="separator:a800c90f3cad48adef27c6fddb4d0dc33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a62d31371a81f3b0a4b723189b1b7db" id="r_a0a62d31371a81f3b0a4b723189b1b7db"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structTinyCalc_1_1UnitInfo.html">UnitInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a0a62d31371a81f3b0a4b723189b1b7db">unitTable</a> (size_t &amp;count)</td></tr>
+<tr class="separator:a0a62d31371a81f3b0a4b723189b1b7db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed45805ba15d41e816f90dd153e0e62f" id="r_aed45805ba15d41e816f90dd153e0e62f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#aed45805ba15d41e816f90dd153e0e62f">isTemperatureUnit</a> (const char *name)</td></tr>
+<tr class="separator:aed45805ba15d41e816f90dd153e0e62f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b0b42f9cc6180e3b86e650924d18797" id="r_a2b0b42f9cc6180e3b86e650924d18797"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a2b0b42f9cc6180e3b86e650924d18797"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">lookupConstant</a> (const char *name, T &amp;value)</td></tr>
 <tr class="separator:a2b0b42f9cc6180e3b86e650924d18797"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3556315f1b5df863559d5cbdffe8a99d" id="r_a3556315f1b5df863559d5cbdffe8a99d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a3556315f1b5df863559d5cbdffe8a99d">errorText</a> (<a class="el" href="namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bc">Error</a> e)</td></tr>
+<tr class="memitem:a3556315f1b5df863559d5cbdffe8a99d" id="r_a3556315f1b5df863559d5cbdffe8a99d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a3556315f1b5df863559d5cbdffe8a99d">errorText</a> (<a class="el" href="namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bc">Error</a> e)</td></tr>
 <tr class="separator:a3556315f1b5df863559d5cbdffe8a99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a1f264d5a6ee21d987cc078dd36ba50d3" id="r_a1f264d5a6ee21d987cc078dd36ba50d3"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a1f264d5a6ee21d987cc078dd36ba50d3">kFrameBit</a> = 0x80</td></tr>
+<tr class="separator:a1f264d5a6ee21d987cc078dd36ba50d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="a3f24dffc500a71d57bdb81e863c82fd1" name="a3f24dffc500a71d57bdb81e863c82fd1"></a>
@@ -254,10 +279,10 @@ Functions</h2></td></tr>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>  = tinymd::TINYMD_DEFAULT_RGB_T&gt; </div>
+template&lt;typename RGB_T  = tinymd::TINYMD_DEFAULT_RGB_T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">using</a> <a class="el" href="namespaceTinyCalc.html#a3f24dffc500a71d57bdb81e863c82fd1">TinyCalc::CalculatorTheme</a> = <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typedef</a> tinymd::MaterialTheme&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>&gt;</td>
+          <td class="memname">using <a class="el" href="namespaceTinyCalc.html#a3f24dffc500a71d57bdb81e863c82fd1">TinyCalc::CalculatorTheme</a> = typedef tinymd::MaterialTheme&lt;RGB_T&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -277,7 +302,7 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">enum</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">class</a> <a class="el" href="namespaceTinyCalc.html#abe2ed22a2b3a2f1bc8a08c88674592c4">TinyCalc::AngleUnit</a> : <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">uint8_t</a></td>
+          <td class="memname">enum class <a class="el" href="namespaceTinyCalc.html#abe2ed22a2b3a2f1bc8a08c88674592c4">TinyCalc::AngleUnit</a> : uint8_t</td>
         </tr>
       </table>
   </td>
@@ -303,7 +328,7 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">enum</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">class</a> <a class="el" href="namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bc">TinyCalc::Error</a> : <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">uint8_t</a></td>
+          <td class="memname">enum class <a class="el" href="namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bc">TinyCalc::Error</a> : uint8_t</td>
         </tr>
       </table>
   </td>
@@ -330,6 +355,7 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
 <tr><td class="fieldname"><a id="a73b8b20c23c22eb34a959888019462bcac5d279782c6e3b4b0ea5294171087911" name="a73b8b20c23c22eb34a959888019462bcac5d279782c6e3b4b0ea5294171087911"></a>TooManyVariables&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a73b8b20c23c22eb34a959888019462bcaa798c6c805d93fedf99d9bdf443e7ffc" name="a73b8b20c23c22eb34a959888019462bcaa798c6c805d93fedf99d9bdf443e7ffc"></a>InvalidName&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a73b8b20c23c22eb34a959888019462bcad94463866431e5ac2ebc6777fe799a0a" name="a73b8b20c23c22eb34a959888019462bcad94463866431e5ac2ebc6777fe799a0a"></a>ReservedName&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a73b8b20c23c22eb34a959888019462bcad943de8a96214baf559b59d3c5ad90ae" name="a73b8b20c23c22eb34a959888019462bcad943de8a96214baf559b59d3c5ad90ae"></a>TooManyFunctions&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -344,7 +370,7 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">enum</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">class</a> <a class="el" href="namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70">TinyCalc::Fn</a> : <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">uint8_t</a></td>
+          <td class="memname">enum class <a class="el" href="namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70">TinyCalc::Fn</a> : uint8_t</td>
         </tr>
       </table>
   </td>
@@ -412,6 +438,44 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
 
 </div>
 </div>
+<a id="a256612747c07965adf7321628878dce8" name="a256612747c07965adf7321628878dce8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a256612747c07965adf7321628878dce8">&#9670;&#160;</a></span>GuiScreen</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8">TinyCalc::GuiScreen</a> : uint8_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The screens of the calculator that are not part of the basic keypad. Each one is off by default and is switched on with <a class="el" href="classTinyCalc_1_1CalculatorGui.html#a9295bd94de4aff6d8e9a528b009877a2" title="Switches on a screen. Only the Basic keypad is shown until a screen is enabled.">CalculatorGui::enable()</a>, e.g. <code>gui.enable(GuiScreen::Trig);</code>. </p>
+<ul>
+<li>Trig: trigonometric, inverse and hyperbolic functions, deg/rad, e, tau, phi</li>
+<li><a class="el" href="classTinyCalc_1_1Math.html" title="Mathematical functions and constants for the number type T.">Math</a>: roots, exponentials, logarithms, rounding, aggregates, gcd/lcm</li>
+<li>Special: gamma, factorial, erf, erfc, comb, perm</li>
+<li>Units: unit keys, "to" conversions, user-defined functions</li>
+<li>Plot: plotting of a function of x (Plot key and x key on the Basic page) </li>
+</ul>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a256612747c07965adf7321628878dce8aac96e85e29431333294cdc2e48f3fdce" name="a256612747c07965adf7321628878dce8aac96e85e29431333294cdc2e48f3fdce"></a>Trig&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a256612747c07965adf7321628878dce8aa49950aa047c2292e989e368a97a3aae" name="a256612747c07965adf7321628878dce8aa49950aa047c2292e989e368a97a3aae"></a>Math&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a256612747c07965adf7321628878dce8ab4c2b550635fe54fd29f2b64dfaca55d" name="a256612747c07965adf7321628878dce8ab4c2b550635fe54fd29f2b64dfaca55d"></a>Special&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a256612747c07965adf7321628878dce8ae5771a362d88a71a657bfcd21ca54b3f" name="a256612747c07965adf7321628878dce8ae5771a362d88a71a657bfcd21ca54b3f"></a>Units&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a256612747c07965adf7321628878dce8a36be98b843e778a6e7350354b6937cfe" name="a256612747c07965adf7321628878dce8a36be98b843e778a6e7350354b6937cfe"></a>Plot&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <a id="a4585c23ced3a9447c6d119660a80b386" name="a4585c23ced3a9447c6d119660a80b386"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4585c23ced3a9447c6d119660a80b386">&#9670;&#160;</a></span>OpCode</h2>
 
@@ -422,7 +486,7 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">enum</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">class</a> <a class="el" href="namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386">TinyCalc::OpCode</a> : <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">uint8_t</a></td>
+          <td class="memname">enum class <a class="el" href="namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386">TinyCalc::OpCode</a> : uint8_t</td>
         </tr>
       </table>
   </td>
@@ -442,6 +506,7 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
 <tr><td class="fieldname"><a id="a4585c23ced3a9447c6d119660a80b386a8be6d3e955290ee50c00a4bc92aa7749" name="a4585c23ced3a9447c6d119660a80b386a8be6d3e955290ee50c00a4bc92aa7749"></a>Pow&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a4585c23ced3a9447c6d119660a80b386afb278fa5defd7e699fcbc930c3e76ccd" name="a4585c23ced3a9447c6d119660a80b386afb278fa5defd7e699fcbc930c3e76ccd"></a>Neg&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a4585c23ced3a9447c6d119660a80b386ac3755e61202abd74da5885d2e9c9160e" name="a4585c23ced3a9447c6d119660a80b386ac3755e61202abd74da5885d2e9c9160e"></a>Call&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4585c23ced3a9447c6d119660a80b386abbceed526fabacb364f6437e6c9ec34d" name="a4585c23ced3a9447c6d119660a80b386abbceed526fabacb364f6437e6c9ec34d"></a>UserCall&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -457,7 +522,7 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">char</a> * TinyCalc::errorText </td>
+          <td class="memname">const char * TinyCalc::errorText </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bc">Error</a>&#160;</td>
           <td class="paramname"><em>e</em></td><td>)</td>
@@ -483,9 +548,9 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> * TinyCalc::findFunction </td>
+          <td class="memname">const <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> * TinyCalc::findFunction </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">char</a> *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
         </tr>
@@ -509,10 +574,36 @@ template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e6509
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">const</a> <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> * TinyCalc::functionTable </td>
+          <td class="memname">const <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> * TinyCalc::functionTable </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">size_t</a> &amp;&#160;</td>
+          <td class="paramtype">size_t &amp;&#160;</td>
           <td class="paramname"><em>count</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aed45805ba15d41e816f90dd153e0e62f" name="aed45805ba15d41e816f90dd153e0e62f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed45805ba15d41e816f90dd153e0e62f">&#9670;&#160;</a></span>isTemperatureUnit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TinyCalc::isTemperatureUnit </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -557,6 +648,55 @@ template&lt;typename T &gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0a62d31371a81f3b0a4b723189b1b7db" name="a0a62d31371a81f3b0a4b723189b1b7db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a62d31371a81f3b0a4b723189b1b7db">&#9670;&#160;</a></span>unitTable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structTinyCalc_1_1UnitInfo.html">UnitInfo</a> * TinyCalc::unitTable </td>
+          <td>(</td>
+          <td class="paramtype">size_t &amp;&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a1f264d5a6ee21d987cc078dd36ba50d3" name="a1f264d5a6ee21d987cc078dd36ba50d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f264d5a6ee21d987cc078dd36ba50d3">&#9670;&#160;</a></span>kFrameBit</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t TinyCalc::kFrameBit = 0x80</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

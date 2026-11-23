@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['kkeycount_0',['kKeyCount',['../classTinyCalc_1_1CalculatorGui.html#a27f2c4e5b6fd63aaf061e80709da9444',1,'TinyCalc::CalculatorGui']]],
-  ['kpagecount_1',['kPageCount',['../classTinyCalc_1_1CalculatorGui.html#aa6ed1c488764147149d7b3ecee6286f3',1,'TinyCalc::CalculatorGui']]],
-  ['kplotsamples_2',['kPlotSamples',['../classTinyCalc_1_1CalculatorGui.html#a84ae089ae8168544fd6d7b4949578787',1,'TinyCalc::CalculatorGui']]]
+  ['factor_0',['factor',['../structTinyCalc_1_1UnitInfo.html#ad79b7ed0a710088a9b5c8b545dcfc5d6',1,'TinyCalc::UnitInfo']]],
+  ['function_1',['function',['../structTinyCalc_1_1detail_1_1Token.html#afdc0df1fcebe463c6b23ca26e6af6688',1,'TinyCalc::detail::Token']]],
+  ['functioncount_2',['functionCount',['../structTinyCalc_1_1detail_1_1Environment.html#a9ee429653d4d60fb04db112f5e6214af',1,'TinyCalc::detail::Environment']]],
+  ['functions_3',['functions',['../structTinyCalc_1_1detail_1_1Environment.html#a6b44f4529e5280562fb39d8c22648f64',1,'TinyCalc::detail::Environment']]]
 ];

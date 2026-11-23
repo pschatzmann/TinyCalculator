@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['opcode_0',['OpCode',['../namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386',1,'TinyCalc']]]
+  ['guiscreen_0',['GuiScreen',['../namespaceTinyCalc.html#a256612747c07965adf7321628878dce8',1,'TinyCalc']]]
 ];

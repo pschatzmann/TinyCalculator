@@ -12,9 +12,11 @@ var searchData=
   ['sinh_9',['sinh',['../classTinyCalc_1_1Math.html#a7849908730a7100aab5561039b69df3a',1,'TinyCalc::Math::sinh()'],['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70a98ed804abf4edd1f3be3fa894fa8cc3d',1,'TinyCalc::Sinh']]],
   ['size_10',['size',['../classTinyCalc_1_1Expression.html#aa784a3506272cbd760396af1872d8a47',1,'TinyCalc::Expression']]],
   ['slash_11',['Slash',['../namespaceTinyCalc_1_1detail.html#ac15ac6e12f8156599562a6a472b022c7a358cfe58715d680d9ab09f82e4010cbc',1,'TinyCalc::detail']]],
-  ['sqrt_12',['sqrt',['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70aae77f3ad25595e35b327334d89410054',1,'TinyCalc::Sqrt'],['../structTinyCalc_1_1detail_1_1Prim.html#a4cf95608cf146395f235c14fe1a72979',1,'TinyCalc::detail::Prim::sqrt()'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a0058488bd4da121ffb0585c53d2a4694',1,'TinyCalc::detail::Prim&lt; float &gt;::sqrt()']]],
-  ['star_13',['Star',['../namespaceTinyCalc_1_1detail.html#ac15ac6e12f8156599562a6a472b022c7a26f93e6e68e28a698377e941cb59f29a',1,'TinyCalc::detail']]],
-  ['sub_14',['Sub',['../namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386ae80155eceb940c89e2de63ad05868db2',1,'TinyCalc']]],
-  ['sum_15',['Sum',['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70aa0ec87054b5e5b7847d0d8780a01a3d5',1,'TinyCalc']]],
-  ['syntax_16',['Syntax',['../namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bca92e9d6227d5534e7afc27a11179c808e',1,'TinyCalc']]]
+  ['source_12',['source',['../structTinyCalc_1_1CalculatorGui_1_1ToState.html#a3af5edb56881bb27741d81f928c9c4ca',1,'TinyCalc::CalculatorGui::ToState']]],
+  ['special_13',['Special',['../namespaceTinyCalc.html#a256612747c07965adf7321628878dce8ab4c2b550635fe54fd29f2b64dfaca55d',1,'TinyCalc']]],
+  ['sqrt_14',['sqrt',['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70aae77f3ad25595e35b327334d89410054',1,'TinyCalc::Sqrt'],['../structTinyCalc_1_1detail_1_1Prim.html#a4cf95608cf146395f235c14fe1a72979',1,'TinyCalc::detail::Prim::sqrt()'],['../structTinyCalc_1_1detail_1_1Prim_3_01float_01_4.html#a0058488bd4da121ffb0585c53d2a4694',1,'TinyCalc::detail::Prim&lt; float &gt;::sqrt()']]],
+  ['star_15',['Star',['../namespaceTinyCalc_1_1detail.html#ac15ac6e12f8156599562a6a472b022c7a26f93e6e68e28a698377e941cb59f29a',1,'TinyCalc::detail']]],
+  ['sub_16',['Sub',['../namespaceTinyCalc.html#a4585c23ced3a9447c6d119660a80b386ae80155eceb940c89e2de63ad05868db2',1,'TinyCalc']]],
+  ['sum_17',['Sum',['../namespaceTinyCalc.html#add41f90e8ef763eddc8dc7635ec10d70aa0ec87054b5e5b7847d0d8780a01a3d5',1,'TinyCalc']]],
+  ['syntax_18',['Syntax',['../namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bca92e9d6227d5534e7afc27a11179c808e',1,'TinyCalc']]]
 ];

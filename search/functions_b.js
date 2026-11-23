@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['needsproduct_0',['needsProduct',['../classTinyCalc_1_1CalculatorGui.html#adc1721734c22744e3070068115149133',1,'TinyCalc::CalculatorGui']]],
-  ['numberhasdot_1',['numberHasDot',['../classTinyCalc_1_1CalculatorGui.html#ae54369b7eaa13c7f38fc5118c2878fdd',1,'TinyCalc::CalculatorGui']]]
+  ['main_0',['main',['../main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main.cpp']]],
+  ['maxstack_1',['maxStack',['../classTinyCalc_1_1Expression.html#a298485eeebe32ef07b472f53b8116416',1,'TinyCalc::Expression']]]
 ];

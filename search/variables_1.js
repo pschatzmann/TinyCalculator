@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['code_0',['code',['../structTinyCalc_1_1Op.html#afc519304091dbe0a07624b9a0732b536',1,'TinyCalc::Op']]]
+  ['builtin_0',['builtin',['../structTinyCalc_1_1detail_1_1Token.html#a966a24d13b6a9049bc5e688ed0efb484',1,'TinyCalc::detail::Token']]]
 ];

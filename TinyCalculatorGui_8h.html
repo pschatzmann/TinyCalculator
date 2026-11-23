@@ -77,7 +77,8 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle"><div class="title">TinyCalculatorGui.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -176,6 +177,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTinyCalc_1_1CalculatorGui_1_1KeyDef.html">TinyCalc::CalculatorGui&lt; RGB_T, Number &gt;::KeyDef</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Key definition: the label shown on the key and the action it performs.  <a href="structTinyCalc_1_1CalculatorGui_1_1KeyDef.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTinyCalc_1_1CalculatorGui_1_1ToState.html">TinyCalc::CalculatorGui&lt; RGB_T, Number &gt;::ToState</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -184,10 +187,24 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a3f24dffc500a71d57bdb81e863c82fd1" id="r_a3f24dffc500a71d57bdb81e863c82fd1"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">typename</a> <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a>  = tinymd::TINYMD_DEFAULT_RGB_T&gt; </td></tr>
-<tr class="memitem:a3f24dffc500a71d57bdb81e863c82fd1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">using</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a3f24dffc500a71d57bdb81e863c82fd1">TinyCalc::CalculatorTheme</a> = tinymd::MaterialTheme&lt; <a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">RGB_T</a> &gt;</td></tr>
+<tr class="memitem:a3f24dffc500a71d57bdb81e863c82fd1" id="r_a3f24dffc500a71d57bdb81e863c82fd1"><td class="memTemplParams" colspan="2">template&lt;typename RGB_T  = tinymd::TINYMD_DEFAULT_RGB_T&gt; </td></tr>
+<tr class="memitem:a3f24dffc500a71d57bdb81e863c82fd1"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a3f24dffc500a71d57bdb81e863c82fd1">TinyCalc::CalculatorTheme</a> = tinymd::MaterialTheme&lt; RGB_T &gt;</td></tr>
 <tr class="memdesc:a3f24dffc500a71d57bdb81e863c82fd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Look of the calculator: the TinyMaterialDesign theme of all its widgets. Its typography holds the fonts (label, body, title, headline), so a TinyFonts font assigned there is used by the expression line (label) and the result line (headline).  <br /></td></tr>
 <tr class="separator:a3f24dffc500a71d57bdb81e863c82fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a256612747c07965adf7321628878dce8" id="r_a256612747c07965adf7321628878dce8"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8">TinyCalc::GuiScreen</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8aac96e85e29431333294cdc2e48f3fdce">TinyCalc::Trig</a>
+, <a class="el" href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8aa49950aa047c2292e989e368a97a3aae">TinyCalc::Math</a>
+, <a class="el" href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8ab4c2b550635fe54fd29f2b64dfaca55d">TinyCalc::Special</a>
+, <a class="el" href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8ae5771a362d88a71a657bfcd21ca54b3f">TinyCalc::Units</a>
+, <br />
+&#160;&#160;<a class="el" href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8a36be98b843e778a6e7350354b6937cfe">TinyCalc::Plot</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a256612747c07965adf7321628878dce8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The screens of the calculator that are not part of the basic keypad. Each one is off by default and is switched on with <a class="el" href="classTinyCalc_1_1CalculatorGui.html#a9295bd94de4aff6d8e9a528b009877a2" title="Switches on a screen. Only the Basic keypad is shown until a screen is enabled.">CalculatorGui::enable()</a>, e.g. <code>gui.enable(GuiScreen::Trig);</code>.  <a href="namespaceTinyCalc.html#a256612747c07965adf7321628878dce8">More...</a><br /></td></tr>
+<tr class="separator:a256612747c07965adf7321628878dce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

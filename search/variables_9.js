@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['onswipeleft_0',['onSwipeLeft',['../classTinyCalc_1_1CalculatorPanel.html#ae740b32ca3a2b34d77824a7c61597097',1,'TinyCalc::CalculatorPanel']]],
-  ['onswiperight_1',['onSwipeRight',['../classTinyCalc_1_1CalculatorPanel.html#a08b77cee85c571adf90e07798a9a91a7',1,'TinyCalc::CalculatorPanel']]]
+  ['maxargs_0',['maxArgs',['../structTinyCalc_1_1FunctionInfo.html#a2c483c317f9c4af5880054fc668aaba5',1,'TinyCalc::FunctionInfo']]],
+  ['minargs_1',['minArgs',['../structTinyCalc_1_1FunctionInfo.html#a0cfcf2099f10eba970d3aed54ee594bb',1,'TinyCalc::FunctionInfo']]]
 ];
