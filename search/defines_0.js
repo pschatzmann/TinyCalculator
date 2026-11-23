@@ -13,7 +13,8 @@ var searchData=
   ['tinycalc_5fmemcpy_5fp_10',['TINYCALC_MEMCPY_P',['../Progmem_8h.html#acf0536da6a5c537e83632ed05885eb92',1,'Progmem.h']]],
   ['tinycalc_5fprogmem_11',['TINYCALC_PROGMEM',['../Progmem_8h.html#a5f581fda46eab05eb19274611b350102',1,'Progmem.h']]],
   ['tinycalc_5fread_5fptr_12',['TINYCALC_READ_PTR',['../Progmem_8h.html#aed62e8f9a6720e6b59c951f37accdf1c',1,'Progmem.h']]],
-  ['tinycalc_5fversion_5fmajor_13',['TINYCALC_VERSION_MAJOR',['../Config_8h.html#ad8f747e090845c62480d528499df6d12',1,'Config.h']]],
-  ['tinycalc_5fversion_5fminor_14',['TINYCALC_VERSION_MINOR',['../Config_8h.html#af7327ff37cb5c7140aaec719fa90fe2a',1,'Config.h']]],
-  ['tinycalc_5fversion_5fpatch_15',['TINYCALC_VERSION_PATCH',['../Config_8h.html#af18868cd2092c3b0b7342c59f1adf1ca',1,'Config.h']]]
+  ['tinycalc_5fstrcmp_5fp_13',['TINYCALC_STRCMP_P',['../Progmem_8h.html#a2a3b227a6d2fd94ea0d089896de30f45',1,'Progmem.h']]],
+  ['tinycalc_5fversion_5fmajor_14',['TINYCALC_VERSION_MAJOR',['../Config_8h.html#ad8f747e090845c62480d528499df6d12',1,'Config.h']]],
+  ['tinycalc_5fversion_5fminor_15',['TINYCALC_VERSION_MINOR',['../Config_8h.html#af7327ff37cb5c7140aaec719fa90fe2a',1,'Config.h']]],
+  ['tinycalc_5fversion_5fpatch_16',['TINYCALC_VERSION_PATCH',['../Config_8h.html#af18868cd2092c3b0b7342c59f1adf1ca',1,'Config.h']]]
 ];

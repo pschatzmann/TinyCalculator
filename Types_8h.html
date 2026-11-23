@@ -77,25 +77,31 @@ $(function() {
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">Types.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="Config_8h_source.html">Config.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Progmem_8h_source.html">Progmem.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Types.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="Types_8h__incl.png" border="0" usemap="#asrc_2tinycalc_2Types_8h" alt=""/></div>
 <map name="asrc_2tinycalc_2Types_8h" id="asrc_2tinycalc_2Types_8h">
-<area shape="rect" title=" " alt="" coords="64,5,212,33"/>
+<area shape="rect" title=" " alt="" coords="112,5,260,33"/>
 <area shape="rect" title=" " alt="" coords="5,81,79,109"/>
-<area shape="poly" title=" " alt="" coords="123,33,73,74,70,69,118,34"/>
+<area shape="poly" title=" " alt="" coords="159,36,83,76,80,71,162,31"/>
 <area shape="rect" title=" " alt="" coords="103,81,173,109"/>
-<area shape="poly" title=" " alt="" coords="140,32,140,66,136,64,136,36"/>
+<area shape="poly" title=" " alt="" coords="179,32,157,70,153,66,176,35"/>
 <area shape="rect" href="Config_8h.html" title=" " alt="" coords="197,81,271,109"/>
-<area shape="poly" title=" " alt="" coords="156,31,208,71,202,72,154,36"/>
+<area shape="poly" title=" " alt="" coords="195,31,220,68,215,68,194,36"/>
+<area shape="rect" href="Progmem_8h.html" title=" " alt="" coords="295,81,392,109"/>
+<area shape="poly" title=" " alt="" coords="214,31,304,73,299,75,214,36"/>
+<area shape="rect" title=" " alt="" coords="308,157,378,184"/>
+<area shape="poly" title=" " alt="" coords="345,107,345,143,341,139,341,111"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -176,6 +182,8 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a3556315f1b5df863559d5cbdffe8a99d" id="r_a3556315f1b5df863559d5cbdffe8a99d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a3556315f1b5df863559d5cbdffe8a99d">TinyCalc::errorText</a> (<a class="el" href="namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bc">Error</a> e)</td></tr>
 <tr class="separator:a3556315f1b5df863559d5cbdffe8a99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf095de8061399691eaed884ea3c383d" id="r_abf095de8061399691eaed884ea3c383d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#abf095de8061399691eaed884ea3c383d">TinyCalc::errorTextFlash</a> (<a class="el" href="namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bc">Error</a> e)</td></tr>
+<tr class="separator:abf095de8061399691eaed884ea3c383d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf4a0b78fa3e1a8468c302aa6b5ce5e5" id="r_abf4a0b78fa3e1a8468c302aa6b5ce5e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc_1_1detail.html#adcccb98ca5899f4d9f39b51daeb9339b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc_1_1detail.html#abf4a0b78fa3e1a8468c302aa6b5ce5e5">TinyCalc::detail::isDigit</a> (<a class="el" href="namespaceTinyCalc_1_1detail.html#adcccb98ca5899f4d9f39b51daeb9339b">char</a> c)</td></tr>
 <tr class="separator:abf4a0b78fa3e1a8468c302aa6b5ce5e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93b829ea2284bec68659524bf5bc5fef" id="r_a93b829ea2284bec68659524bf5bc5fef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc_1_1detail.html#adcccb98ca5899f4d9f39b51daeb9339b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc_1_1detail.html#a93b829ea2284bec68659524bf5bc5fef">TinyCalc::detail::isIdentStart</a> (<a class="el" href="namespaceTinyCalc_1_1detail.html#adcccb98ca5899f4d9f39b51daeb9339b">char</a> c)</td></tr>
@@ -186,6 +194,49 @@ Functions</h2></td></tr>
 <tr class="separator:a7e6e912a652f2c31515366466d238017"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54f6bcff9f763e641e44193cdb3d045b" id="r_a54f6bcff9f763e641e44193cdb3d045b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceTinyCalc_1_1detail.html#adcccb98ca5899f4d9f39b51daeb9339b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc_1_1detail.html#a54f6bcff9f763e641e44193cdb3d045b">TinyCalc::detail::isIdentifier</a> (<a class="el" href="namespaceTinyCalc_1_1detail.html#adcccb98ca5899f4d9f39b51daeb9339b">const</a> <a class="el" href="namespaceTinyCalc_1_1detail.html#adcccb98ca5899f4d9f39b51daeb9339b">char</a> *<a class="el" href="namespaceTinyCalc_1_1detail.html#adcccb98ca5899f4d9f39b51daeb9339b">s</a>)</td></tr>
 <tr class="separator:a54f6bcff9f763e641e44193cdb3d045b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:abf6cf3d5a9b6cd5c74dea2f39617e0dd" id="r_abf6cf3d5a9b6cd5c74dea2f39617e0dd"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#abf6cf3d5a9b6cd5c74dea2f39617e0dd">TinyCalc::kErr00</a> [] = &quot;OK&quot;</td></tr>
+<tr class="separator:abf6cf3d5a9b6cd5c74dea2f39617e0dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51db48f20f3cdf936d913e5cac66c644" id="r_a51db48f20f3cdf936d913e5cac66c644"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a51db48f20f3cdf936d913e5cac66c644">TinyCalc::kErr01</a> [] = &quot;empty expression&quot;</td></tr>
+<tr class="separator:a51db48f20f3cdf936d913e5cac66c644"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae266c4abca4fd076b6aea493e05c0e3e" id="r_ae266c4abca4fd076b6aea493e05c0e3e"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#ae266c4abca4fd076b6aea493e05c0e3e">TinyCalc::kErr02</a> [] = &quot;syntax error&quot;</td></tr>
+<tr class="separator:ae266c4abca4fd076b6aea493e05c0e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23280f93b923c8a8ddc46fd56497d444" id="r_a23280f93b923c8a8ddc46fd56497d444"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a23280f93b923c8a8ddc46fd56497d444">TinyCalc::kErr03</a> [] = &quot;unexpected token&quot;</td></tr>
+<tr class="separator:a23280f93b923c8a8ddc46fd56497d444"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfbf3687b0bdfb52fb9991e2be9ce664" id="r_adfbf3687b0bdfb52fb9991e2be9ce664"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#adfbf3687b0bdfb52fb9991e2be9ce664">TinyCalc::kErr04</a> [] = &quot;unexpected end of expression&quot;</td></tr>
+<tr class="separator:adfbf3687b0bdfb52fb9991e2be9ce664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc1b0c64695488714dea96d81db31a87" id="r_adc1b0c64695488714dea96d81db31a87"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#adc1b0c64695488714dea96d81db31a87">TinyCalc::kErr05</a> [] = &quot;unbalanced parenthesis&quot;</td></tr>
+<tr class="separator:adc1b0c64695488714dea96d81db31a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabfd003637770b4767c8a134b0b31eec" id="r_aabfd003637770b4767c8a134b0b31eec"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#aabfd003637770b4767c8a134b0b31eec">TinyCalc::kErr06</a> [] = &quot;unknown identifier&quot;</td></tr>
+<tr class="separator:aabfd003637770b4767c8a134b0b31eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff575dd6e49f7f220bd66c4648876c28" id="r_aff575dd6e49f7f220bd66c4648876c28"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#aff575dd6e49f7f220bd66c4648876c28">TinyCalc::kErr07</a> [] = &quot;unknown function&quot;</td></tr>
+<tr class="separator:aff575dd6e49f7f220bd66c4648876c28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab96f31d361d5371d432c1856e94b6f3c" id="r_ab96f31d361d5371d432c1856e94b6f3c"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#ab96f31d361d5371d432c1856e94b6f3c">TinyCalc::kErr08</a> [] = &quot;wrong number of arguments&quot;</td></tr>
+<tr class="separator:ab96f31d361d5371d432c1856e94b6f3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfd1357645b1b2b414ff1828be8e2880" id="r_adfd1357645b1b2b414ff1828be8e2880"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#adfd1357645b1b2b414ff1828be8e2880">TinyCalc::kErr09</a> [] = &quot;division by zero&quot;</td></tr>
+<tr class="separator:adfd1357645b1b2b414ff1828be8e2880"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae529b1d20f128c0f1ab2c9fb90667aa3" id="r_ae529b1d20f128c0f1ab2c9fb90667aa3"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#ae529b1d20f128c0f1ab2c9fb90667aa3">TinyCalc::kErr10</a> [] = &quot;argument out of domain&quot;</td></tr>
+<tr class="separator:ae529b1d20f128c0f1ab2c9fb90667aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8f6175e754b5bcf97b04f7b00f4cb0d" id="r_af8f6175e754b5bcf97b04f7b00f4cb0d"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#af8f6175e754b5bcf97b04f7b00f4cb0d">TinyCalc::kErr11</a> [] = &quot;result overflow&quot;</td></tr>
+<tr class="separator:af8f6175e754b5bcf97b04f7b00f4cb0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2a35445633b9e9b7cd65c0bef5368e2" id="r_af2a35445633b9e9b7cd65c0bef5368e2"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#af2a35445633b9e9b7cd65c0bef5368e2">TinyCalc::kErr12</a> [] = &quot;expression too complex&quot;</td></tr>
+<tr class="separator:af2a35445633b9e9b7cd65c0bef5368e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f3ca5b5e963a5a48b21fd4c1b85db19" id="r_a5f3ca5b5e963a5a48b21fd4c1b85db19"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a5f3ca5b5e963a5a48b21fd4c1b85db19">TinyCalc::kErr13</a> [] = &quot;nesting too deep&quot;</td></tr>
+<tr class="separator:a5f3ca5b5e963a5a48b21fd4c1b85db19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e54b13460364b41156152a5f5fde99c" id="r_a9e54b13460364b41156152a5f5fde99c"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a9e54b13460364b41156152a5f5fde99c">TinyCalc::kErr14</a> [] = &quot;too many variables&quot;</td></tr>
+<tr class="separator:a9e54b13460364b41156152a5f5fde99c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2856c4d7244eaad567d3a7bb93f1b47d" id="r_a2856c4d7244eaad567d3a7bb93f1b47d"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a2856c4d7244eaad567d3a7bb93f1b47d">TinyCalc::kErr15</a> [] = &quot;invalid name&quot;</td></tr>
+<tr class="separator:a2856c4d7244eaad567d3a7bb93f1b47d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38a2bf4d187a31fa1f3a82215c0b2daf" id="r_a38a2bf4d187a31fa1f3a82215c0b2daf"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a38a2bf4d187a31fa1f3a82215c0b2daf">TinyCalc::kErr16</a> [] = &quot;name is reserved&quot;</td></tr>
+<tr class="separator:a38a2bf4d187a31fa1f3a82215c0b2daf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf3821a2627dc08b6863b88d34a52416" id="r_adf3821a2627dc08b6863b88d34a52416"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#adf3821a2627dc08b6863b88d34a52416">TinyCalc::kErr17</a> [] = &quot;too many functions&quot;</td></tr>
+<tr class="separator:adf3821a2627dc08b6863b88d34a52416"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2fecc124d3671b4c3fdcbf24098e14e" id="r_ab2fecc124d3671b4c3fdcbf24098e14e"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#ab2fecc124d3671b4c3fdcbf24098e14e">TinyCalc::kUnknownError</a> [] = &quot;unknown error&quot;</td></tr>
+<tr class="separator:ab2fecc124d3671b4c3fdcbf24098e14e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad22c5d42edcecad33f38f08a32f766c0" id="r_ad22c5d42edcecad33f38f08a32f766c0"><td class="memItemLeft" align="right" valign="top">static const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#ad22c5d42edcecad33f38f08a32f766c0">TinyCalc::kErrorTexts</a> [] = {<a class="el" href="namespaceTinyCalc.html#abf6cf3d5a9b6cd5c74dea2f39617e0dd">kErr00</a>, <a class="el" href="namespaceTinyCalc.html#a51db48f20f3cdf936d913e5cac66c644">kErr01</a>, <a class="el" href="namespaceTinyCalc.html#ae266c4abca4fd076b6aea493e05c0e3e">kErr02</a>, <a class="el" href="namespaceTinyCalc.html#a23280f93b923c8a8ddc46fd56497d444">kErr03</a>, <a class="el" href="namespaceTinyCalc.html#adfbf3687b0bdfb52fb9991e2be9ce664">kErr04</a>, <a class="el" href="namespaceTinyCalc.html#adc1b0c64695488714dea96d81db31a87">kErr05</a>, <a class="el" href="namespaceTinyCalc.html#aabfd003637770b4767c8a134b0b31eec">kErr06</a>, <a class="el" href="namespaceTinyCalc.html#aff575dd6e49f7f220bd66c4648876c28">kErr07</a>, <a class="el" href="namespaceTinyCalc.html#ab96f31d361d5371d432c1856e94b6f3c">kErr08</a>, <a class="el" href="namespaceTinyCalc.html#adfd1357645b1b2b414ff1828be8e2880">kErr09</a>, <a class="el" href="namespaceTinyCalc.html#ae529b1d20f128c0f1ab2c9fb90667aa3">kErr10</a>, <a class="el" href="namespaceTinyCalc.html#af8f6175e754b5bcf97b04f7b00f4cb0d">kErr11</a>, <a class="el" href="namespaceTinyCalc.html#af2a35445633b9e9b7cd65c0bef5368e2">kErr12</a>, <a class="el" href="namespaceTinyCalc.html#a5f3ca5b5e963a5a48b21fd4c1b85db19">kErr13</a>, <a class="el" href="namespaceTinyCalc.html#a9e54b13460364b41156152a5f5fde99c">kErr14</a>, <a class="el" href="namespaceTinyCalc.html#a2856c4d7244eaad567d3a7bb93f1b47d">kErr15</a>, <a class="el" href="namespaceTinyCalc.html#a38a2bf4d187a31fa1f3a82215c0b2daf">kErr16</a>, <a class="el" href="namespaceTinyCalc.html#adf3821a2627dc08b6863b88d34a52416">kErr17</a>}</td></tr>
+<tr class="separator:ad22c5d42edcecad33f38f08a32f766c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

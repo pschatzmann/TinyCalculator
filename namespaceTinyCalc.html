@@ -101,7 +101,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A compiled formula: a fixed-capacity RPN (postfix) program.  <a href="classTinyCalc_1_1Expression.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Table entry describing one built-in function: its name, its Fn id and the range of allowed argument counts.  <a href="structTinyCalc_1_1FunctionInfo.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Table entry describing one built-in function: its name, its Fn id and the range of allowed argument counts. The name is at most 7 characters.  <a href="structTinyCalc_1_1FunctionInfo.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyCalc_1_1Math.html">Math</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mathematical functions and constants for the number type T.  <a href="classTinyCalc_1_1Math.html#details">More...</a><br /></td></tr>
@@ -255,22 +255,84 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a60b7303010068655231a060f90ed7076" id="r_a60b7303010068655231a060f90ed7076"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a60b7303010068655231a060f90ed7076">functionTable</a> (size_t &amp;count)</td></tr>
 <tr class="separator:a60b7303010068655231a060f90ed7076"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a800c90f3cad48adef27c6fddb4d0dc33" id="r_a800c90f3cad48adef27c6fddb4d0dc33"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a800c90f3cad48adef27c6fddb4d0dc33">findFunction</a> (const char *name)</td></tr>
-<tr class="separator:a800c90f3cad48adef27c6fddb4d0dc33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a341f6c63ddb17b9787fdf82c1e3007e5" id="r_a341f6c63ddb17b9787fdf82c1e3007e5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a341f6c63ddb17b9787fdf82c1e3007e5">functionAt</a> (size_t i, <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> &amp;out)</td></tr>
+<tr class="separator:a341f6c63ddb17b9787fdf82c1e3007e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f7bddc2bbc2790049ed0c6d66339640" id="r_a3f7bddc2bbc2790049ed0c6d66339640"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a3f7bddc2bbc2790049ed0c6d66339640">findFunction</a> (const char *name, <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> &amp;out)</td></tr>
+<tr class="separator:a3f7bddc2bbc2790049ed0c6d66339640"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f19f483001dad7b07050e9a421481d3" id="r_a6f19f483001dad7b07050e9a421481d3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a6f19f483001dad7b07050e9a421481d3">isFunctionName</a> (const char *name)</td></tr>
+<tr class="separator:a6f19f483001dad7b07050e9a421481d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a62d31371a81f3b0a4b723189b1b7db" id="r_a0a62d31371a81f3b0a4b723189b1b7db"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structTinyCalc_1_1UnitInfo.html">UnitInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a0a62d31371a81f3b0a4b723189b1b7db">unitTable</a> (size_t &amp;count)</td></tr>
 <tr class="separator:a0a62d31371a81f3b0a4b723189b1b7db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bb7989a47e22b21ea0b45deb980c1b8" id="r_a0bb7989a47e22b21ea0b45deb980c1b8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a0bb7989a47e22b21ea0b45deb980c1b8">findUnitFactor</a> (const char *name, double &amp;factor)</td></tr>
+<tr class="separator:a0bb7989a47e22b21ea0b45deb980c1b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77059d649bbfee56eb617a17cf6583c6" id="r_a77059d649bbfee56eb617a17cf6583c6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a77059d649bbfee56eb617a17cf6583c6">temperatureIndex</a> (const char *name)</td></tr>
+<tr class="separator:a77059d649bbfee56eb617a17cf6583c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed45805ba15d41e816f90dd153e0e62f" id="r_aed45805ba15d41e816f90dd153e0e62f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#aed45805ba15d41e816f90dd153e0e62f">isTemperatureUnit</a> (const char *name)</td></tr>
 <tr class="separator:aed45805ba15d41e816f90dd153e0e62f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d2391072844770b4bdca5da4c662976" id="r_a5d2391072844770b4bdca5da4c662976"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a5d2391072844770b4bdca5da4c662976">isKeyword</a> (const char *name)</td></tr>
+<tr class="separator:a5d2391072844770b4bdca5da4c662976"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b0b42f9cc6180e3b86e650924d18797" id="r_a2b0b42f9cc6180e3b86e650924d18797"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a2b0b42f9cc6180e3b86e650924d18797"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">lookupConstant</a> (const char *name, T &amp;value)</td></tr>
 <tr class="separator:a2b0b42f9cc6180e3b86e650924d18797"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3556315f1b5df863559d5cbdffe8a99d" id="r_a3556315f1b5df863559d5cbdffe8a99d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a3556315f1b5df863559d5cbdffe8a99d">errorText</a> (<a class="el" href="namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bc">Error</a> e)</td></tr>
 <tr class="separator:a3556315f1b5df863559d5cbdffe8a99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf095de8061399691eaed884ea3c383d" id="r_abf095de8061399691eaed884ea3c383d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#abf095de8061399691eaed884ea3c383d">errorTextFlash</a> (<a class="el" href="namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bc">Error</a> e)</td></tr>
+<tr class="separator:abf095de8061399691eaed884ea3c383d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a1f264d5a6ee21d987cc078dd36ba50d3" id="r_a1f264d5a6ee21d987cc078dd36ba50d3"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a1f264d5a6ee21d987cc078dd36ba50d3">kFrameBit</a> = 0x80</td></tr>
 <tr class="separator:a1f264d5a6ee21d987cc078dd36ba50d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15678d72167c82c35f304295b8390896" id="r_a15678d72167c82c35f304295b8390896"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a15678d72167c82c35f304295b8390896">kDegC</a> [] = &quot;degC&quot;</td></tr>
+<tr class="separator:a15678d72167c82c35f304295b8390896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f5c05601140e57c4fdc913e43d0da2b" id="r_a6f5c05601140e57c4fdc913e43d0da2b"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a6f5c05601140e57c4fdc913e43d0da2b">kDegF</a> [] = &quot;degF&quot;</td></tr>
+<tr class="separator:a6f5c05601140e57c4fdc913e43d0da2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac02b455a36d4a1598c52786c40cc8d95" id="r_ac02b455a36d4a1598c52786c40cc8d95"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#ac02b455a36d4a1598c52786c40cc8d95">kKelvin</a> [] = &quot;K&quot;</td></tr>
+<tr class="separator:ac02b455a36d4a1598c52786c40cc8d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b6fb0dc94b718c165a1e1202ccc452c" id="r_a2b6fb0dc94b718c165a1e1202ccc452c"><td class="memItemLeft" align="right" valign="top">static const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a2b6fb0dc94b718c165a1e1202ccc452c">kTemperatureUnits</a> [] = {<a class="el" href="namespaceTinyCalc.html#a15678d72167c82c35f304295b8390896">kDegC</a>, <a class="el" href="namespaceTinyCalc.html#a6f5c05601140e57c4fdc913e43d0da2b">kDegF</a>, <a class="el" href="namespaceTinyCalc.html#ac02b455a36d4a1598c52786c40cc8d95">kKelvin</a>}</td></tr>
+<tr class="separator:a2b6fb0dc94b718c165a1e1202ccc452c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d7c630b25ee055238891c2eb0378396" id="r_a4d7c630b25ee055238891c2eb0378396"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a4d7c630b25ee055238891c2eb0378396">kToKeyword</a> [] = &quot;to&quot;</td></tr>
+<tr class="separator:a4d7c630b25ee055238891c2eb0378396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf6cf3d5a9b6cd5c74dea2f39617e0dd" id="r_abf6cf3d5a9b6cd5c74dea2f39617e0dd"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#abf6cf3d5a9b6cd5c74dea2f39617e0dd">kErr00</a> [] = &quot;OK&quot;</td></tr>
+<tr class="separator:abf6cf3d5a9b6cd5c74dea2f39617e0dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51db48f20f3cdf936d913e5cac66c644" id="r_a51db48f20f3cdf936d913e5cac66c644"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a51db48f20f3cdf936d913e5cac66c644">kErr01</a> [] = &quot;empty expression&quot;</td></tr>
+<tr class="separator:a51db48f20f3cdf936d913e5cac66c644"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae266c4abca4fd076b6aea493e05c0e3e" id="r_ae266c4abca4fd076b6aea493e05c0e3e"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#ae266c4abca4fd076b6aea493e05c0e3e">kErr02</a> [] = &quot;syntax error&quot;</td></tr>
+<tr class="separator:ae266c4abca4fd076b6aea493e05c0e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23280f93b923c8a8ddc46fd56497d444" id="r_a23280f93b923c8a8ddc46fd56497d444"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a23280f93b923c8a8ddc46fd56497d444">kErr03</a> [] = &quot;unexpected token&quot;</td></tr>
+<tr class="separator:a23280f93b923c8a8ddc46fd56497d444"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfbf3687b0bdfb52fb9991e2be9ce664" id="r_adfbf3687b0bdfb52fb9991e2be9ce664"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#adfbf3687b0bdfb52fb9991e2be9ce664">kErr04</a> [] = &quot;unexpected end of expression&quot;</td></tr>
+<tr class="separator:adfbf3687b0bdfb52fb9991e2be9ce664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc1b0c64695488714dea96d81db31a87" id="r_adc1b0c64695488714dea96d81db31a87"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#adc1b0c64695488714dea96d81db31a87">kErr05</a> [] = &quot;unbalanced parenthesis&quot;</td></tr>
+<tr class="separator:adc1b0c64695488714dea96d81db31a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabfd003637770b4767c8a134b0b31eec" id="r_aabfd003637770b4767c8a134b0b31eec"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#aabfd003637770b4767c8a134b0b31eec">kErr06</a> [] = &quot;unknown identifier&quot;</td></tr>
+<tr class="separator:aabfd003637770b4767c8a134b0b31eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff575dd6e49f7f220bd66c4648876c28" id="r_aff575dd6e49f7f220bd66c4648876c28"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#aff575dd6e49f7f220bd66c4648876c28">kErr07</a> [] = &quot;unknown function&quot;</td></tr>
+<tr class="separator:aff575dd6e49f7f220bd66c4648876c28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab96f31d361d5371d432c1856e94b6f3c" id="r_ab96f31d361d5371d432c1856e94b6f3c"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#ab96f31d361d5371d432c1856e94b6f3c">kErr08</a> [] = &quot;wrong number of arguments&quot;</td></tr>
+<tr class="separator:ab96f31d361d5371d432c1856e94b6f3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfd1357645b1b2b414ff1828be8e2880" id="r_adfd1357645b1b2b414ff1828be8e2880"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#adfd1357645b1b2b414ff1828be8e2880">kErr09</a> [] = &quot;division by zero&quot;</td></tr>
+<tr class="separator:adfd1357645b1b2b414ff1828be8e2880"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae529b1d20f128c0f1ab2c9fb90667aa3" id="r_ae529b1d20f128c0f1ab2c9fb90667aa3"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#ae529b1d20f128c0f1ab2c9fb90667aa3">kErr10</a> [] = &quot;argument out of domain&quot;</td></tr>
+<tr class="separator:ae529b1d20f128c0f1ab2c9fb90667aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8f6175e754b5bcf97b04f7b00f4cb0d" id="r_af8f6175e754b5bcf97b04f7b00f4cb0d"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#af8f6175e754b5bcf97b04f7b00f4cb0d">kErr11</a> [] = &quot;result overflow&quot;</td></tr>
+<tr class="separator:af8f6175e754b5bcf97b04f7b00f4cb0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2a35445633b9e9b7cd65c0bef5368e2" id="r_af2a35445633b9e9b7cd65c0bef5368e2"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#af2a35445633b9e9b7cd65c0bef5368e2">kErr12</a> [] = &quot;expression too complex&quot;</td></tr>
+<tr class="separator:af2a35445633b9e9b7cd65c0bef5368e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f3ca5b5e963a5a48b21fd4c1b85db19" id="r_a5f3ca5b5e963a5a48b21fd4c1b85db19"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a5f3ca5b5e963a5a48b21fd4c1b85db19">kErr13</a> [] = &quot;nesting too deep&quot;</td></tr>
+<tr class="separator:a5f3ca5b5e963a5a48b21fd4c1b85db19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e54b13460364b41156152a5f5fde99c" id="r_a9e54b13460364b41156152a5f5fde99c"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a9e54b13460364b41156152a5f5fde99c">kErr14</a> [] = &quot;too many variables&quot;</td></tr>
+<tr class="separator:a9e54b13460364b41156152a5f5fde99c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2856c4d7244eaad567d3a7bb93f1b47d" id="r_a2856c4d7244eaad567d3a7bb93f1b47d"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a2856c4d7244eaad567d3a7bb93f1b47d">kErr15</a> [] = &quot;invalid name&quot;</td></tr>
+<tr class="separator:a2856c4d7244eaad567d3a7bb93f1b47d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38a2bf4d187a31fa1f3a82215c0b2daf" id="r_a38a2bf4d187a31fa1f3a82215c0b2daf"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a38a2bf4d187a31fa1f3a82215c0b2daf">kErr16</a> [] = &quot;name is reserved&quot;</td></tr>
+<tr class="separator:a38a2bf4d187a31fa1f3a82215c0b2daf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf3821a2627dc08b6863b88d34a52416" id="r_adf3821a2627dc08b6863b88d34a52416"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#adf3821a2627dc08b6863b88d34a52416">kErr17</a> [] = &quot;too many functions&quot;</td></tr>
+<tr class="separator:adf3821a2627dc08b6863b88d34a52416"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2fecc124d3671b4c3fdcbf24098e14e" id="r_ab2fecc124d3671b4c3fdcbf24098e14e"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#ab2fecc124d3671b4c3fdcbf24098e14e">kUnknownError</a> [] = &quot;unknown error&quot;</td></tr>
+<tr class="separator:ab2fecc124d3671b4c3fdcbf24098e14e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad22c5d42edcecad33f38f08a32f766c0" id="r_ad22c5d42edcecad33f38f08a32f766c0"><td class="memItemLeft" align="right" valign="top">static const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#ad22c5d42edcecad33f38f08a32f766c0">kErrorTexts</a> [] = {<a class="el" href="namespaceTinyCalc.html#abf6cf3d5a9b6cd5c74dea2f39617e0dd">kErr00</a>, <a class="el" href="namespaceTinyCalc.html#a51db48f20f3cdf936d913e5cac66c644">kErr01</a>, <a class="el" href="namespaceTinyCalc.html#ae266c4abca4fd076b6aea493e05c0e3e">kErr02</a>, <a class="el" href="namespaceTinyCalc.html#a23280f93b923c8a8ddc46fd56497d444">kErr03</a>, <a class="el" href="namespaceTinyCalc.html#adfbf3687b0bdfb52fb9991e2be9ce664">kErr04</a>, <a class="el" href="namespaceTinyCalc.html#adc1b0c64695488714dea96d81db31a87">kErr05</a>, <a class="el" href="namespaceTinyCalc.html#aabfd003637770b4767c8a134b0b31eec">kErr06</a>, <a class="el" href="namespaceTinyCalc.html#aff575dd6e49f7f220bd66c4648876c28">kErr07</a>, <a class="el" href="namespaceTinyCalc.html#ab96f31d361d5371d432c1856e94b6f3c">kErr08</a>, <a class="el" href="namespaceTinyCalc.html#adfd1357645b1b2b414ff1828be8e2880">kErr09</a>, <a class="el" href="namespaceTinyCalc.html#ae529b1d20f128c0f1ab2c9fb90667aa3">kErr10</a>, <a class="el" href="namespaceTinyCalc.html#af8f6175e754b5bcf97b04f7b00f4cb0d">kErr11</a>, <a class="el" href="namespaceTinyCalc.html#af2a35445633b9e9b7cd65c0bef5368e2">kErr12</a>, <a class="el" href="namespaceTinyCalc.html#a5f3ca5b5e963a5a48b21fd4c1b85db19">kErr13</a>, <a class="el" href="namespaceTinyCalc.html#a9e54b13460364b41156152a5f5fde99c">kErr14</a>, <a class="el" href="namespaceTinyCalc.html#a2856c4d7244eaad567d3a7bb93f1b47d">kErr15</a>, <a class="el" href="namespaceTinyCalc.html#a38a2bf4d187a31fa1f3a82215c0b2daf">kErr16</a>, <a class="el" href="namespaceTinyCalc.html#adf3821a2627dc08b6863b88d34a52416">kErr17</a>}</td></tr>
+<tr class="separator:ad22c5d42edcecad33f38f08a32f766c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="a3f24dffc500a71d57bdb81e863c82fd1" name="a3f24dffc500a71d57bdb81e863c82fd1"></a>
@@ -538,8 +600,8 @@ template&lt;typename RGB_T  = tinymd::TINYMD_DEFAULT_RGB_T&gt; </div>
 
 </div>
 </div>
-<a id="a800c90f3cad48adef27c6fddb4d0dc33" name="a800c90f3cad48adef27c6fddb4d0dc33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a800c90f3cad48adef27c6fddb4d0dc33">&#9670;&#160;</a></span>findFunction()</h2>
+<a id="abf095de8061399691eaed884ea3c383d" name="abf095de8061399691eaed884ea3c383d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf095de8061399691eaed884ea3c383d">&#9670;&#160;</a></span>errorTextFlash()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -548,11 +610,119 @@ template&lt;typename RGB_T  = tinymd::TINYMD_DEFAULT_RGB_T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> * TinyCalc::findFunction </td>
+          <td class="memname">const char * TinyCalc::errorTextFlash </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceTinyCalc.html#a73b8b20c23c22eb34a959888019462bc">Error</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f7bddc2bbc2790049ed0c6d66339640" name="a3f7bddc2bbc2790049ed0c6d66339640"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f7bddc2bbc2790049ed0c6d66339640">&#9670;&#160;</a></span>findFunction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TinyCalc::findFunction </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0bb7989a47e22b21ea0b45deb980c1b8" name="a0bb7989a47e22b21ea0b45deb980c1b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bb7989a47e22b21ea0b45deb980c1b8">&#9670;&#160;</a></span>findUnitFactor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TinyCalc::findUnitFactor </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>factor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a341f6c63ddb17b9787fdf82c1e3007e5" name="a341f6c63ddb17b9787fdf82c1e3007e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a341f6c63ddb17b9787fdf82c1e3007e5">&#9670;&#160;</a></span>functionAt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TinyCalc::functionAt </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -578,6 +748,58 @@ template&lt;typename RGB_T  = tinymd::TINYMD_DEFAULT_RGB_T&gt; </div>
           <td>(</td>
           <td class="paramtype">size_t &amp;&#160;</td>
           <td class="paramname"><em>count</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f19f483001dad7b07050e9a421481d3" name="a6f19f483001dad7b07050e9a421481d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f19f483001dad7b07050e9a421481d3">&#9670;&#160;</a></span>isFunctionName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TinyCalc::isFunctionName </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5d2391072844770b4bdca5da4c662976" name="a5d2391072844770b4bdca5da4c662976"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d2391072844770b4bdca5da4c662976">&#9670;&#160;</a></span>isKeyword()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TinyCalc::isKeyword </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -654,6 +876,32 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a77059d649bbfee56eb617a17cf6583c6" name="a77059d649bbfee56eb617a17cf6583c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77059d649bbfee56eb617a17cf6583c6">&#9670;&#160;</a></span>temperatureIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int TinyCalc::temperatureIndex </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0a62d31371a81f3b0a4b723189b1b7db" name="a0a62d31371a81f3b0a4b723189b1b7db"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0a62d31371a81f3b0a4b723189b1b7db">&#9670;&#160;</a></span>unitTable()</h2>
 
@@ -681,6 +929,468 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="a15678d72167c82c35f304295b8390896" name="a15678d72167c82c35f304295b8390896"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15678d72167c82c35f304295b8390896">&#9670;&#160;</a></span>kDegC</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kDegC[] = &quot;degC&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f5c05601140e57c4fdc913e43d0da2b" name="a6f5c05601140e57c4fdc913e43d0da2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f5c05601140e57c4fdc913e43d0da2b">&#9670;&#160;</a></span>kDegF</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kDegF[] = &quot;degF&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abf6cf3d5a9b6cd5c74dea2f39617e0dd" name="abf6cf3d5a9b6cd5c74dea2f39617e0dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf6cf3d5a9b6cd5c74dea2f39617e0dd">&#9670;&#160;</a></span>kErr00</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr00[] = &quot;OK&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a51db48f20f3cdf936d913e5cac66c644" name="a51db48f20f3cdf936d913e5cac66c644"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51db48f20f3cdf936d913e5cac66c644">&#9670;&#160;</a></span>kErr01</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr01[] = &quot;empty expression&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae266c4abca4fd076b6aea493e05c0e3e" name="ae266c4abca4fd076b6aea493e05c0e3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae266c4abca4fd076b6aea493e05c0e3e">&#9670;&#160;</a></span>kErr02</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr02[] = &quot;syntax error&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a23280f93b923c8a8ddc46fd56497d444" name="a23280f93b923c8a8ddc46fd56497d444"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23280f93b923c8a8ddc46fd56497d444">&#9670;&#160;</a></span>kErr03</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr03[] = &quot;unexpected token&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adfbf3687b0bdfb52fb9991e2be9ce664" name="adfbf3687b0bdfb52fb9991e2be9ce664"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfbf3687b0bdfb52fb9991e2be9ce664">&#9670;&#160;</a></span>kErr04</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr04[] = &quot;unexpected end of expression&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adc1b0c64695488714dea96d81db31a87" name="adc1b0c64695488714dea96d81db31a87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc1b0c64695488714dea96d81db31a87">&#9670;&#160;</a></span>kErr05</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr05[] = &quot;unbalanced parenthesis&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aabfd003637770b4767c8a134b0b31eec" name="aabfd003637770b4767c8a134b0b31eec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabfd003637770b4767c8a134b0b31eec">&#9670;&#160;</a></span>kErr06</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr06[] = &quot;unknown identifier&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aff575dd6e49f7f220bd66c4648876c28" name="aff575dd6e49f7f220bd66c4648876c28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff575dd6e49f7f220bd66c4648876c28">&#9670;&#160;</a></span>kErr07</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr07[] = &quot;unknown function&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab96f31d361d5371d432c1856e94b6f3c" name="ab96f31d361d5371d432c1856e94b6f3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab96f31d361d5371d432c1856e94b6f3c">&#9670;&#160;</a></span>kErr08</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr08[] = &quot;wrong number of arguments&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adfd1357645b1b2b414ff1828be8e2880" name="adfd1357645b1b2b414ff1828be8e2880"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfd1357645b1b2b414ff1828be8e2880">&#9670;&#160;</a></span>kErr09</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr09[] = &quot;division by zero&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae529b1d20f128c0f1ab2c9fb90667aa3" name="ae529b1d20f128c0f1ab2c9fb90667aa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae529b1d20f128c0f1ab2c9fb90667aa3">&#9670;&#160;</a></span>kErr10</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr10[] = &quot;argument out of domain&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af8f6175e754b5bcf97b04f7b00f4cb0d" name="af8f6175e754b5bcf97b04f7b00f4cb0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8f6175e754b5bcf97b04f7b00f4cb0d">&#9670;&#160;</a></span>kErr11</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr11[] = &quot;result overflow&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af2a35445633b9e9b7cd65c0bef5368e2" name="af2a35445633b9e9b7cd65c0bef5368e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2a35445633b9e9b7cd65c0bef5368e2">&#9670;&#160;</a></span>kErr12</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr12[] = &quot;expression too complex&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5f3ca5b5e963a5a48b21fd4c1b85db19" name="a5f3ca5b5e963a5a48b21fd4c1b85db19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f3ca5b5e963a5a48b21fd4c1b85db19">&#9670;&#160;</a></span>kErr13</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr13[] = &quot;nesting too deep&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9e54b13460364b41156152a5f5fde99c" name="a9e54b13460364b41156152a5f5fde99c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e54b13460364b41156152a5f5fde99c">&#9670;&#160;</a></span>kErr14</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr14[] = &quot;too many variables&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2856c4d7244eaad567d3a7bb93f1b47d" name="a2856c4d7244eaad567d3a7bb93f1b47d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2856c4d7244eaad567d3a7bb93f1b47d">&#9670;&#160;</a></span>kErr15</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr15[] = &quot;invalid name&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a38a2bf4d187a31fa1f3a82215c0b2daf" name="a38a2bf4d187a31fa1f3a82215c0b2daf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38a2bf4d187a31fa1f3a82215c0b2daf">&#9670;&#160;</a></span>kErr16</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr16[] = &quot;name is reserved&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adf3821a2627dc08b6863b88d34a52416" name="adf3821a2627dc08b6863b88d34a52416"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf3821a2627dc08b6863b88d34a52416">&#9670;&#160;</a></span>kErr17</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kErr17[] = &quot;too many functions&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad22c5d42edcecad33f38f08a32f766c0" name="ad22c5d42edcecad33f38f08a32f766c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad22c5d42edcecad33f38f08a32f766c0">&#9670;&#160;</a></span>kErrorTexts</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* const TinyCalc::kErrorTexts[] = {<a class="el" href="namespaceTinyCalc.html#abf6cf3d5a9b6cd5c74dea2f39617e0dd">kErr00</a>, <a class="el" href="namespaceTinyCalc.html#a51db48f20f3cdf936d913e5cac66c644">kErr01</a>, <a class="el" href="namespaceTinyCalc.html#ae266c4abca4fd076b6aea493e05c0e3e">kErr02</a>, <a class="el" href="namespaceTinyCalc.html#a23280f93b923c8a8ddc46fd56497d444">kErr03</a>, <a class="el" href="namespaceTinyCalc.html#adfbf3687b0bdfb52fb9991e2be9ce664">kErr04</a>, <a class="el" href="namespaceTinyCalc.html#adc1b0c64695488714dea96d81db31a87">kErr05</a>, <a class="el" href="namespaceTinyCalc.html#aabfd003637770b4767c8a134b0b31eec">kErr06</a>, <a class="el" href="namespaceTinyCalc.html#aff575dd6e49f7f220bd66c4648876c28">kErr07</a>, <a class="el" href="namespaceTinyCalc.html#ab96f31d361d5371d432c1856e94b6f3c">kErr08</a>, <a class="el" href="namespaceTinyCalc.html#adfd1357645b1b2b414ff1828be8e2880">kErr09</a>, <a class="el" href="namespaceTinyCalc.html#ae529b1d20f128c0f1ab2c9fb90667aa3">kErr10</a>, <a class="el" href="namespaceTinyCalc.html#af8f6175e754b5bcf97b04f7b00f4cb0d">kErr11</a>, <a class="el" href="namespaceTinyCalc.html#af2a35445633b9e9b7cd65c0bef5368e2">kErr12</a>, <a class="el" href="namespaceTinyCalc.html#a5f3ca5b5e963a5a48b21fd4c1b85db19">kErr13</a>, <a class="el" href="namespaceTinyCalc.html#a9e54b13460364b41156152a5f5fde99c">kErr14</a>, <a class="el" href="namespaceTinyCalc.html#a2856c4d7244eaad567d3a7bb93f1b47d">kErr15</a>, <a class="el" href="namespaceTinyCalc.html#a38a2bf4d187a31fa1f3a82215c0b2daf">kErr16</a>, <a class="el" href="namespaceTinyCalc.html#adf3821a2627dc08b6863b88d34a52416">kErr17</a>}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a1f264d5a6ee21d987cc078dd36ba50d3" name="a1f264d5a6ee21d987cc078dd36ba50d3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1f264d5a6ee21d987cc078dd36ba50d3">&#9670;&#160;</a></span>kFrameBit</h2>
 
@@ -692,6 +1402,94 @@ template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">const uint8_t TinyCalc::kFrameBit = 0x80</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac02b455a36d4a1598c52786c40cc8d95" name="ac02b455a36d4a1598c52786c40cc8d95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac02b455a36d4a1598c52786c40cc8d95">&#9670;&#160;</a></span>kKelvin</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kKelvin[] = &quot;K&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2b6fb0dc94b718c165a1e1202ccc452c" name="a2b6fb0dc94b718c165a1e1202ccc452c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b6fb0dc94b718c165a1e1202ccc452c">&#9670;&#160;</a></span>kTemperatureUnits</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* const TinyCalc::kTemperatureUnits[] = {<a class="el" href="namespaceTinyCalc.html#a15678d72167c82c35f304295b8390896">kDegC</a>, <a class="el" href="namespaceTinyCalc.html#a6f5c05601140e57c4fdc913e43d0da2b">kDegF</a>, <a class="el" href="namespaceTinyCalc.html#ac02b455a36d4a1598c52786c40cc8d95">kKelvin</a>}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4d7c630b25ee055238891c2eb0378396" name="a4d7c630b25ee055238891c2eb0378396"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d7c630b25ee055238891c2eb0378396">&#9670;&#160;</a></span>kToKeyword</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kToKeyword[] = &quot;to&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab2fecc124d3671b4c3fdcbf24098e14e" name="ab2fecc124d3671b4c3fdcbf24098e14e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2fecc124d3671b4c3fdcbf24098e14e">&#9670;&#160;</a></span>kUnknownError</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char TinyCalc::kUnknownError[] = &quot;unknown error&quot;</td>
         </tr>
       </table>
   </td>

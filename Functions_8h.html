@@ -78,35 +78,41 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">Functions.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="Config_8h_source.html">Config.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Math_8h_source.html">Math.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Progmem_8h_source.html">Progmem.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Types_8h_source.html">Types.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Functions.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="Functions_8h__incl.png" border="0" usemap="#asrc_2tinycalc_2Functions_8h" alt=""/></div>
 <map name="asrc_2tinycalc_2Functions_8h" id="asrc_2tinycalc_2Functions_8h">
-<area shape="rect" title=" " alt="" coords="80,5,254,33"/>
-<area shape="rect" title=" " alt="" coords="5,81,76,109"/>
-<area shape="poly" title=" " alt="" coords="143,36,77,75,74,71,146,31"/>
-<area shape="rect" href="Config_8h.html" title=" " alt="" coords="166,157,240,184"/>
-<area shape="poly" title=" " alt="" coords="172,31,199,142,194,141,168,35"/>
-<area shape="rect" href="Math_8h.html" title=" " alt="" coords="99,81,166,109"/>
-<area shape="poly" title=" " alt="" coords="163,32,147,68,143,65,159,36"/>
-<area shape="rect" href="Types_8h.html" title=" " alt="" coords="253,81,324,109"/>
-<area shape="poly" title=" " alt="" coords="189,31,257,72,252,73,188,36"/>
-<area shape="rect" title=" " alt="" coords="75,157,142,184"/>
-<area shape="poly" title=" " alt="" coords="130,108,120,143,115,140,126,111"/>
-<area shape="poly" title=" " alt="" coords="276,108,231,149,229,144,271,110"/>
-<area shape="rect" title=" " alt="" coords="264,157,337,184"/>
-<area shape="poly" title=" " alt="" coords="292,107,298,143,294,140,289,111"/>
-<area shape="rect" title=" " alt="" coords="361,157,432,184"/>
-<area shape="poly" title=" " alt="" coords="309,107,367,148,362,148,307,112"/>
+<area shape="rect" title=" " alt="" coords="91,5,264,33"/>
+<area shape="rect" title=" " alt="" coords="5,232,76,260"/>
+<area shape="poly" title=" " alt="" coords="151,36,122,55,86,83,52,117,26,158,22,172,22,188,30,218,24,218,17,188,16,172,21,156,47,114,82,79,119,51,154,32"/>
+<area shape="rect" href="Config_8h.html" title=" " alt="" coords="155,157,230,184"/>
+<area shape="poly" title=" " alt="" coords="181,31,192,142,187,141,177,35"/>
+<area shape="rect" href="Math_8h.html" title=" " alt="" coords="385,81,451,109"/>
+<area shape="poly" title=" " alt="" coords="221,31,372,78,367,80,221,36"/>
+<area shape="rect" href="Progmem_8h.html" title=" " alt="" coords="35,157,131,184"/>
+<area shape="poly" title=" " alt="" coords="172,32,102,145,97,142,168,35"/>
+<area shape="rect" href="Types_8h.html" title=" " alt="" coords="215,81,285,109"/>
+<area shape="poly" title=" " alt="" coords="191,31,229,70,224,70,190,36"/>
+<area shape="rect" title=" " alt="" coords="446,157,513,184"/>
+<area shape="poly" title=" " alt="" coords="430,107,461,145,456,144,428,112"/>
+<area shape="poly" title=" " alt="" coords="78,183,58,220,53,217,73,186"/>
+<area shape="poly" title=" " alt="" coords="242,108,214,146,210,142,237,111"/>
+<area shape="poly" title=" " alt="" coords="218,111,128,152,126,148,222,107"/>
+<area shape="rect" title=" " alt="" coords="253,157,326,184"/>
+<area shape="poly" title=" " alt="" coords="258,107,278,143,273,142,256,112"/>
+<area shape="rect" title=" " alt="" coords="351,157,421,184"/>
+<area shape="poly" title=" " alt="" coords="275,107,351,149,346,149,274,112"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -140,7 +146,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTinyCalc_1_1FunctionInfo.html">TinyCalc::FunctionInfo</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Table entry describing one built-in function: its name, its Fn id and the range of allowed argument counts.  <a href="structTinyCalc_1_1FunctionInfo.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Table entry describing one built-in function: its name, its Fn id and the range of allowed argument counts. The name is at most 7 characters.  <a href="structTinyCalc_1_1FunctionInfo.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTinyCalc_1_1UnitInfo.html">TinyCalc::UnitInfo</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -228,15 +234,38 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a60b7303010068655231a060f90ed7076" id="r_a60b7303010068655231a060f90ed7076"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a60b7303010068655231a060f90ed7076">TinyCalc::functionTable</a> (size_t &amp;count)</td></tr>
 <tr class="separator:a60b7303010068655231a060f90ed7076"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a800c90f3cad48adef27c6fddb4d0dc33" id="r_a800c90f3cad48adef27c6fddb4d0dc33"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a800c90f3cad48adef27c6fddb4d0dc33">TinyCalc::findFunction</a> (const char *name)</td></tr>
-<tr class="separator:a800c90f3cad48adef27c6fddb4d0dc33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a341f6c63ddb17b9787fdf82c1e3007e5" id="r_a341f6c63ddb17b9787fdf82c1e3007e5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a341f6c63ddb17b9787fdf82c1e3007e5">TinyCalc::functionAt</a> (size_t i, <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> &amp;out)</td></tr>
+<tr class="separator:a341f6c63ddb17b9787fdf82c1e3007e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f7bddc2bbc2790049ed0c6d66339640" id="r_a3f7bddc2bbc2790049ed0c6d66339640"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a3f7bddc2bbc2790049ed0c6d66339640">TinyCalc::findFunction</a> (const char *name, <a class="el" href="structTinyCalc_1_1FunctionInfo.html">FunctionInfo</a> &amp;out)</td></tr>
+<tr class="separator:a3f7bddc2bbc2790049ed0c6d66339640"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f19f483001dad7b07050e9a421481d3" id="r_a6f19f483001dad7b07050e9a421481d3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a6f19f483001dad7b07050e9a421481d3">TinyCalc::isFunctionName</a> (const char *name)</td></tr>
+<tr class="separator:a6f19f483001dad7b07050e9a421481d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a62d31371a81f3b0a4b723189b1b7db" id="r_a0a62d31371a81f3b0a4b723189b1b7db"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structTinyCalc_1_1UnitInfo.html">UnitInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a0a62d31371a81f3b0a4b723189b1b7db">TinyCalc::unitTable</a> (size_t &amp;count)</td></tr>
 <tr class="separator:a0a62d31371a81f3b0a4b723189b1b7db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bb7989a47e22b21ea0b45deb980c1b8" id="r_a0bb7989a47e22b21ea0b45deb980c1b8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a0bb7989a47e22b21ea0b45deb980c1b8">TinyCalc::findUnitFactor</a> (const char *name, double &amp;factor)</td></tr>
+<tr class="separator:a0bb7989a47e22b21ea0b45deb980c1b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77059d649bbfee56eb617a17cf6583c6" id="r_a77059d649bbfee56eb617a17cf6583c6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a77059d649bbfee56eb617a17cf6583c6">TinyCalc::temperatureIndex</a> (const char *name)</td></tr>
+<tr class="separator:a77059d649bbfee56eb617a17cf6583c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed45805ba15d41e816f90dd153e0e62f" id="r_aed45805ba15d41e816f90dd153e0e62f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#aed45805ba15d41e816f90dd153e0e62f">TinyCalc::isTemperatureUnit</a> (const char *name)</td></tr>
 <tr class="separator:aed45805ba15d41e816f90dd153e0e62f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d2391072844770b4bdca5da4c662976" id="r_a5d2391072844770b4bdca5da4c662976"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a5d2391072844770b4bdca5da4c662976">TinyCalc::isKeyword</a> (const char *name)</td></tr>
+<tr class="separator:a5d2391072844770b4bdca5da4c662976"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b0b42f9cc6180e3b86e650924d18797" id="r_a2b0b42f9cc6180e3b86e650924d18797"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a2b0b42f9cc6180e3b86e650924d18797"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a2b0b42f9cc6180e3b86e650924d18797">TinyCalc::lookupConstant</a> (const char *name, T &amp;value)</td></tr>
 <tr class="separator:a2b0b42f9cc6180e3b86e650924d18797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a15678d72167c82c35f304295b8390896" id="r_a15678d72167c82c35f304295b8390896"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a15678d72167c82c35f304295b8390896">TinyCalc::kDegC</a> [] = &quot;degC&quot;</td></tr>
+<tr class="separator:a15678d72167c82c35f304295b8390896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f5c05601140e57c4fdc913e43d0da2b" id="r_a6f5c05601140e57c4fdc913e43d0da2b"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a6f5c05601140e57c4fdc913e43d0da2b">TinyCalc::kDegF</a> [] = &quot;degF&quot;</td></tr>
+<tr class="separator:a6f5c05601140e57c4fdc913e43d0da2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac02b455a36d4a1598c52786c40cc8d95" id="r_ac02b455a36d4a1598c52786c40cc8d95"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#ac02b455a36d4a1598c52786c40cc8d95">TinyCalc::kKelvin</a> [] = &quot;K&quot;</td></tr>
+<tr class="separator:ac02b455a36d4a1598c52786c40cc8d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b6fb0dc94b718c165a1e1202ccc452c" id="r_a2b6fb0dc94b718c165a1e1202ccc452c"><td class="memItemLeft" align="right" valign="top">static const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a2b6fb0dc94b718c165a1e1202ccc452c">TinyCalc::kTemperatureUnits</a> [] = {<a class="el" href="namespaceTinyCalc.html#a15678d72167c82c35f304295b8390896">kDegC</a>, <a class="el" href="namespaceTinyCalc.html#a6f5c05601140e57c4fdc913e43d0da2b">kDegF</a>, <a class="el" href="namespaceTinyCalc.html#ac02b455a36d4a1598c52786c40cc8d95">kKelvin</a>}</td></tr>
+<tr class="separator:a2b6fb0dc94b718c165a1e1202ccc452c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d7c630b25ee055238891c2eb0378396" id="r_a4d7c630b25ee055238891c2eb0378396"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTinyCalc.html#a4d7c630b25ee055238891c2eb0378396">TinyCalc::kToKeyword</a> [] = &quot;to&quot;</td></tr>
+<tr class="separator:a4d7c630b25ee055238891c2eb0378396"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
