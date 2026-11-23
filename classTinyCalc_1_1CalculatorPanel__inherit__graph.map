@@ -1,0 +1,5 @@
+<map id="TinyCalc::CalculatorPanel&lt; RGB_T &gt;" name="TinyCalc::CalculatorPanel&lt; RGB_T &gt;">
+<area shape="rect" id="Node000001" title="Container for the calculator&#39;s widgets. Gestures go to the widget under the touch first...." alt="" coords="10,115,196,160"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,201,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,81,105,115,101,114,101,85"/>
+</map>
