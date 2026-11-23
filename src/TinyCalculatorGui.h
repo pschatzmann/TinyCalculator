@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <functional>
 #include <string.h>
 #include <string>
 #include <vector>
@@ -23,6 +24,35 @@
 #include "TinyMaterialDesign.h"
 
 namespace TinyCalc {
+
+/**
+ * @brief Container for the calculator's widgets. Gestures go to the widget
+ * under the touch first. A swipe that no widget handles reaches this
+ * container, which reports left swipes through onSwipeLeft.
+ */
+template <typename RGB_T = tinymd::TINYMD_DEFAULT_RGB_T>
+class CalculatorPanel : public tinymd::Container<RGB_T> {
+ public:
+  CalculatorPanel() = default;
+
+  /// Called for a left / right swipe that no child handled.
+  std::function<void()> onSwipeLeft;
+  std::function<void()> onSwipeRight;
+
+  bool onGesture(const tinygpu::GestureEvent& event) override {
+    const bool handled = tinymd::Container<RGB_T>::onGesture(event);
+    if (handled) return true;
+    if (event.type == tinygpu::GestureType::kSwipeLeft && onSwipeLeft) {
+      onSwipeLeft();
+      return true;
+    }
+    if (event.type == tinygpu::GestureType::kSwipeRight && onSwipeRight) {
+      onSwipeRight();
+      return true;
+    }
+    return false;
+  }
+};
 
 /**
  * @brief Calculator keypad with an expression line and a result line, and a
@@ -85,6 +115,8 @@ class CalculatorGui {
     bounds_ = bounds;
     relayout();
     plot_.addSeries(colorFromHex<RGB_T>(0x6750A4));
+    panel_.onSwipeLeft = [this]() { swipeLeft(); };
+    panel_.onSwipeRight = [this]() { swipeRight(); };
     fromField_.onFocus = [this]() { activeField_ = 0; };
     toField_.onFocus = [this]() { activeField_ = 1; };
     syncRangeFields();
@@ -106,12 +138,13 @@ class CalculatorGui {
   void begin(tinymd::Screen<RGB_T>& screen) {
     if (attached_) return;
     screen_ = &screen;
-    screen.addWidget(exprLabel_);
-    screen.addWidget(resultLabel_);
-    for (size_t i = 0; i < kKeyCount; ++i) screen.addWidget(keys_[i]);
-    screen.addWidget(plot_);
-    screen.addWidget(fromField_);
-    screen.addWidget(toField_);
+    screen.addWidget(panel_);
+    panel_.addChild(exprLabel_);
+    panel_.addChild(resultLabel_);
+    for (size_t i = 0; i < kKeyCount; ++i) panel_.addChild(keys_[i]);
+    panel_.addChild(plot_);
+    panel_.addChild(fromField_);
+    panel_.addChild(toField_);
     attached_ = true;
     refresh();
   }
@@ -120,12 +153,8 @@ class CalculatorGui {
   /// state, so begin() can attach it again later. Does nothing if not attached.
   void end() {
     if (!attached_) return;
-    screen_->removeChild(exprLabel_);
-    screen_->removeChild(resultLabel_);
-    for (size_t i = 0; i < kKeyCount; ++i) screen_->removeChild(keys_[i]);
-    screen_->removeChild(plot_);
-    screen_->removeChild(fromField_);
-    screen_->removeChild(toField_);
+    screen_->removeChild(panel_);
+    panel_.clearChildren();
     screen_ = nullptr;
     attached_ = false;
   }
@@ -160,8 +189,7 @@ class CalculatorGui {
     }
 
     if (a == "page") {
-      page_ = (page_ + 1) % kPageCount;
-      refreshKeys();
+      changePage(1);
     } else if (a == "plot") {
       plotExpression();
     } else if (a == "angle") {
@@ -317,6 +345,7 @@ class CalculatorGui {
   // right; tall areas (portrait) stack the display above the keys. The keys
   // use the space the display does not need, so the keypad fills the area.
   void relayout() {
+    panel_.bounds = bounds_;
     const int32_t x = bounds_.x, y = bounds_.y, w = bounds_.w, h = bounds_.h;
     const bool landscape = w > h;
     tinymd::Bounds display, pad;
@@ -547,6 +576,28 @@ class CalculatorGui {
     refresh();
   }
 
+  // Shows the keypad page `step` pages away from the current one (wraps around).
+  void changePage(int step) {
+    const int pages = static_cast<int>(kPageCount);
+    page_ = static_cast<size_t>((static_cast<int>(page_) + step % pages + pages) % pages);
+    refreshKeys();
+    refresh();
+  }
+
+  // Left swipe: leaves the plot screen, otherwise goes back one page.
+  void swipeLeft() {
+    if (plotting_) {
+      closePlot();
+    } else {
+      changePage(-1);
+    }
+  }
+
+  // Right swipe: goes forward one page (the plot screen has no pages).
+  void swipeRight() {
+    if (!plotting_) changePage(1);
+  }
+
   void closePlot() {
     plotting_ = false;
     fromField_.blur();
@@ -592,6 +643,7 @@ class CalculatorGui {
   size_t page_ = 0;
   tinymd::Label<RGB_T> exprLabel_;
   tinymd::Label<RGB_T> resultLabel_;
+  CalculatorPanel<RGB_T> panel_;
   tinymd::Button<RGB_T> keys_[kKeyCount];
   tinymd::LineChart<RGB_T> plot_;
   tinymd::TextField<RGB_T> fromField_;

@@ -46,6 +46,14 @@ All keypad pages, shown at the same size:
 </tr>
 </table>
 
+## Swipes
+
+- **Swipe right**: next keypad page (Basic → Trig → Math → Special → Basic).
+- **Swipe left**: previous keypad page. On the plot screen it returns to the keypad.
+
+A swipe works wherever it starts, including on a key. Pages wrap around, the
+same as the **page** key.
+
 ## Keypad
 
 The keypad has four pages. The top-left key shows the current page name

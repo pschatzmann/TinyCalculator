@@ -329,6 +329,55 @@ static void testSetBounds() {
   CHECK(gui.key(0).bounds.y >= 100);            // back to portrait
 }
 
+static tinygpu::GestureEvent swipe(tinygpu::GestureType type, int x, int y) {
+  tinygpu::GestureEvent e;
+  e.type = type;
+  e.phase = tinygpu::GesturePhase::kEnded;
+  e.point.x = static_cast<int16_t>(x);
+  e.point.y = static_cast<int16_t>(y);
+  e.startPoint = e.point;
+  return e;
+}
+
+// right swipe: next page; left swipe: previous page (wraps around)
+static void testSwipePages() {
+  tinymd::Screen<TINYMD_DEFAULT_RGB_T> screen(tinymd::defaultTheme<TINYMD_DEFAULT_RGB_T>());
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.begin(screen);
+  screen.handleGesture(swipe(tinygpu::GestureType::kSwipeRight, 120, 14));  // empty area
+  CHECK(gui.page() == 1);
+  screen.handleGesture(swipe(tinygpu::GestureType::kSwipeRight, 120, 14));
+  CHECK(gui.page() == 2);
+  screen.handleGesture(swipe(tinygpu::GestureType::kSwipeLeft, 120, 14));
+  CHECK(gui.page() == 1);
+  screen.handleGesture(swipe(tinygpu::GestureType::kSwipeLeft, 120, 14));
+  CHECK(gui.page() == 0);
+  screen.handleGesture(swipe(tinygpu::GestureType::kSwipeLeft, 120, 14));
+  CHECK(gui.page() == 3);                       // wraps to the last page
+
+  // a swipe that starts on a key still changes the page
+  const tinymd::Bounds k = gui.key(10).bounds;
+  screen.handleGesture(swipe(tinygpu::GestureType::kSwipeRight,
+                             k.x + k.w / 2, k.y + k.h / 2));
+  CHECK(gui.page() == 0);
+  gui.end();
+}
+
+// on the plot screen a right swipe does nothing, a left swipe returns to the keypad
+static void testSwipeInPlot() {
+  tinymd::Screen<TINYMD_DEFAULT_RGB_T> screen(tinymd::defaultTheme<TINYMD_DEFAULT_RGB_T>());
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.begin(screen);
+  gui.beginPlot("x");
+  screen.handleGesture(swipe(tinygpu::GestureType::kSwipeRight, 120, 14));
+  CHECK(gui.plotting());
+  CHECK(gui.page() == 0);
+  screen.handleGesture(swipe(tinygpu::GestureType::kSwipeLeft, 120, 14));
+  CHECK(!gui.plotting());
+  CHECK(gui.page() == 0);                       // closing the plot does not change the page
+  gui.end();
+}
+
 static void testDoublePrecision() {
   DoubleGui gui(tinymd::Bounds(0, 0, 240, 320));
   type(gui, {"1", "/", "3"});
@@ -418,6 +467,8 @@ int main() {
   testBeginEndPlot();
   testLayoutAnySize();
   testSetBounds();
+  testSwipePages();
+  testSwipeInPlot();
   testDoublePrecision();
   testAttachAndDraw();
 
