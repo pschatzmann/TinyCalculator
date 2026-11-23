@@ -145,7 +145,7 @@ class Calculator {
         skipSpaces(p);
         if (np >= kMaxParams || !parseName(p, params[np])) return Error::InvalidName;
         T dummy = T();
-        if (lookupConstant<T>(params[np], dummy) || findFunction(params[np]) != nullptr) {
+        if (lookupConstant<T>(params[np], dummy) || isFunctionName(params[np])) {
           return Error::ReservedName;
         }
         for (size_t k = 0; k < np; ++k) {
@@ -279,25 +279,28 @@ class Calculator {
   // Constants, units, built-in functions and the keyword "to" cannot be redefined.
   static bool isReserved(const char* name) {
     T dummy = T();
-    return lookupConstant<T>(name, dummy) || findFunction(name) != nullptr ||
-           isTemperatureUnit(name) || strcmp(name, "to") == 0;
+    return lookupConstant<T>(name, dummy) || isFunctionName(name) ||
+           isTemperatureUnit(name) || isKeyword(name);
   }
 
   // Temperature scale: kelvin = value * scale + offset.
   static bool temperatureScale(const char* unit, T& scale, T& offset) {
-    if (strcmp(unit, "K") == 0) {
-      scale = T(1);
-      offset = T(0);
-    } else if (strcmp(unit, "degC") == 0) {
-      scale = T(1);
-      offset = T(273.15);
-    } else if (strcmp(unit, "degF") == 0) {
-      scale = T(0.5555555555555556);  // 5/9
-      offset = T(255.3722222222222);  // 459.67 * 5/9
-    } else {
-      return false;
+    switch (temperatureIndex(unit)) {
+      case 0:  // degC
+        scale = T(1);
+        offset = T(273.15);
+        return true;
+      case 1:  // degF
+        scale = T(0.5555555555555556);  // 5/9
+        offset = T(255.3722222222222);  // 459.67 * 5/9
+        return true;
+      case 2:  // K
+        scale = T(1);
+        offset = T(0);
+        return true;
+      default:
+        return false;
     }
-    return true;
   }
 
   // Copies text[start, end) into out (NUL-terminated). False if it does not fit.

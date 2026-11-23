@@ -27,7 +27,7 @@ struct Token {
   Tok type;
   size_t pos;
   T number;
-  const FunctionInfo* function;  // built-in function, if builtin
+  FunctionInfo function;         // built-in function, if builtin
   bool builtin;                  // false: a user function (looked up by name)
   char name[TINYCALC_MAX_NAME + 1];
 };
@@ -62,7 +62,7 @@ class Compiler {
     cur_.type = Tok::End;
     cur_.pos = 0;
     cur_.number = T();
-    cur_.function = nullptr;
+    cur_.function = FunctionInfo();
     cur_.builtin = false;
     cur_.name[0] = '\0';
   }
@@ -182,8 +182,7 @@ class Compiler {
     size_t p = pos_;
     while (isSpace(src_[p])) ++p;
     if (src_[p] == '(') {  // identifier followed by '(' must be a function
-      cur_.function = findFunction(cur_.name);  // nullptr: a user function
-      cur_.builtin = cur_.function != nullptr;
+      cur_.builtin = findFunction(cur_.name, cur_.function);  // else a user function
       cur_.type = Tok::Function;
     } else {
       cur_.type = Tok::Ident;
@@ -199,7 +198,7 @@ class Compiler {
   void leave() { --depth_; }
 
   // the keyword of a unit conversion ("5 km to m")
-  bool isToKeyword() const { return cur_.type == Tok::Ident && strcmp(cur_.name, "to") == 0; }
+  bool isToKeyword() const { return cur_.type == Tok::Ident && isKeyword(cur_.name); }
 
   static bool startsOperand(Tok t) {
     return t == Tok::Number || t == Tok::Ident || t == Tok::Function || t == Tok::LParen;
@@ -295,7 +294,8 @@ class Compiler {
   }
 
   bool parseCall() {
-    const FunctionInfo* info = cur_.function;
+    const FunctionInfo info = cur_.function;
+    const bool builtin = cur_.builtin;
     size_t start = cur_.pos;
     char name[TINYCALC_MAX_NAME + 1];
     strcpy(name, cur_.name);
@@ -314,11 +314,11 @@ class Compiler {
       return fail(Error::UnexpectedToken, cur_.pos);
     }
     if (!advance()) return false;
-    if (info != nullptr) {  // built-in function
-      if (argc < info->minArgs || argc > info->maxArgs) {
+    if (builtin) {  // built-in function
+      if (argc < info.minArgs || argc > info.maxArgs) {
         return fail(Error::WrongArgumentCount, start);
       }
-      return emitCall(info->id, argc);
+      return emitCall(info.id, argc);
     }
     // user function: looked up by name, the number of parameters must match
     int slot = -1, params = 0;

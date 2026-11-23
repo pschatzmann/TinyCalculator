@@ -176,10 +176,9 @@ static void testAllFunctionsHaveKeys() {
       if (a != nullptr) actions.insert(a);
     }
   }
-  size_t count = 0;
-  const TinyCalc::FunctionInfo* table = TinyCalc::functionTable(count);
-  for (size_t i = 0; i < count; ++i) {
-    CHECK(actions.count(std::string(table[i].name) + "(") == 1);
+  TinyCalc::FunctionInfo info;
+  for (size_t i = 0; TinyCalc::functionAt(i, info); ++i) {
+    CHECK(actions.count(std::string(info.name) + "(") == 1);
   }
   for (const char* c : {"pi", "e", "tau", "phi", "ans"}) {
     CHECK(actions.count(c) == 1);

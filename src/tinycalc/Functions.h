@@ -1,8 +1,14 @@
 #pragma once
 
+// Built-in functions, constants, units and keywords.
+//
+// The tables are kept in flash (PROGMEM) on AVR boards. The lookups copy the
+// entry they find into RAM, so callers never touch flash directly.
+
 #include <string.h>
 #include "Config.h"
 #include "Math.h"
+#include "Progmem.h"
 #include "Types.h"
 
 namespace TinyCalc {
@@ -20,17 +26,18 @@ enum class Fn : uint8_t {
 
 /**
  * @brief Table entry describing one built-in function: its name, its Fn id and
- * the range of allowed argument counts.
+ * the range of allowed argument counts. The name is at most 7 characters.
  */
 struct FunctionInfo {
-  const char* name;
+  char name[8];
   Fn id;
   uint8_t minArgs;
   uint8_t maxArgs;
 };
 
+// The table of built-in functions (in flash on AVR).
 inline const FunctionInfo* functionTable(size_t& count) {
-  static const FunctionInfo table[] = {
+  static const FunctionInfo table[] TINYCALC_PROGMEM = {
       {"abs", Fn::Abs, 1, 1},       {"sqrt", Fn::Sqrt, 1, 1},
       {"cbrt", Fn::Cbrt, 1, 1},     {"root", Fn::Root, 2, 2},
       {"exp", Fn::Exp, 1, 1},       {"exp2", Fn::Exp2, 1, 1},
@@ -63,24 +70,42 @@ inline const FunctionInfo* functionTable(size_t& count) {
   return table;
 }
 
-inline const FunctionInfo* findFunction(const char* name) {
+// Copies entry i of the function table into out. False if i is out of range.
+inline bool functionAt(size_t i, FunctionInfo& out) {
   size_t count = 0;
   const FunctionInfo* table = functionTable(count);
+  if (i >= count) return false;
+  TINYCALC_MEMCPY_P(&out, &table[i], sizeof(FunctionInfo));
+  return true;
+}
+
+// Looks up a built-in function by name; copies its entry into out.
+inline bool findFunction(const char* name, FunctionInfo& out) {
+  size_t count = 0;
+  functionTable(count);
   for (size_t i = 0; i < count; ++i) {
-    if (strcmp(table[i].name, name) == 0) return &table[i];
+    functionAt(i, out);
+    if (strcmp(out.name, name) == 0) return true;
   }
-  return nullptr;
+  return false;
+}
+
+// true if name is a built-in function
+inline bool isFunctionName(const char* name) {
+  FunctionInfo info;
+  return findFunction(name, info);
 }
 
 // Units: the value of one unit in base units (metre, kilogram, second).
 // "5 km" is 5000, and "x to mi" divides by the factor of mi.
 struct UnitInfo {
-  const char* name;
+  char name[4];
   double factor;
 };
 
+// The table of units (in flash on AVR).
 inline const UnitInfo* unitTable(size_t& count) {
-  static const UnitInfo table[] = {
+  static const UnitInfo table[] TINYCALC_PROGMEM = {
       {"m", 1.0},          {"cm", 0.01},         {"mm", 0.001},     {"km", 1000.0},
       {"mi", 1609.344},    {"ft", 0.3048},       {"in", 0.0254},    {"yd", 0.9144},
       {"kg", 1.0},         {"g", 0.001},         {"lb", 0.45359237}, {"oz", 0.028349523125},
@@ -90,32 +115,73 @@ inline const UnitInfo* unitTable(size_t& count) {
   return table;
 }
 
-// Temperature units: they are not linear (0 degC is not 0 K), so they are
-// converted with "value unit to unit" rather than with a factor.
-inline bool isTemperatureUnit(const char* name) {
-  return strcmp(name, "degC") == 0 || strcmp(name, "degF") == 0 || strcmp(name, "K") == 0;
+// Looks up a unit by name; returns its factor, or false.
+inline bool findUnitFactor(const char* name, double& factor) {
+  size_t count = 0;
+  const UnitInfo* table = unitTable(count);
+  for (size_t i = 0; i < count; ++i) {
+    UnitInfo unit;
+    TINYCALC_MEMCPY_P(&unit, &table[i], sizeof(UnitInfo));
+    if (strcmp(unit.name, name) == 0) {
+      factor = unit.factor;
+      return true;
+    }
+  }
+  return false;
 }
 
-// Built-in constants (pi, e, tau, phi) and units (km, s, ...)
+// Temperature units: they are not linear (0 degC is not 0 K), so they are
+// converted with "value unit to unit" rather than with a factor.
+// Index: 0 degC, 1 degF, 2 K; -1 if the name is not a temperature unit.
+static const char kDegC[] TINYCALC_PROGMEM = "degC";
+static const char kDegF[] TINYCALC_PROGMEM = "degF";
+static const char kKelvin[] TINYCALC_PROGMEM = "K";
+static const char* const kTemperatureUnits[] TINYCALC_PROGMEM = {kDegC, kDegF, kKelvin};
+
+inline int temperatureIndex(const char* name) {
+  for (int i = 0; i < 3; ++i) {
+    const char* unit = TINYCALC_READ_PTR(kTemperatureUnits[i]);
+    if (TINYCALC_STRCMP_P(name, unit) == 0) return i;
+  }
+  return -1;
+}
+
+inline bool isTemperatureUnit(const char* name) { return temperatureIndex(name) >= 0; }
+
+// The keyword of a unit conversion ("5 km to m").
+static const char kToKeyword[] TINYCALC_PROGMEM = "to";
+
+inline bool isKeyword(const char* name) { return TINYCALC_STRCMP_P(name, kToKeyword) == 0; }
+
+// Looks up a built-in constant (pi, e, tau, phi) or unit (km, s, ...).
 template <typename T>
 inline bool lookupConstant(const char* name, T& value) {
   typedef Math<T> M;
-  if (strcmp(name, "pi") == 0) value = M::pi();
-  else if (strcmp(name, "e") == 0) value = M::e();
-  else if (strcmp(name, "tau") == 0) value = M::tau();
-  else if (strcmp(name, "phi") == 0) value = M::phi();
-  else {
-    size_t count = 0;
-    const UnitInfo* units = unitTable(count);
-    for (size_t i = 0; i < count; ++i) {
-      if (strcmp(units[i].name, name) == 0) {
-        value = static_cast<T>(units[i].factor);
-        return true;
+  struct Constant {
+    char name[4];
+    uint8_t index;
+  };
+  static const Constant constants[] TINYCALC_PROGMEM = {
+      {"pi", 0}, {"e", 1}, {"tau", 2}, {"phi", 3}};
+  for (size_t i = 0; i < sizeof(constants) / sizeof(constants[0]); ++i) {
+    Constant c;
+    TINYCALC_MEMCPY_P(&c, &constants[i], sizeof(Constant));
+    if (strcmp(c.name, name) == 0) {
+      switch (c.index) {
+        case 0: value = M::pi(); break;
+        case 1: value = M::e(); break;
+        case 2: value = M::tau(); break;
+        default: value = M::phi(); break;
       }
+      return true;
     }
-    return false;
   }
-  return true;
+  double factor = 0.0;
+  if (findUnitFactor(name, factor)) {
+    value = static_cast<T>(factor);
+    return true;
+  }
+  return false;
 }
 
 }  // namespace TinyCalc
