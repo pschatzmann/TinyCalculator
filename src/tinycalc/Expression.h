@@ -12,8 +12,13 @@ enum class OpCode : uint8_t {
   Load,  // push variable slot `index`
   Add, Sub, Mul, Div, Mod, Pow,  // binary: pop 2, push 1
   Neg,   // unary minus
-  Call   // call function `index` with `argc` arguments
+  Call,  // call built-in function `index` with `argc` arguments
+  UserCall  // call user function `index` with `argc` arguments
 };
+
+// Load index with this bit set refers to a parameter of the running user
+// function (the low bits are the parameter number) instead of a variable.
+static const uint8_t kFrameBit = 0x80;
 
 /**
  * @brief One instruction of a compiled program.

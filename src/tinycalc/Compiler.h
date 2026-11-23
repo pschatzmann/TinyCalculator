@@ -27,7 +27,8 @@ struct Token {
   Tok type;
   size_t pos;
   T number;
-  const FunctionInfo* function;
+  const FunctionInfo* function;  // built-in function, if builtin
+  bool builtin;                  // false: a user function (looked up by name)
   char name[TINYCALC_MAX_NAME + 1];
 };
 
@@ -62,6 +63,7 @@ class Compiler {
     cur_.pos = 0;
     cur_.number = T();
     cur_.function = nullptr;
+    cur_.builtin = false;
     cur_.name[0] = '\0';
   }
 
@@ -70,6 +72,21 @@ class Compiler {
     bool ok = advance();
     if (ok && cur_.type == Tok::End) ok = fail(Error::Empty, 0);
     if (ok) ok = parseExpression();
+    // unit conversion: "expr to unit" expresses the value in that unit
+    if (ok && cur_.type == Tok::Ident && isToKeyword()) {
+      ok = advance();
+      if (ok && cur_.type != Tok::Ident) {
+        ok = fail(cur_.type == Tok::End ? Error::UnexpectedEnd : Error::Syntax, cur_.pos);
+      }
+      if (ok) {
+        T factor = T();
+        if (!lookupConstant<T>(cur_.name, factor)) {
+          ok = fail(Error::UnknownIdentifier, cur_.pos);
+        } else {
+          ok = emitPush(factor) && emitBinary(OpCode::Div) && advance();
+        }
+      }
+    }
     if (ok && cur_.type != Tok::End) {
       ok = fail(cur_.type == Tok::RParen ? Error::UnbalancedParenthesis
                                          : Error::UnexpectedToken,
@@ -165,8 +182,8 @@ class Compiler {
     size_t p = pos_;
     while (isSpace(src_[p])) ++p;
     if (src_[p] == '(') {  // identifier followed by '(' must be a function
-      cur_.function = findFunction(cur_.name);
-      if (cur_.function == nullptr) return fail(Error::UnknownFunction, start);
+      cur_.function = findFunction(cur_.name);  // nullptr: a user function
+      cur_.builtin = cur_.function != nullptr;
       cur_.type = Tok::Function;
     } else {
       cur_.type = Tok::Ident;
@@ -180,6 +197,9 @@ class Compiler {
     return true;
   }
   void leave() { --depth_; }
+
+  // the keyword of a unit conversion ("5 km to m")
+  bool isToKeyword() const { return cur_.type == Tok::Ident && strcmp(cur_.name, "to") == 0; }
 
   static bool startsOperand(Tok t) {
     return t == Tok::Number || t == Tok::Ident || t == Tok::Function || t == Tok::LParen;
@@ -206,7 +226,7 @@ class Compiler {
         op = OpCode::Div;
       } else if (cur_.type == Tok::Percent) {
         op = OpCode::Mod;
-      } else if (startsOperand(cur_.type)) {  // implicit multiplication: 2pi, 3(x+1)
+      } else if (startsOperand(cur_.type) && !isToKeyword()) {  // implicit multiplication: 2pi, 3(x+1)
         if (!parseUnary() || !emitBinary(OpCode::Mul)) return false;
         continue;
       } else {
@@ -277,6 +297,8 @@ class Compiler {
   bool parseCall() {
     const FunctionInfo* info = cur_.function;
     size_t start = cur_.pos;
+    char name[TINYCALC_MAX_NAME + 1];
+    strcpy(name, cur_.name);
     if (!advance() || !advance()) return false;  // skip name and '('
     int argc = 0;
     if (cur_.type != Tok::RParen) {
@@ -292,10 +314,18 @@ class Compiler {
       return fail(Error::UnexpectedToken, cur_.pos);
     }
     if (!advance()) return false;
-    if (argc < info->minArgs || argc > info->maxArgs) {
-      return fail(Error::WrongArgumentCount, start);
+    if (info != nullptr) {  // built-in function
+      if (argc < info->minArgs || argc > info->maxArgs) {
+        return fail(Error::WrongArgumentCount, start);
+      }
+      return emitCall(info->id, argc);
     }
-    return emitCall(info->id, argc);
+    // user function: looked up by name, the number of parameters must match
+    int slot = -1, params = 0;
+    if (!res_.findUserFunction(name, slot, params)) return fail(Error::UnknownFunction, start);
+    if (argc != params) return fail(Error::WrongArgumentCount, start);
+    return emit(OpCode::UserCall, static_cast<uint8_t>(slot), static_cast<uint8_t>(argc),
+                T(), 1 - argc);
   }
 
   // ---- code emission --------------------------------------------------

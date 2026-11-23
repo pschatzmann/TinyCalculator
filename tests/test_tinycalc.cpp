@@ -404,6 +404,117 @@ void testClearAndAns() {
 }
 
 template <typename T>
+void testUnits() {
+  Calculator<T> calc;
+  expectValue(calc, "5 km", 5000);
+  expectValue(calc, "1 h to min", 60);
+  expectValue(calc, "2 min to s", 120);
+  expectValue(calc, "1 ft to in", 12);
+  expectValue(calc, "1 kg to g", 1000);
+  expectValue(calc, "5 km to mi", 5000.0 / 1609.344);
+  expectValue(calc, "5 km + 300 m to m", 5300);
+  expectValue(calc, "2 * 3 km to m", 6000);
+  expectValue(calc, "1 day to h", 24);
+  expectValue(calc, "1 lb to kg", 0.45359237);
+  expectError(calc, "5 km to foo", Error::UnknownIdentifier);
+  expectError(calc, "5 to", Error::UnexpectedEnd);
+  expectError(calc, "to m", Error::UnknownIdentifier);
+  // units are reserved names
+  CHECK(calc.setVariable("km", T(1)) == Error::ReservedName);
+  CHECK(calc.setVariable("to", T(1)) == Error::ReservedName);
+}
+
+template <typename T>
+void testTemperatures() {
+  Calculator<T> calc;
+  expectValue(calc, "100 degC to degF", 212);
+  expectValue(calc, "32 degF to degC", 0);
+  expectValue(calc, "0 degC to K", 273.15);
+  expectValue(calc, "273.15 K to degC", 0);
+  expectValue(calc, "(10 + 15) degC to degF", 77);
+  expectValue(calc, "-40 degC to degF", -40);
+  expectValue(calc, "100 degC to degC", 100);
+  expectError(calc, "25 to degF", Error::Syntax);          // the source needs a unit
+  expectError(calc, "25 degC to m", Error::UnknownIdentifier);
+  CHECK(calc.setVariable("degC", T(1)) == Error::ReservedName);
+  CHECK(calc.setVariable("K", T(1)) == Error::ReservedName);
+}
+
+template <typename T>
+void testUserFunctions() {
+  Calculator<T> calc;
+  CHECK(calc.evaluate("f(x) = x^2 + 1").ok());
+  CHECK(calc.hasFunction("f"));
+  CHECK(calc.functionCount() == 1);
+  expectValue(calc, "f(3)", 10);
+  expectValue(calc, "f(2) + f(1)", 7);
+  expectValue(calc, "f(f(1))", 5);                 // 1 -> 2 -> 5
+
+  // several parameters, and a function that calls an earlier one
+  CHECK(calc.evaluate("mul(a, b) = a*b - 1").ok());
+  expectValue(calc, "mul(3, 4)", 11);
+  CHECK(calc.evaluate("twice(x) = f(x) * 2").ok());
+  expectValue(calc, "twice(2)", 10);
+
+  // parameters shadow variables with the same name
+  calc.setVariable("x", T(100));
+  expectValue(calc, "f(1)", 2);
+  expectValue(calc, "x", 100);
+
+  // redefinition replaces the body
+  CHECK(calc.evaluate("f(x) = x").ok());
+  expectValue(calc, "f(3)", 3);
+  CHECK(calc.functionCount() == 3);
+
+  // a function with a unit conversion in its body
+  CHECK(calc.evaluate("km2m(v) = v * 1 km").ok());
+  expectValue(calc, "km2m(2)", 2000);
+
+  // errors
+  expectError(calc, "f(1, 2)", Error::WrongArgumentCount);
+  expectError(calc, "zz(1)", Error::UnknownFunction);
+  expectError(calc, "sin(x) = x", Error::ReservedName);
+  expectError(calc, "km(x) = x", Error::ReservedName);
+  expectError(calc, "r(x) = r(x)", Error::UnknownFunction);   // no recursion
+  expectError(calc, "q(x) = ", Error::Empty);
+  expectError(calc, "q(x, x) = x", Error::InvalidName);       // duplicate parameter
+  expectError(calc, "q(x) == 1", Error::Syntax);
+
+  // the function table is limited
+  calc.clearFunctions();
+  CHECK(calc.functionCount() == 0);
+  for (int i = 0; i < TINYCALC_MAX_FUNCTIONS; ++i) {
+    char def[16];
+    std::snprintf(def, sizeof(def), "u%d(x) = x", i);
+    CHECK(calc.evaluate(def).ok());
+  }
+  expectError(calc, "extra(x) = x", Error::TooManyFunctions);
+  CHECK(calc.evaluate("u0(x) = x + 1").ok());   // redefining is still allowed
+  calc.clearFunctions();
+  CHECK(!calc.hasFunction("f"));
+  expectError(calc, "f(1)", Error::UnknownFunction);
+  CHECK(!Calculator<T>::isDefinition("a == b"));
+  CHECK(Calculator<T>::isDefinition("f(x) = x"));
+  CHECK(!Calculator<T>::isDefinition("y = x"));
+}
+
+// compile once: a program that calls a user function, run with new variables
+template <typename T>
+void testUserFunctionCompiled() {
+  Calculator<T> calc;
+  calc.setVariable("x", T(0));
+  CHECK(calc.evaluate("f(y) = y * y").ok());
+  typename Calculator<T>::Program prog;
+  CHECK(calc.compile("f(x) + 1", prog) == Error::None);
+  for (int i = 1; i <= 3; ++i) {
+    calc.setVariable("x", T(i));
+    auto r = calc.run(prog);
+    CHECK(r.ok());
+    CHECK(nearly<T>(static_cast<double>(r.value), i * i + 1.0));
+  }
+}
+
+template <typename T>
 void testResultCasts() {
   Calculator<T> calc;
   auto r = calc.evaluate("1/4");
@@ -443,6 +554,10 @@ void runAll(const char* label) {
   testErrorPosition<T>();
   testBoolConversion<T>();
   testResultCasts<T>();
+  testUnits<T>();
+  testTemperatures<T>();
+  testUserFunctions<T>();
+  testUserFunctionCompiled<T>();
   testLimits<T>();
   testClearAndAns<T>();
 }

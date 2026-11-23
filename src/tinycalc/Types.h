@@ -24,6 +24,7 @@ enum class Error : uint8_t {
   TooManyVariables,
   InvalidName,
   ReservedName,
+  TooManyFunctions,
 };
 
 enum class AngleUnit : uint8_t { Radians = 0, Degrees = 1 };
@@ -47,6 +48,7 @@ inline const char* errorText(Error e) {
     case Error::TooManyVariables: return "too many variables";
     case Error::InvalidName: return "invalid name";
     case Error::ReservedName: return "name is reserved";
+    case Error::TooManyFunctions: return "too many functions";
   }
   return "unknown error";
 }

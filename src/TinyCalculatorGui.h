@@ -26,6 +26,19 @@
 namespace TinyCalc {
 
 /**
+ * @brief The screens of the calculator that are not part of the basic
+ * keypad. Each one is off by default and is switched on with
+ * CalculatorGui::enable(), e.g. `gui.enable(GuiScreen::Trig);`.
+ *
+ *  - Trig: trigonometric, inverse and hyperbolic functions, deg/rad, e, tau, phi
+ *  - Math: roots, exponentials, logarithms, rounding, aggregates, gcd/lcm
+ *  - Special: gamma, factorial, erf, erfc, comb, perm
+ *  - Units: unit keys, "to" conversions, user-defined functions
+ *  - Plot: plotting of a function of x (Plot key and x key on the Basic page)
+ */
+enum class GuiScreen : uint8_t { Trig, Math, Special, Units, Plot };
+
+/**
  * @brief Look of the calculator: the TinyMaterialDesign theme of all its
  * widgets. Its typography holds the fonts (label, body, title, headline), so
  * a TinyFonts font assigned there is used by the expression line (label) and
@@ -101,7 +114,7 @@ class CalculatorGui {
  public:
   typedef Calculator<Number> Calc;
   static const size_t kKeyCount = 28;   // 7 rows x 4 columns per page
-  static const size_t kPageCount = 4;
+  static const size_t kPageCount = 5;
   static const size_t kPlotSamples = 160;  // points of a plot
 
   /// @brief Key definition: the label shown on the key and the action it performs.
@@ -132,7 +145,9 @@ class CalculatorGui {
     toField_.onFocus = [this]() { activeField_ = 1; };
     syncRangeFields();
     calc_.setVariable("x", Number(0));
+    dimTheme_ = fadedTheme(theme_);
     applyMode();
+    updateUnitKeys();
   }
 
   // Removes the widgets from the screen if the GUI is still attached. The
@@ -201,7 +216,7 @@ class CalculatorGui {
     }
 
     if (a == "page") {
-      changePage(1);
+      changePage(1);  // to the next enabled page
     } else if (a == "plot") {
       plotExpression();
     } else if (a == "angle") {
@@ -224,7 +239,7 @@ class CalculatorGui {
       std::string prefix = expr_;
       if (showResult_) {
         bool continues = a == "+" || a == "-" || a == "*" || a == "/" || a == "^" ||
-                         a == "%" || a == "!" || a == ",";
+                         a == "%" || a == "!" || a == "," || a == "to";
         prefix = continues ? "ans" : "";
       }
       if (!acceptable(a, prefix)) {  // invalid combination: the key is ignored
@@ -235,8 +250,10 @@ class CalculatorGui {
         expr_ = prefix;
         showResult_ = false;
       }
-      if (needsProduct(expr_, a)) expr_ += "*";
-      expr_ += a;
+      // "to" is a conversion, ":=" starts a body: both are written out in full
+      const std::string token = a == "to" ? " to " : a == "def" ? "=" : a;
+      if (needsProduct(expr_, token)) expr_ += "*";
+      expr_ += token;
     }
     refresh();
   }
@@ -256,7 +273,16 @@ class CalculatorGui {
     return a == "+" || a == "*" || a == "/" || a == "^" || a == "%";
   }
   static bool isNameKey(const std::string& a) {
-    return a == "pi" || a == "e" || a == "tau" || a == "phi" || a == "ans" || a == "x";
+    return a == "pi" || a == "e" || a == "tau" || a == "phi" || a == "ans" || a == "x" ||
+           isUnitName(a);
+  }
+
+  // The units (see unitTable() in Functions.h).
+  static bool isUnitName(const std::string& a) {
+    return a == "m" || a == "cm" || a == "mm" || a == "km" || a == "mi" || a == "ft" ||
+           a == "in" || a == "yd" || a == "kg" || a == "g" || a == "lb" || a == "oz" ||
+           a == "s" || a == "min" || a == "h" || a == "day" || a == "degC" ||
+           a == "degF" || a == "K";
   }
   static bool isFunctionKey(const std::string& a) { return !a.empty() && a[a.size() - 1] == '('; }
 
@@ -280,12 +306,65 @@ class CalculatorGui {
   }
 
   // true if key `a` may follow the expression `t`
+  // Dimension of a unit: 0 none, 1 length, 2 mass, 3 time, 4 temperature.
+  static int unitDimension(const std::string& u) {
+    if (u == "m" || u == "cm" || u == "mm" || u == "km" || u == "mi" || u == "ft" ||
+        u == "in" || u == "yd") {
+      return 1;
+    }
+    if (u == "kg" || u == "g" || u == "lb" || u == "oz") return 2;
+    if (u == "s" || u == "min" || u == "h" || u == "day") return 3;
+    if (u == "degC" || u == "degF" || u == "K") return 4;
+    return 0;
+  }
+
+  // The letters at the end of t (the name just typed), e.g. "km" in "5 km".
+  static std::string trailingWord(const std::string& t) {
+    size_t b = t.size();
+    while (b > 0 && isLetter(t[b - 1])) --b;
+    return t.substr(b);
+  }
+
+  // Conversion state of an expression: a "to" is in it, the target unit is
+  // still missing (awaiting), and the source unit before the "to".
+  struct ToState {
+    bool present;
+    bool awaiting;
+    std::string source;
+  };
+
+  static ToState toState(const std::string& t) {
+    ToState st{false, false, ""};
+    const size_t k = t.rfind(" to");
+    if (k == std::string::npos) return st;
+    const size_t after = k + 3;
+    if (after < t.size() && t[after] != ' ') return st;  // "tox" is not the keyword
+    st.present = true;
+    st.awaiting = t.find_first_not_of(' ', after) == std::string::npos;
+    st.source = trailingWord(t.substr(0, k));
+    return st;
+  }
+
+  // True if the unit key may be pressed for this expression.
+  static bool unitAllowed(const std::string& unit, const std::string& t) {
+    const ToState st = toState(t);
+    if (!st.present) return true;  // a unit can always be typed before "to"
+    return st.awaiting && unitDimension(unit) != 0 &&
+           unitDimension(unit) == unitDimension(st.source);
+  }
+
   static bool acceptable(const std::string& a, const std::string& t) {
+    const ToState conv = toState(t);
+    if (conv.present) {  // after "to": only a unit of the same kind as the source
+      return conv.awaiting && isUnitName(a) && unitAllowed(a, t);
+    }
+    if (a == "to") return unitDimension(trailingWord(t)) != 0;  // a unit comes first
     const char c = lastChar(t);
     const bool empty = t.empty();
     const bool open = c == '(';
     const bool op = isOperatorChar(c);
-    const bool operand = !empty && !open && !op;  // a number, name, ")" or "!"
+    // a number, name, ")" or "!" (a space after "to" is not an operand yet)
+    const bool operand = !empty && !open && !op && c != ' ';
 
     if (a == "(" || isFunctionKey(a)) return true;  // a function is also a call start
     if (a == ")") return openDepth(t) > 0 && operand;
@@ -293,7 +372,8 @@ class CalculatorGui {
     if (a == ",") return openDepth(t) > 0 && operand;
     if (a == "-") return c != '-';  // subtraction or a sign, but never "--"
     if (a == ".") return !numberHasDot(t) && !isLetter(c) && c != ')' && c != '!';
-    if (isBinaryOp(a)) return operand;
+    if (isBinaryOp(a) || a == "to") return operand;
+    if (a == "def") return openDepth(t) == 0 && c == ')';  // a function header "f(x)" then "="
     if (isNameKey(a)) return c != '.';
     return true;  // digits
   }
@@ -323,8 +403,38 @@ class CalculatorGui {
   /// to fire its onClick in tests.
   tinymd::Button<RGB_T>& key(size_t index) { return keys_[index]; }
 
+  /// True if the key of slot `index` is drawn faded: a unit that cannot follow
+  /// the expression (after "to", only units of the same kind as the source).
+  bool isKeyFaded(size_t index) const { return keyFaded(index); }
+
   /// Index of the current keypad page (0 .. kPageCount-1).
   size_t page() const { return page_; }
+
+  /// Switches on a screen. Only the Basic keypad is shown until a screen is enabled.
+  void enable(GuiScreen screen) {
+    if (screen == GuiScreen::Plot) {
+      plotEnabled_ = true;
+    } else {
+      pages_ = static_cast<uint8_t>(pages_ | (1u << pageOf(screen)));
+    }
+    applyMode();
+    refresh();
+  }
+
+  /// True if the screen is switched on.
+  bool isEnabled(GuiScreen screen) const {
+    if (screen == GuiScreen::Plot) return plotEnabled_;
+    return (pages_ & (1u << pageOf(screen))) != 0;
+  }
+
+  /// Switches on all screens.
+  void enableAll() {
+    enable(GuiScreen::Trig);
+    enable(GuiScreen::Math);
+    enable(GuiScreen::Special);
+    enable(GuiScreen::Units);
+    enable(GuiScreen::Plot);
+  }
 
   /// The area the calculator occupies.
   tinymd::Bounds bounds() const { return bounds_; }
@@ -423,16 +533,40 @@ class CalculatorGui {
         {"ans", "ans"},   {"pi", "pi"},     {"e", "e"},      {"tau", "tau"},
         {"phi", "phi"},   {"^", "^"},      {"Plot", "plot"}, {"x", "x"},
     };
+    static const KeyDef units[kKeyCount] = {
+        {"", "page"},     {"to", "to"},     {"m", "m"},       {"cm", "cm"},
+        {"mm", "mm"},     {"km", "km"},     {"mi", "mi"},     {"ft", "ft"},
+        {"in", "in"},     {"yd", "yd"},     {"kg", "kg"},     {"g", "g"},
+        {"lb", "lb"},     {"oz", "oz"},     {"s", "s"},       {"min", "min"},
+        {"h", "h"},       {"day", "day"},   {"degC", "degC"}, {"degF", "degF"},
+        {"K", "K"},       {"f", "f("},      {"p", "p("},      {"q", "q("},
+        {"r", "r("},      {"x", "x"},       {":=", "def"},    {"=", "="},
+    };
     switch (page % kPageCount) {
       case 1: return trig;
       case 2: return math;
       case 3: return special;
+      case 4: return units;
       default: return basic;
     }
   }
 
   /// Numeric pad of the plot screen: From/To select a field, the digits and
   /// "-" and "." type into it, DEL deletes, Back returns to the keypad.
+  // The basic keypad with the Plot screen on: "Plot" and "x" replace "," and "pi".
+  static const KeyDef* basicPlotKeys() {
+    static const KeyDef basicPlot[kKeyCount] = {
+        {"", "page"},     {"RAD", "angle"}, {"(", "("},      {")", ")"},
+        {"C", "clear"},   {"DEL", "del"},   {"^", "^"},      {"%", "%"},
+        {"7", "7"},       {"8", "8"},       {"9", "9"},      {"/", "/"},
+        {"4", "4"},       {"5", "5"},       {"6", "6"},      {"*", "*"},
+        {"1", "1"},       {"2", "2"},       {"3", "3"},      {"-", "-"},
+        {"0", "0"},       {".", "."},       {"!", "!"},      {"+", "+"},
+        {"ans", "ans"},   {"x", "x"},       {"Plot", "plot"}, {"=", "="},
+    };
+    return basicPlot;
+  }
+
   static const KeyDef* plotKeys() {
     static const KeyDef pad[kKeyCount] = {
         {"From", "from"}, {"To", "to"},     {"DEL", "del"},  {"Back", "back"},
@@ -445,7 +579,7 @@ class CalculatorGui {
 
   /// Name shown on the page key.
   static const char* pageName(size_t page) {
-    static const char* names[kPageCount] = {"Basic", "Trig", "Math", "Special"};
+    static const char* names[kPageCount] = {"Basic", "Trig", "Math", "Special", "Units"};
     return names[page % kPageCount];
   }
 
@@ -522,14 +656,19 @@ class CalculatorGui {
   }
 
   // The key table shown now: the plot pad or the keypad page.
-  const KeyDef* activeKeys() const { return plotting_ ? plotKeys() : keys(page_); }
+  const KeyDef* activeKeys() const {
+    if (plotting_) return plotKeys();
+    if (page_ == 0 && plotEnabled_) return basicPlotKeys();
+    return keys(page_);
+  }
 
   // Shows the keypad page.
-  void refreshKeys() { showKeys(keys(page_)); }
+  void refreshKeys() { showKeys(activeKeys()); }
 
   void showKeys(const KeyDef* defs) {
     for (size_t i = 0; i < kKeyCount; ++i) {
-      const bool used = defs[i].action != nullptr && *defs[i].action != '\0';
+      const bool used = defs[i].action != nullptr && *defs[i].action != '\0' &&
+                        !hiddenByScreens(defs[i].action);
       keys_[i].visible = used;
       if (!used) continue;
       keys_[i].setLabel(labelOf(defs[i]));
@@ -564,6 +703,16 @@ class CalculatorGui {
 
   void evaluate() {
     if (expr_.empty()) return;
+    if (Calc::isDefinition(expr_.c_str())) {  // "f(x) = ...": defines a function
+      typename Calc::Result r = calc_.evaluate(expr_.c_str());
+      showResult_ = r.ok();
+      if (r.ok()) {
+        resultText_ = expr_.substr(0, expr_.find('(')) + " defined";
+      } else {
+        error_ = errorText(r.error);
+      }
+      return;
+    }
     typename Calc::Result r = calc_.evaluate(expr_.c_str());  // also updates "ans"
     if (r.ok()) {
       resultText_ = format(r.value);
@@ -677,6 +826,10 @@ class CalculatorGui {
 
   // Opens the plot screen for the current expression.
   void plotExpression() {
+    if (!plotEnabled_) {
+      error_ = "plotting is not enabled";
+      return;
+    }
     if (expr_.empty()) {
       error_ = "nothing to plot";
       return;
@@ -694,12 +847,41 @@ class CalculatorGui {
     refresh();
   }
 
-  // Shows the keypad page `step` pages away from the current one (wraps around).
+  // Shows the enabled keypad page `step` pages away from the current one (wraps around).
   void changePage(int step) {
-    const int pages = static_cast<int>(kPageCount);
-    page_ = static_cast<size_t>((static_cast<int>(page_) + step % pages + pages) % pages);
+    page_ = nextPage(step);
     refreshKeys();
     refresh();
+  }
+
+  // The enabled page `step` steps away (step = +1 or -1); the Basic page is always enabled.
+  size_t nextPage(int step) const {
+    const int pages = static_cast<int>(kPageCount);
+    size_t candidate = page_;
+    for (int i = 0; i < pages; ++i) {
+      candidate = static_cast<size_t>((static_cast<int>(candidate) + (step < 0 ? -1 : 1) + pages) % pages);
+      if (candidate == 0 || (pages_ & (1u << candidate)) != 0) return candidate;
+    }
+    return 0;
+  }
+
+  // The keypad page of a screen (Plot has no page of its own).
+  static size_t pageOf(GuiScreen screen) {
+    switch (screen) {
+      case GuiScreen::Trig: return 1;
+      case GuiScreen::Math: return 2;
+      case GuiScreen::Special: return 3;
+      case GuiScreen::Units: return 4;
+      default: return 0;
+    }
+  }
+
+  // Keys that exist only with some screens switched on: the page key needs an
+  // extra page, the Plot key needs the Plot screen.
+  bool hiddenByScreens(const char* action) const {
+    if (strcmp(action, "page") == 0) return pages_ == 0;
+    if (strcmp(action, "plot") == 0) return !plotEnabled_;
+    return false;
   }
 
   // Left swipe: leaves the plot screen, otherwise goes back one page.
@@ -747,19 +929,57 @@ class CalculatorGui {
   // Pushes the theme to the attached screen and the plot color.
   void applyTheme() {
     plot_.series(0).color = theme_.colors.primary;
+    dimTheme_ = fadedTheme(theme_);
     if (screen_ != nullptr) screen_->setTheme(theme_);
-    refresh();
+    refresh();  // also updates the unit keys
   }
+
+  // Unit keys that cannot follow the expression are faded out: they keep the
+  // background colour of their theme but are drawn with the surface as the
+  // "on-surface" colour, so they are lighter. press() refuses them.
+  void updateUnitKeys() {
+    const KeyDef* defs = activeKeys();
+    for (size_t i = 0; i < kKeyCount; ++i) {
+      const bool isUnit = defs[i].action != nullptr && isUnitName(defs[i].action);
+      const bool allowed = !isUnit || unitAllowed(defs[i].action, expr_);
+      keys_[i].enabled = true;  // drawn normally; the faded theme shows the state
+      keys_[i].setTheme(allowed ? theme_ : dimTheme_);
+      faded_[i] = !allowed;
+    }
+  }
+
+  // Mixes colour c towards `toward` by a (0 = c, 1 = toward).
+  static RGB_T fade(RGB_T c, RGB_T toward, float a) {
+    auto mix = [a](int x, int y) {
+      return static_cast<uint8_t>(x + (y - x) * a + 0.5f);
+    };
+    return RGB_T::fromRGB(mix(c.getRed(), toward.getRed()), mix(c.getGreen(), toward.getGreen()),
+                          mix(c.getBlue(), toward.getBlue()));
+  }
+
+  // The theme of a faded unit key: its tonal background and text are lighter,
+  // keeping their colour, so the key still shows its background colour.
+  static CalculatorTheme<RGB_T> fadedTheme(const CalculatorTheme<RGB_T>& t) {
+    CalculatorTheme<RGB_T> d = t;
+    d.colors.secondaryContainer = fade(t.colors.secondaryContainer, t.colors.surface, 0.6f);
+    d.colors.onSecondaryContainer = fade(t.colors.onSecondaryContainer, t.colors.surface, 0.5f);
+    return d;
+  }
+
+  // True if the key in slot `index` is drawn faded (a unit that cannot be used now).
+  bool keyFaded(size_t index) const { return faded_[index]; }
 
   void refresh() {
     std::string e = showResult_ ? expr_ + " =" : expr_;
     exprLabel_.setText(e.c_str());
     resultLabel_.setText(resultText().c_str());
+    updateUnitKeys();
     if (screen_ != nullptr) screen_->invalidate();
   }
 
   tinymd::Bounds bounds_;
   CalculatorTheme<RGB_T> theme_;
+  CalculatorTheme<RGB_T> dimTheme_;  // theme of the unit keys that cannot be used now
   tinymd::Screen<RGB_T>* screen_;
   Calc calc_;
   std::string expr_;
@@ -771,6 +991,7 @@ class CalculatorGui {
   tinymd::Label<RGB_T> resultLabel_;
   CalculatorPanel<RGB_T> panel_;
   tinymd::Button<RGB_T> keys_[kKeyCount];
+  bool faded_[kKeyCount] = {};  // per key: drawn faded (see updateUnitKeys())
   tinymd::LineChart<RGB_T> plot_;
   tinymd::TextField<RGB_T> fromField_;
   tinymd::TextField<RGB_T> toField_;
@@ -782,6 +1003,8 @@ class CalculatorGui {
   float plotMax_ = 10.0f;
   bool plotting_ = false;
   bool attached_ = false;
+  uint8_t pages_ = 0;         // bit p: the keypad page p is enabled
+  bool plotEnabled_ = false;  // the plot screen is enabled
 };
 
 }  // namespace TinyCalc

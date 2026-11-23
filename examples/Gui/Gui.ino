@@ -30,6 +30,13 @@ void setup() {
   Serial.begin(115200);
   app.begin();
   calculatorGui.assignFonts(calculatorFonts);
+
+  // The basic keypad is always shown; these screens are switched on separately.
+  calculatorGui.enable(GuiScreen::Trig);
+  calculatorGui.enable(GuiScreen::Math);
+  calculatorGui.enable(GuiScreen::Special);
+  calculatorGui.enable(GuiScreen::Units);
+  calculatorGui.enable(GuiScreen::Plot);
   calculatorGui.begin(app.screen());
 }
 

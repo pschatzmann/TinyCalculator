@@ -8,6 +8,13 @@ Header-only formula parser and evaluator for Arduino and desktop C++, with
 all common math functions. The number type is a template parameter: `float`
 (default) or `double`.
 
+- All common math functions, constants and expressions with implicit multiplication
+- Units and conversion: `1000mm to m` is 1, `100 degC to degF` is 212
+- User-defined functions: `f(x) = x^2 + 1`, then `f(3)` is 10
+- No heap allocation, no exceptions, C++11
+- Optional calculator GUI (TinyMaterialDesign) with the basic keypad and
+  optional screens for trigonometry, math, special functions, units and plotting
+
 ```cpp
 #include <TinyCalculator.h>
 
@@ -17,7 +24,6 @@ calc.setVariable("x", 2.0f);
 auto r = calc.evaluate("sin(pi/6) + x^3");   // r.value == 8.5
 if (!r) Serial.println(errorText(r.error));
 ```
-
 
 ## Documentation
 

@@ -44,6 +44,7 @@ static size_t keyIndex(const char* action) {
 
 static void testTypingAndEvaluation() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   type(gui, {"2", "+", "3"});
   CHECK(gui.expression() == "2+3");
   CHECK(gui.resultText().empty());  // nothing is evaluated before "="
@@ -67,6 +68,7 @@ static void testTypingAndEvaluation() {
 
 static void testIncompleteExpressionShowsNoResult() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   type(gui, {"2", "+"});
   CHECK(gui.expression() == "2+");
   gui.press("=");  // "=" on an incomplete expression reports an error
@@ -75,6 +77,7 @@ static void testIncompleteExpressionShowsNoResult() {
 
 static void testErrorsAreReported() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   type(gui, {"1", "/", "0"});
   CHECK(gui.resultText().empty());  // not evaluated until "="
   gui.press("=");
@@ -90,6 +93,7 @@ static void testErrorsAreReported() {
 
 static void testClearAndDelete() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   type(gui, {"1", "2", "3"});
   gui.press("del");
   CHECK(gui.expression() == "12");
@@ -103,6 +107,7 @@ static void testClearAndDelete() {
 
 static void testFunctionsAndAngleUnit() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   type(gui, {"sqrt(", "1", "6", ")"});
   gui.press("=");
   CHECK(gui.resultText() == "4");
@@ -121,6 +126,7 @@ static void testFunctionsAndAngleUnit() {
 
 static void testKeyButtonsAreWired() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   for (size_t i = 0; i < FloatGui::kKeyCount; ++i) {
     CHECK(static_cast<bool>(gui.key(i).onClick));
   }
@@ -136,6 +142,7 @@ static void testKeyButtonsAreWired() {
 
 static void testEveryKeyCanBePressed() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   for (size_t p = 0; p < FloatGui::kPageCount; ++p) {
     for (size_t i = 0; i < FloatGui::kKeyCount; ++i) {
       const char* action = FloatGui::keys(p)[i].action;
@@ -152,6 +159,7 @@ static void testEveryKeyCanBePressed() {
 
 static void testPagesCycle() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   CHECK(gui.page() == 0);
   gui.press("page");
   CHECK(gui.page() == 1);
@@ -181,6 +189,7 @@ static void testAllFunctionsHaveKeys() {
 // a function key enters a usable call: "sqrt(" + argument + ")" evaluates
 static void testFunctionKeysEvaluate() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   type(gui, {"sqrt(", "1", "6", ")", "="});
   CHECK(gui.resultText() == "4");
   gui.press("clear");
@@ -194,6 +203,7 @@ static void testFunctionKeysEvaluate() {
 // the Plot key samples x^2 over the default range -10 .. 10
 static void testPlotSamplesFormula() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   type(gui, {"x", "^", "2"});
   gui.press("plot");
   CHECK(gui.plotting());
@@ -211,6 +221,7 @@ static void testPlotSamplesFormula() {
 // undefined points (sqrt of a negative x) are NaN, which the chart draws as a gap
 static void testPlotUndefinedPoints() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   gui.setPlotRange(-4.0f, 4.0f);
   type(gui, {"sqrt(", "x", ")"});
   gui.press("plot");
@@ -222,6 +233,7 @@ static void testPlotUndefinedPoints() {
 
 static void testPlotErrors() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   gui.press("plot");                            // nothing typed
   CHECK(!gui.plotting());
   CHECK(gui.resultText() == "nothing to plot");
@@ -234,6 +246,7 @@ static void testPlotErrors() {
 
 static void testPlotRangeIgnoresInvalid() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   gui.setPlotRange(5.0f, 5.0f);                 // empty range: ignored
   type(gui, {"x"});
   gui.press("plot");
@@ -245,6 +258,7 @@ static void testPlotRangeIgnoresInvalid() {
 // chart is redrawn when both fields hold a valid range
 static void testPlotRangeEntry() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   type(gui, {"x", "^", "2"});
   gui.press("plot");
   CHECK(gui.plotFrom() == "-10" && gui.plotTo() == "10");
@@ -271,6 +285,7 @@ static void testPlotRangeEntry() {
 // a range with To not above From is not applied
 static void testPlotRangeRejectsReversed() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   type(gui, {"x"});
   gui.press("plot");
   gui.press("from");
@@ -295,6 +310,7 @@ static void testLayoutAnySize() {
                           {160, 128}, {128, 160}, {400, 240}, {240, 240}};
   for (const auto& sz : sizes) {
     FloatGui gui(tinymd::Bounds(0, 0, sz[0], sz[1]));
+  gui.enableAll();
     const tinymd::Bounds area = gui.bounds();
     for (int mode = 0; mode < 2; ++mode) {
       if (mode == 1) gui.beginPlot("x");
@@ -319,6 +335,7 @@ static void testLayoutAnySize() {
 // setBounds() re-lays out the keys: landscape puts them on the right half
 static void testSetBounds() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   const int portraitX = gui.key(7).bounds.x;
   CHECK(gui.key(0).bounds.y >= 100);            // keypad below the display
   gui.setBounds(tinymd::Bounds(0, 0, 320, 240));
@@ -343,6 +360,7 @@ static tinygpu::GestureEvent swipe(tinygpu::GestureType type, int x, int y) {
 static void testSwipePages() {
   tinymd::Screen<TINYMD_DEFAULT_RGB_T> screen(tinymd::defaultTheme<TINYMD_DEFAULT_RGB_T>());
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   gui.begin(screen);
   screen.handleGesture(swipe(tinygpu::GestureType::kSwipeRight, 120, 14));  // empty area
   CHECK(gui.page() == 1);
@@ -353,7 +371,7 @@ static void testSwipePages() {
   screen.handleGesture(swipe(tinygpu::GestureType::kSwipeLeft, 120, 14));
   CHECK(gui.page() == 0);
   screen.handleGesture(swipe(tinygpu::GestureType::kSwipeLeft, 120, 14));
-  CHECK(gui.page() == 3);                       // wraps to the last page
+  CHECK(gui.page() == 4);                       // wraps to the last page (Units)
 
   // a swipe that starts on a key still changes the page
   const tinymd::Bounds k = gui.key(10).bounds;
@@ -367,6 +385,7 @@ static void testSwipePages() {
 static void testSwipeInPlot() {
   tinymd::Screen<TINYMD_DEFAULT_RGB_T> screen(tinymd::defaultTheme<TINYMD_DEFAULT_RGB_T>());
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   gui.begin(screen);
   gui.beginPlot("x");
   screen.handleGesture(swipe(tinygpu::GestureType::kSwipeRight, 120, 14));
@@ -381,6 +400,7 @@ static void testSwipeInPlot() {
 // invalid key combinations are ignored; valid ones are kept
 static void testInputRules() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   type(gui, {"2", "+", "+"});  CHECK(gui.expression() == "2+");   // operator after operator
   type(gui, {"*", "/"});       CHECK(gui.expression() == "2+");   // "*" and "/" after "+" are ignored
   gui.press("clear");
@@ -438,6 +458,7 @@ static void sketchFonts(CalculatorTheme<TINYMD_DEFAULT_RGB_T>& t) {
 // TinyFonts assigned through a function: the calculator still works and draws
 static void testTinyFonts() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   gui.assignFonts(sketchFonts);
   CHECK(gui.theme().typography.label == &g_small);
   CHECK(gui.theme().typography.headline == &g_big);
@@ -456,6 +477,7 @@ static void testTinyFonts() {
 // themes: a theme is applied to the screen and the plot, and the calculator draws with it
 static void testThemes() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   CalculatorTheme<TINYMD_DEFAULT_RGB_T> dark = tinymd::defaultDarkTheme<TINYMD_DEFAULT_RGB_T>();
   CalculatorTheme<TINYMD_DEFAULT_RGB_T> green = tinymd::greenTheme<TINYMD_DEFAULT_RGB_T>();
   gui.setTheme(dark);
@@ -473,13 +495,115 @@ static void testThemes() {
 
   // a default-constructed GUI uses the default theme
   FloatGui plain(tinymd::Bounds(0, 0, 240, 320));
+  plain.enableAll();
   CHECK(plain.theme().colors.primary.getRed() ==
         tinymd::defaultTheme<TINYMD_DEFAULT_RGB_T>().colors.primary.getRed());
 }
 
 
+// units, temperature functions and user functions entered with the keypad
+static void testUnitsAndFunctionKeys() {
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
+  type(gui, {"5", "km", "to", "m"});
+  CHECK(gui.expression() == "5km to m");
+  gui.press("=");
+  CHECK(gui.resultText() == "5000");
+  gui.press("clear");
+  type(gui, {"1", "0", "0", "degC", "to", "degF", "="});
+  CHECK(gui.resultText() == "212");
+  gui.press("clear");
+
+  // f(x) := x^2 defines f; "=" then reports it, and f can be called
+  type(gui, {"f(", "x", ")", "def", "x", "^", "2"});
+  CHECK(gui.expression() == "f(x)=x^2");
+  gui.press("=");
+  CHECK(gui.resultText() == "f defined");
+  gui.press("clear");
+  type(gui, {"f(", "3", ")", "="});
+  CHECK(gui.resultText() == "9");
+
+  // ":=" is only valid right after a function header
+  gui.press("clear");
+  type(gui, {"2", "def"});
+  CHECK(gui.expression() == "2");
+  gui.press("clear");
+}
+
+// by default only the basic keypad is shown; the other screens are enabled one by one
+static void testBasicByDefault() {
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  CHECK(!gui.key(0).visible);                   // no page key
+  size_t visible = 0;
+  for (size_t i = 0; i < FloatGui::kKeyCount; ++i) {
+    if (gui.key(i).visible) ++visible;
+  }
+  CHECK(visible == 27);
+  gui.press("page");
+  CHECK(gui.page() == 0);
+  CHECK(!gui.isEnabled(GuiScreen::Trig) && !gui.isEnabled(GuiScreen::Plot));
+  gui.press("plot");                            // the plot screen is off
+  CHECK(!gui.plotting());
+  CHECK(gui.resultText() == "plotting is not enabled");
+
+  gui.enable(GuiScreen::Trig);
+  CHECK(gui.isEnabled(GuiScreen::Trig));
+  CHECK(gui.key(0).visible);                    // the page key appears
+  gui.press("page");
+  CHECK(gui.page() == 1);                       // Trig
+  gui.press("page");
+  CHECK(gui.page() == 0);                       // Math is off, so back to Basic
+  gui.enable(GuiScreen::Plot);
+  CHECK(gui.beginPlot("x"));
+  gui.endPlot();
+}
+
+// index of a key with the given action on the Units page
+static size_t unitKey(const char* action) {
+  for (size_t i = 0; i < FloatGui::kKeyCount; ++i) {
+    const char* a = FloatGui::keys(4)[i].action;
+    if (a != nullptr && std::strcmp(a, action) == 0) return i;
+  }
+  return FloatGui::kKeyCount;
+}
+
+// after "to" only the units of the source's kind stay enabled
+static void testUnitKeysAfterTo() {
+  FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
+  for (int i = 0; i < 4; ++i) gui.press("page");
+  CHECK(gui.page() == 4);
+  const size_t km = unitKey("km"), m = unitKey("m"), kg = unitKey("kg");
+  const size_t s = unitKey("s"), degF = unitKey("degF"), lb = unitKey("lb");
+
+  type(gui, {"5", "km"});
+  CHECK(!gui.isKeyFaded(kg) && !gui.isKeyFaded(m));       // before "to": all units
+  gui.press("to");
+  CHECK(gui.expression() == "5km to ");
+  CHECK(!gui.isKeyFaded(m) && !gui.isKeyFaded(km));       // length
+  CHECK(gui.isKeyFaded(kg) && gui.isKeyFaded(s) && gui.isKeyFaded(degF));
+  gui.press("kg");                                        // refused: not a length
+  CHECK(gui.expression() == "5km to ");
+  gui.press("m");
+  CHECK(gui.expression() == "5km to m");
+  CHECK(gui.isKeyFaded(km) && gui.isKeyFaded(kg));    // conversion complete
+  gui.press("=");
+  CHECK(gui.resultText() == "5000");
+
+  gui.press("clear");
+  type(gui, {"5", "kg", "to"});
+  CHECK(!gui.isKeyFaded(lb) && gui.isKeyFaded(m));      // mass
+  gui.press("clear");
+  type(gui, {"100", "degC", "to"});
+  CHECK(!gui.isKeyFaded(degF) && gui.isKeyFaded(km));   // temperature
+  gui.press("clear");
+  gui.press("to");                                         // no unit before "to"
+  CHECK(gui.expression().empty());
+}
+
 static void testDoublePrecision() {
   DoubleGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   type(gui, {"1", "/", "3"});
   gui.press("=");
   CHECK(gui.resultText() == "0.333333333333");  // 12 significant digits
@@ -487,6 +611,7 @@ static void testDoublePrecision() {
 
 static void testAttachAndDraw() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   tinymd::Screen<TINYMD_DEFAULT_RGB_T> screen(tinymd::defaultTheme<TINYMD_DEFAULT_RGB_T>());
   gui.begin(screen);
 
@@ -502,6 +627,7 @@ static void testLifecycle() {
   tinymd::Screen<TINYMD_DEFAULT_RGB_T> screen(tinymd::defaultTheme<TINYMD_DEFAULT_RGB_T>());
   CHECK(screen.childCount() == 0);
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   gui.begin(screen);
   const int widgets = screen.childCount();
   CHECK(widgets > 0);
@@ -521,6 +647,7 @@ static void testDestructorDetaches() {
   tinymd::Screen<TINYMD_DEFAULT_RGB_T> screen(tinymd::defaultTheme<TINYMD_DEFAULT_RGB_T>());
   {
     FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+    gui.enableAll();
     gui.begin(screen);
     CHECK(screen.childCount() > 0);
   }
@@ -530,6 +657,7 @@ static void testDestructorDetaches() {
 // beginPlot/endPlot open and close the plot screen from code
 static void testBeginEndPlot() {
   FloatGui gui(tinymd::Bounds(0, 0, 240, 320));
+  gui.enableAll();
   CHECK(gui.beginPlot("x^2"));
   CHECK(gui.plotting());
   CHECK(std::fabs(gui.plotSamples().back() - 100.0f) < 1e-3f);
@@ -570,6 +698,9 @@ int main() {
   testSwipePages();
   testSwipeInPlot();
   testInputRules();
+  testUnitsAndFunctionKeys();
+  testBasicByDefault();
+  testUnitKeysAfterTo();
   testThemes();
 #ifdef TINYCALC_USE_TINYFONTS
   testTinyFonts();

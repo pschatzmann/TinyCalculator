@@ -270,10 +270,23 @@ Error applyBinary(OpCode code, T a, T b, T& out) {
   }
 }
 
-// Runs a compiled program. `vars` holds the current variable values.
+// What a running program can see: the variables, the bodies of the user
+// functions, the angle unit and how deeply user functions are nested.
 template <typename T, size_t N>
-Error evaluateProgram(const Expression<T, N>& ex, const T* vars, size_t varCount,
-                      AngleUnit unit, T& result) {
+struct Environment {
+  const T* vars;
+  size_t varCount;
+  const Expression<T, N>* functions;  // bodies of the user functions
+  size_t functionCount;
+  AngleUnit unit;
+  size_t depth;
+};
+
+// Runs a compiled program. `frame` holds the parameters of the running user
+// function (none at the top level).
+template <typename T, size_t N>
+Error evaluateProgram(const Expression<T, N>& ex, const Environment<T, N>& env,
+                      const T* frame, size_t frameCount, T& result) {
   typedef Math<T> M;
   T stack[N];
   size_t sp = 0;
@@ -285,8 +298,14 @@ Error evaluateProgram(const Expression<T, N>& ex, const T* vars, size_t varCount
         stack[sp++] = op.value;
         break;
       case OpCode::Load:
-        if (op.index >= varCount) return Error::UnknownIdentifier;
-        stack[sp++] = vars[op.index];
+        if (op.index & kFrameBit) {  // a parameter of a user function
+          const size_t k = op.index & ~kFrameBit;
+          if (k >= frameCount) return Error::UnknownIdentifier;
+          stack[sp++] = frame[k];
+        } else {
+          if (op.index >= env.varCount) return Error::UnknownIdentifier;
+          stack[sp++] = env.vars[op.index];
+        }
         break;
       case OpCode::Neg:
         stack[sp - 1] = -stack[sp - 1];
@@ -294,7 +313,18 @@ Error evaluateProgram(const Expression<T, N>& ex, const T* vars, size_t varCount
       case OpCode::Call: {
         sp -= op.argc;
         T r = T();
-        err = callFunction(static_cast<Fn>(op.index), stack + sp, op.argc, unit, r);
+        err = callFunction(static_cast<Fn>(op.index), stack + sp, op.argc, env.unit, r);
+        stack[sp++] = r;
+        break;
+      }
+      case OpCode::UserCall: {
+        if (op.index >= env.functionCount) return Error::UnknownFunction;
+        if (env.depth >= TINYCALC_MAX_FUNCTIONS) return Error::NestingTooDeep;
+        sp -= op.argc;
+        Environment<T, N> inner = env;
+        inner.depth = env.depth + 1;
+        T r = T();
+        err = evaluateProgram(env.functions[op.index], inner, stack + sp, op.argc, r);
         stack[sp++] = r;
         break;
       }

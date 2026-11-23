@@ -21,6 +21,16 @@
 #define TINYCALC_MAX_NAME 12
 #endif
 
+// Maximum number of user-defined functions (e.g. f(x) = x^2)
+#ifndef TINYCALC_MAX_FUNCTIONS
+#define TINYCALC_MAX_FUNCTIONS 4
+#endif
+
+// Maximum number of parameters of a user-defined function
+#ifndef TINYCALC_MAX_PARAMS
+#define TINYCALC_MAX_PARAMS 3
+#endif
+
 // Maximum nesting of parentheses / unary operators (guards recursion depth)
 #ifndef TINYCALC_MAX_NESTING
 #define TINYCALC_MAX_NESTING 32

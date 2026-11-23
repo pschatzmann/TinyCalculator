@@ -72,7 +72,31 @@ inline const FunctionInfo* findFunction(const char* name) {
   return nullptr;
 }
 
-// Built-in constants: pi, e, tau, phi
+// Units: the value of one unit in base units (metre, kilogram, second).
+// "5 km" is 5000, and "x to mi" divides by the factor of mi.
+struct UnitInfo {
+  const char* name;
+  double factor;
+};
+
+inline const UnitInfo* unitTable(size_t& count) {
+  static const UnitInfo table[] = {
+      {"m", 1.0},          {"cm", 0.01},         {"mm", 0.001},     {"km", 1000.0},
+      {"mi", 1609.344},    {"ft", 0.3048},       {"in", 0.0254},    {"yd", 0.9144},
+      {"kg", 1.0},         {"g", 0.001},         {"lb", 0.45359237}, {"oz", 0.028349523125},
+      {"s", 1.0},          {"min", 60.0},        {"h", 3600.0},     {"day", 86400.0},
+  };
+  count = sizeof(table) / sizeof(table[0]);
+  return table;
+}
+
+// Temperature units: they are not linear (0 degC is not 0 K), so they are
+// converted with "value unit to unit" rather than with a factor.
+inline bool isTemperatureUnit(const char* name) {
+  return strcmp(name, "degC") == 0 || strcmp(name, "degF") == 0 || strcmp(name, "K") == 0;
+}
+
+// Built-in constants (pi, e, tau, phi) and units (km, s, ...)
 template <typename T>
 inline bool lookupConstant(const char* name, T& value) {
   typedef Math<T> M;
@@ -80,7 +104,17 @@ inline bool lookupConstant(const char* name, T& value) {
   else if (strcmp(name, "e") == 0) value = M::e();
   else if (strcmp(name, "tau") == 0) value = M::tau();
   else if (strcmp(name, "phi") == 0) value = M::phi();
-  else return false;
+  else {
+    size_t count = 0;
+    const UnitInfo* units = unitTable(count);
+    for (size_t i = 0; i < count; ++i) {
+      if (strcmp(units[i].name, name) == 0) {
+        value = static_cast<T>(units[i].factor);
+        return true;
+      }
+    }
+    return false;
+  }
   return true;
 }
 
